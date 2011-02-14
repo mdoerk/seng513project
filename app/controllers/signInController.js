@@ -1,10 +1,11 @@
 
-this.prototype = somthing;
+this.__proto__ = applicationController; //superclass
 
-index = fuction(){
-	if(request.method != 'POST') // the request should be global to the controllers
-		return;
-	var user = user.authenticate(requst.username, request.password, function (authenticated){
+exports.index = function(){
+//	if(this.request.method != 'POST') // the request should be global to the controllers
+//		return;
+	
+	user.authenticate(params.username, params.password, function (authenticated){
 		
 		if(authenticated){
 			redirectTo(index);

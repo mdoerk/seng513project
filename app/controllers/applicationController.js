@@ -1,0 +1,3 @@
+applicationController = function(){
+	
+}

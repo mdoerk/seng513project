@@ -54,7 +54,7 @@ var server = function(request, response){
 	request.on('data', function(chunk){
 		request.content += chunk;
 	})
-	request.on('end', function(chunk){
+	request.on('end', function(){
 		if(request.method == 'POST')
 			parseParameters(request.content);
 			

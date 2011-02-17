@@ -1,25 +1,29 @@
-var http = require('http');
-var fs = require('fs');
+var fs = require('fs'), 
+	http = require('http'),
+	path = require('path'),
+	url = require('url'),
+	util = require('util'), 
+	routes = require('./routes'); 
 
-var fileLoader = function(dir){
-	fs.readdir(dir, function(err, files){
-		for(file in files){
-			filename = files[file].split('.');
-			if(filename[1] == 'js'){
-				this[filename[0]] = require('./' + dir + filename[0]);
-			}else{
-				return;
-			}
-		}
-	});
+var port = 8124; 
+
+// Process command line arguments 
+// ARGV[0] always equals node
+// ARGV[1] always equals server.js
+var argv = process.ARGV.slice(2);
+for (var i = 0; i < argv.length; i++)
+{
+	switch (argv[i]) {
+		case '--port':
+			port = parseInt(argv[i + 1], 10); 
+			break; 
+		default: 
+			break; 
+	}
 }
 
-//load Controllers
-fileLoader('app/controllers/');
-fileLoader('app/models/');
-
 //load database
-var db = require('./db/database');
+//var db = require('./db/database');
 
 // Parses the giving url string and sets the params to the corresponding values.
 var parseGETParameters = function(url){
@@ -42,29 +46,10 @@ var parseParameters = function(string){
 		this['params'][key] = value;
 	}
 }
-
-var server = function(request, response){
-	applicationController.request = request;
-	applicationController.response = response;
-	
-	if(request.method == 'GET')
-		parseGETParameters(request.url);
-	
-	request.content = '';
-	request.on('data', function(chunk){
-		request.content += chunk;
-	})
-	request.on('end', function(chunk){
-		if(request.method == 'POST')
-			parseParameters(request.content);
-			
-			
-		
-		//routing needed. for not just assume index of signInController.
-		signInController.index();
-		console.log(params);
-	})
-	
-}
-
-http.createServer(server).listen(1234);
+ 
+var server = http.createServer(function(req, res) { 
+	util.log('Received ' + req.method + ' request for ' + req.url); 
+	var parsedUrl = url.parse(req.url, true);
+	routes.router.handle(parsedUrl.pathname, req, res); 
+}).listen(port); 
+util.log('Server running on port ' + port);

@@ -1,0 +1,315 @@
+/* Global Styles */ 
+/* ------------------------------*/
+html, body
+{
+	height: 100%; 
+	margin: 0;
+	padding: 0;
+}
+ 
+body 
+{
+	background-image: url(../images/background.gif); 
+	background-repeat: repeat; 
+	color: #333333;
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; 
+	font-size: 0.8em;
+}
+
+h1, h2, h3
+{
+	color: #333333;
+}
+
+h1
+{
+	font-size: 1.3em;
+}
+
+h2
+{
+	font-size: 1.2em;
+}
+
+hr
+{
+	color: #eceadb; 
+}
+
+a 
+{ 
+	color: #4999cb; 
+}
+
+a:hover 
+{ 
+	text-decoration: none; 
+}
+
+a img
+{
+	border-style: none; 
+}
+
+img.left 
+{
+	float: left;
+	margin: 10px 20px 0px 0px;
+}
+
+img.right 
+{
+	float: right;
+	margin: 10px 0px 0px 20px;
+}
+
+/* Page Structure */ 
+/* ------------------------------*/ 
+#page 
+{
+	height: auto;
+	margin: 0 auto;
+	min-height: 100%;
+	width: 980px;
+}
+
+#header 
+{
+	background-color: #ffffff;
+	background-image: url(../images/logo.png); 
+	background-repeat: no-repeat; 
+	clear: both; 
+	height: 130px; 
+	margin: 0 auto;
+	text-align: right; 
+	padding: 10px 10px 0px 0px; 
+	width: 970px;
+}
+
+#menu 
+{
+	background-color: #262626;
+	clear: both; 
+	color: #ffffff; 
+	height: 50px; 
+	width: 100%; 
+}
+
+#menu ul
+{
+	margin: 0;
+   padding: 0px; 
+	list-style: none; 
+}
+
+#menu li
+{
+	color: #ffffff; 
+	float: left;
+	text-decoration: none; 
+	text-align: center; 
+}
+
+#menu a 
+{
+	display: block; 
+	color: #ffffff;
+	font-size: 1.2em;	
+	height: 50px; 	
+	padding: 15px; 
+	text-align: center; 
+	text-decoration: none; 
+	text-transform: lowercase; 
+}
+
+#menu a:hover 
+{
+	background-image: url(../images/button_background_red.png); 
+	background-repeat: repeat-x; 
+}
+
+#quick-task-bar
+{
+	background-color: #ffffff; 
+	margin: 10px 0px 10px 0px; 
+	clear: both;
+	height: 60px; 
+	padding: 5px 10px 5px 10px; 
+	width: 960px;
+	position: relative; 
+}
+
+#content 
+{
+	background: #ffffff; 
+	clear: both; 
+	float: left; 
+	margin: 5px 0px 0px 0px; 
+	padding: 20px 10px 20px 10px; 
+	width: 960px; 
+	min-height: 600px; 
+}
+
+#footer
+{
+	background: #d0cfbd; 
+	color: #666666;
+	clear: both;
+	height: 30px;
+	font-size: 0.7em; 
+	padding: 10px 0px 10px 0px; 
+	text-align: center;
+	width: 100%; 	
+}
+
+#add-issue-button
+{
+	position: absolute; 
+	top: 15px;
+	left: 10px; 
+	text-decoration: none; 
+}
+
+.issue-container
+{
+	display: block;
+	margin-bottom: 10px; 
+}
+
+.vote-box 
+{
+	text-align: center; 
+	width: 30px;
+	float: left;
+	padding: 10px; 
+}
+
+.vote-box-item
+{
+	display: block; 
+	font-size: 1.6em; 
+	font-weight: bold; 
+	text-align: center; 
+}
+
+.issue-content
+{
+	border: 1px solid #eceadb;
+	width: 870px;
+	float: left; 
+}
+
+.issue-title
+{
+	display: block; 
+	padding: 0px 10px 0px 10px; 
+}
+
+.issue-details
+{
+	display: block; 
+	padding: 0px 10px 0px 10px; 
+}
+
+.issue-metadata
+{
+	background-color: #eceadb; 
+	color: #333333;
+	font-size: 0.8em; 
+	display: block; 
+	list-style: none;
+	padding: 1px 10px 1px 10px; 
+}
+
+/* Forms */ 
+/* ------------------------------*/ 
+fieldset
+{
+    margin: 1em 0px;
+    padding: 1em;
+    border: 1px solid #ccc;
+}
+
+fieldset p 
+{
+    margin: 2px 12px 10px 10px;
+}
+
+fieldset.editor-label
+{
+    display: block;
+}
+
+fieldset label.inline 
+{
+    display: inline;
+}
+
+fieldset.section-header
+{
+    display: block; 
+    font-size: 1.1em;
+    font-weight: bold; 
+}
+
+input[type="text"] 
+{
+    width: 200px;
+    border: 1px solid #ccc;
+}
+
+input[type="password"] 
+{
+    width: 200px;
+    border: 1px solid #ccc;
+}
+
+legend 
+{
+    font-size: 1.1em;
+    padding: 2px 4px 8px 4px;
+}
+
+#search-form 
+{
+	width: 510px; 
+	height: 40px; 
+	position: absolute; 
+  	top: 15px; 
+	right: 10px;
+}
+
+#search-box
+{
+	border: 1px solid #eceadb; 
+	color: #999999; 
+	font-size: 1.6em; 
+	width: 400px;
+	height: 40px;
+}
+
+#search-button
+{
+	display: inline; 
+	text-align: right;
+	position: absolute;  
+}
+
+/* Validation */ 
+/* ------------------------------*/ 
+.validation-error
+{
+    color: #ff0000;
+}
+
+.validation-success
+{
+    color: #00b450; 
+}
+
+/* Miscellaneous */ 
+/* ------------------------------*/ 
+.clear
+{
+	clear: both; 
+}

@@ -57,7 +57,7 @@ For more information please visit the nodeunit [README](https://github.com/caola
 To create a test or a series of tests open a new file called 'test-yourTestName.js'. Once you have done that you can add your tests to the file like this:
 
 	//Include your modules that you will need
-	var testCase = require('nodeunit').testCase;
+	var testCase = require('nodeunit/nodeunit').testCase;
 
 	module.exports = testCase({
 	    setUp: function (callback) {

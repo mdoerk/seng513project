@@ -108,10 +108,10 @@ img.right
 
 #menu li
 {
-	color: #ffffff; 
+	color: #ffffff;
 	float: left;
 	text-decoration: none; 
-	text-align: center; 
+	text-align: center;
 }
 
 #menu a 
@@ -142,6 +142,24 @@ img.right
 	position: relative; 
 }
 
+a#add-issue-button
+{
+	position: absolute; 
+  	top: 10px; 
+	text-decoration: none; 
+	text-align: center; 
+	background-color: #b2e136;
+	border: 1px solid #a0c92d; 
+	color: #ffffff;
+   font-size: 1.6em;
+	padding: 10px 15px 10px 15px; 
+}
+
+a#add-issue-button:hover
+{
+	background-color : #acda33; 
+}
+
 #content 
 {
 	background: #ffffff; 
@@ -159,28 +177,10 @@ img.right
 	color: #EEEEEE;
 	clear: both;
 	height: 30px;
-	font-size: 0.7em; 
+	font-size: 0.8em; 
 	padding: 10px 0px 10px 0px; 
 	text-align: center;
 	width: 100%; 	
-}
-
-a#add-issue-button
-{
-	position: absolute; 
-  	top: 10px; 
-	text-decoration: none; 
-	text-align: center; 
-	background-color: #b2e136;
-	border: 1px solid #a0c92d; 
-	color: #ffffff;
-   font-size: 1.6em;
-	padding: 10px 15px 10px 15px; 
-}
-
-a#add-issue-button:hover
-{
-	background-color : #acda33; 
 }
 
 .issue-container
@@ -210,12 +210,6 @@ a#add-issue-button:hover
 	border: 1px solid #eceadb;
 	width: 870px;
 	float: left; 
-}
-
-.issue-title
-{
-	display: block; 
-	padding: 0px 10px 0px 10px; 
 }
 
 .issue-details
@@ -319,8 +313,6 @@ legend
 {
 	background-color: #d85933;
 }
-
-
 
 /* Validation */ 
 /* ------------------------------*/ 

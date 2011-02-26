@@ -1,5 +1,5 @@
 //Include your modules that you will need
-var testCase = require('nodeunit').testCase;
+var testCase = require('nodeunit/nodeunit').testCase;
 
 module.exports = testCase({
     setUp: function (callback) {

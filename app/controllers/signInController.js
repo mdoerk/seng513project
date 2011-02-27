@@ -1,19 +1,43 @@
+var util = require('util');
 
-this.__proto__ = applicationController; //superclass
 
-exports.index = function(){
-//	if(this.request.method != 'POST') // the request should be global to the controllers
-//		return;
+//this.__proto__ = require('./applicationController'); //superclass
+//util.inherits(this, require('./applicationController'));
+
+var signInController = exports.signInController = function(){
 	
-	user.authenticate(params.username, params.password, function (authenticated){
+}
+signInController.__proto__ = require('./applicationController');
+
+exports.index = signInController.index = function(req, res){
+	if(req.method != 'POST'){
+		console.log('debug: ' + arguments.callee.caller.name );
+		console.log('dubug: ' + util.inspect(arguments.callee.caller.caller));
+		render('signIn', req, res);
+		return;
+	}
 		
-		if(authenticated){
-			redirectTo(index);
-		}else{
-			error = 'Sign in failed.';
-			body = 'signIn';
-		}
+	req.content = '';
+	
+	req.on('data', function(chunk){
+		req.content += chunk;
+	})
+	
+	req.on('end', function(){
+		parseParameters(req.content);
+	
+		var params = req.params
+	
+		user.authenticate(params.username, params.password, function (authenticated){
 		
+			if(authenticated){
+				redirectTo(index);
+			}else{
+				error = 'Sign in failed.';
+				body = 'signIn';
+			}
+		
+		})
 	})
 }
 

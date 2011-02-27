@@ -2,7 +2,8 @@ var fs = require('fs'),
 	http = require('http'),
 	url = require('url'),
 	util = require('util'), 
-	router = require('./lib/routes').router; 
+	router = require('./lib/routes').router,
+	querystring = require('querystring'); 
 
 var port = 8124; 
 
@@ -30,14 +31,7 @@ var parseGETParameters = function(url){
 // Sets the params array accordingly. For the above example params.username == user && params.password == five
 // Returns nothing.
 var parseParameters = function(string){
-	keyValuePairs = string.split('&');
-	this['params'] = new Array();
-	for(index in keyValuePairs){
-	 	splitKeyValue = keyValuePairs[index].split('=');
-		key = splitKeyValue[0];
-		value = splitKeyValue[1];
-		this['params'][key] = value;
-	}
+	this['params'] = queryString.parse(string);
 }
  
 var server = function(req, res) {

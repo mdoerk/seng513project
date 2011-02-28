@@ -19,36 +19,6 @@ you should omit the '/public' from the path when defining routes to static files
 
 The basic object storage will handle inserting, finding, updating and deleting of records from
 the database.
-
-### Tables (Schema) ###
-	users {
-		id				int PRIMARY KEY AUTOINCREMENT
-		name			text
-		email			text
-		password		text
-		neighborhood	text
-		postal_code		text
-	}
-	
-	issues {
-		id				int PRIMARY KEY AUTOINCREMENT
-		user_id			int
-		created			datetime
-		lastModified	datetime
-		status			text
-		title			text
-		description		text
-		link			text
-		location		text
-	}
-	
-	comments {
-		id				int PRIMARY KEY AUTOINCREMENT
-		user_id			int
-		issue_id		int
-		created			datetime
-		content			text
-	}
 	
 ### Usage ###
 

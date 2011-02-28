@@ -1,14 +1,80 @@
 <!doctype html> 
 <html>
 	<head>
-		<title>Home</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>CivicConnect</title>
+		<link rel="stylesheet" href="css/style.css" type="text/css" />
 	</head>
-	<body>
-		<h1>Test Index Page</h1>
-		<h2>Serving static resources</h2>
-		<p><a href="static.html">Click here</a> to see an example of linking to a static resource</p>
-		<p><a href="foo">Click here</a> to see an example of linking to function call that throws an exception.</p>
-		<p><a href="fooBar">Click here</a> to see an example of linking to function call serves some dynamic content</p>
-		<p><a href="123">Click here</a> to see an example of routing using regular expressions that serves a static resource</p>
-	</body>
-</html> 
+	<body> 
+		<div id="page">
+			<div id="header">
+				<a href="#">join</a> |
+				<a href="#">login</a> 
+			</div>
+			
+			<div id="menu">
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="about.html">About</a></li>
+				</ul>
+			</div>
+			
+			<div id="quick-task-bar"> 
+				<a href="#" id="add-issue-button">Add Issue</a>
+				<form id="search-form">
+					<input type="text" id="search-box" name="search" value="" />
+					<input type="submit" id="search-button" value="Search" /> 
+				</form>
+			</div>
+		
+			<div id="content"> 
+				<h1>Latest Issues</h1>
+				
+				<div class="issue-container"> 
+					<div class="vote-box">
+						<span class="vote-box-item"><img src="images/up_arrow.png" alt="upvote"></span>
+						<span class="vote-box-item">20</span>
+						<span class="vote-box-item"><img src="images/down_arrow.png" alt="downvote"></span>
+					</div>
+					<div class="issue-content">
+						<div class="issue-details">
+							<h2>Community Garden in Brentwood</h2>
+							<p>Brentwood still does not have a community garden, 
+							even through residents have been campaigning for starting one for years...</p>
+						</div>
+						<div class="issue-metadata"> 
+							<p>Submitted by: username | 32 comments</p>
+						</div> 
+					</div>
+					<div class="clear"></div> 
+				</div> 
+				
+				<div class="issue-container"> 
+					<div class="vote-box">
+						<span class="vote-box-item"><img src="images/up_arrow.png" alt="upvote"></span>
+						<span class="vote-box-item">8</span>
+						<span class="vote-box-item"><img src="images/down_arrow.png" alt="downvote"></span>
+					</div>
+					<div class="issue-content">
+						<div class="issue-details">
+							<h2>Our City. Our Budget. Our Future.</h2>
+							<p>The City today launched the engagement process for the facilitated review of core services 
+							and The City's business planning and budget process.  
+							The project - being called Our City. Our Budget. Our Future...</p>
+						</div>
+						<div class="issue-metadata"> 
+							<p>Submitted by: username | 32 comments</p>
+						</div> 
+					</div>
+					<div class="clear"></div> 
+				</div> 
+				
+			</div> 
+			
+			<div id="footer">
+				<p>&copy; 2011 University of Calgary. All rights reserved.</p>
+			</div>
+		</div>	
+		
+	</body> 
+</html>

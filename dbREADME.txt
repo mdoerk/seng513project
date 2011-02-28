@@ -37,7 +37,8 @@ Tables (Schema)
 
 Usage
 -------------------------------------------------------------------------------------------------
->> require
+
+>> var dbAccess = require('./dbAccess');
 
 ###### CREATE ######################################################
 >> dbAccess.create(table, params, call_back)

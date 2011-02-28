@@ -12,7 +12,7 @@ var sqlite = require('sqlite');
  *		
  *		Example: create('table_name', { table_column1:'value', table_column2:'value' }, callback);
  */
-function create(table, param, call_back)
+exports.create function (table, param, call_back)
 {
 	db.open('CivicConnect', function(error) {
 		if (error) {
@@ -76,7 +76,7 @@ function create(table, param, call_back)
  *
  *	 	Example: find('table_name', { properties:['column_1','column_2'], conditions:['condition_1', condition_2 OR condition_3'], limit:number, orderby:'column_3 desc/asc' }, callback);
  */
-function find(table, params, call_back)
+exports.find function (table, params, call_back)
 {
 	// DEFAULT VALUES
 	params.properties = params.properties || new Array();
@@ -139,7 +139,7 @@ function find(table, params, call_back)
  *
  *	 	Example: update('table_name', { values:['column_1=value','column_2=value'], conditions:['condition_1', condition_2 OR condition_3'] }, callback);
  */
-function update(table, params, call_back)
+exports.update function (table, params, call_back)
 {
 	// DEFAULT VALUES
 	params.values = params.values || new Array();
@@ -192,7 +192,7 @@ function update(table, params, call_back)
  *
  *	 	Example: remove('table_name', { conditions:['condition_1', condition_2 OR condition_3'] }, callback);
  */
-function remove(table, params, call_back)
+exports.remove function (table, params, call_back)
 {
 	// DEFAULT VALUES
 	params.conditions = params.conditions || new Array();

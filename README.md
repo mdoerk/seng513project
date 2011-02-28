@@ -15,7 +15,23 @@ is as simple as adding a new 'r.add' line under the existing routes. Notice that
 you should omit the '/public' from the path when defining routes to static files.
 
 
-## Basic Object Storage and Fixtures ##
+## Database Access ##
+
+To create the database file with the current schema run the following commands in the project directory:
+
+	sqlite3 CivicConnect.db
+	> .read schema.sql
+	> .exit
+
+For now, please, use the node-sqlite module to access the database from Node.
+
+	var sqlite = require('sqlite');
+	var db = new sqlite.Database();
+	db.open("CivicConnect.db", function (error) {...});
+
+See documentation on the [node-sqlite](https://github.com/orlandov/node-sqlite) module page
+
+You may have to change the path to the database depending on where your module is located.
 
 
 ## Testing Infrastructure ##

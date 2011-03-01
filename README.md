@@ -23,7 +23,7 @@ the database.
 ### Usage ###
 
 First import the module in the file where you require to access the database by:
-var dbAccess = require('./dbAccess');
+var dbAccess = require('dbAccess');
 
 Creating the database from the .sql file, run the following commands on the terminal
 sqlite3 CivicConnect.db
@@ -35,10 +35,9 @@ sqlite3 CivicConnect.db
 create - insert a new row into the database
 	1. table 		   STRING 	MANDATORY					- table to select from
 	2. params  		   ARRAY								- Array containing all the variables
-		Example: { title:'hello world', content:'blah blah blah' }
 	3. call_back	   METHOD	MANDATORY					- return function
 	
-	Example: create('table_name', { table_column1:'value', table_column2:'value' }, callback);
+	Example: create('table_name', { values: 'column_1="value1"', 'column_2="value2"' }, callback);
 
 #### FIND ####
 >> dbAccess.find(table, params, call_back)
@@ -52,7 +51,7 @@ find - returns rows based on certain parameters.
 																ORDERBY date DESC" orderby is 'date desc'
 	3. call_back	   FUNCTON	MANDATORY					- returns the rows to the function to handle
 
- 	Example: results = find('table_name', { properties:['id','date'], conditions:['id=4 OR id=5','user_id=3'], limit:5, orderby:'date asc' }, callback);
+ 	Example: results = find('table_name', { properties:['id','date'], conditions:['id="4" OR id="5"','user_id="3"'], limit:5, orderby:'date asc' }, callback);
 	
 #### UPDATE ####
 >> dbAccess.update(table, params, call_back)
@@ -63,7 +62,7 @@ update - updates row information.
 	    - conditions   ARRAY	OPTIONAL  [default]			- Array of conditions of which rows to be updated. Ex: ['id=5', 'user_id=1']
 	3. call_back	   FUNCTON	MANDATORY					- return function
 
-	Example: update('table_name', { values:['column_1=value','column_2=value'], conditions:['condition_1', condition_2 OR condition_3'] }, callback);
+	Example: update('table_name', { values:['column_1="value"','column_2="value"'], conditions:['condition_1="value1"', 'condition_2="value2" OR condition_3="value3"'] }, callback);
 	
 #### DELETE ####
 >> dbAccess.remove(table, params, call_back)
@@ -73,9 +72,13 @@ remove - updates row information.
 	    - conditions   ARRAY	OPTIONAL  [default]			- Array of conditions of which rows to be updated. Ex: ['id=5', 'user_id=1']
 	3. call_back	   FUNCTON	MANDATORY					- return function
 
-	Example: remove('table_name', { conditions:['condition_1', condition_2 OR condition_3'] }, callback);
+	Example: remove('table_name', { conditions:['condition_1="value1"', 'condition_2="value2" OR condition_3="value3"'] }, callback);
 
+#### RUN QUERY ####
+>> dbAccess.runQuery(query, call_back)
+this method is used if you would like to run your own query
 
+	
 ## Testing Infrastructure ##
 
 The test infrastructure is built upon the [nodeunit](https://github.com/caolan/nodeunit) open source testing platform which is in turn, is built upon the node assert module. Currently there is only unit testing with the nodeunit framework but there is planned implementation for functional tests to be integrated into nodeunit as well, so that you can test the requests you pass to the server and the responses you get back. For those of you that have done testing before this TDD style of testing should be somewhat familiar.

@@ -34,33 +34,36 @@ Creating the database from the .sql file, run the following commands on the term
 >> dbAccess.create(table, params, call_back)
 create - insert a new row into the database
 	1. table 		   STRING 	MANDATORY					- table to select from
-	2. params  		   ARRAY								- Array containing all the variables
-	3. call_back	   METHOD	MANDATORY					- return function
-	
-	Example: create('table_name', { values: 'column_1="value1"', 'column_2="value2"' }, callback);
+	2. params  		   OBJECT								- object containing all the variables
+		- values	   ARRAY	MANDATORY					- data to be inserted.  Ex: "INSERT INTO table (a,b,c) VALUES ('x','y','z')" values is ['a="x"','b="y"','c="z"']
+	3. call_back	   METHOD	OPTIONAL					- return function for errors
+
+	Example: create('table_name', { values:['column_1="value1"', 'column_2="value2"']}, callback);
 
 #### FIND ####
 >> dbAccess.find(table, params, call_back)
 find - returns rows based on certain parameters.
 	1. table 		   STRING 	MANDATORY					- table to select from
-	2. params  		   ARRAY								- Array containing all the variables
+	2. params  		   OBJECT								- Object containing all the variables
 		- properties   ARRAY 	OPTIONAL  [default: '*']	- columns to select. Ex: "SELECT id, date FROM table" properties is ['id', 'date']
-	    - conditions   ARRAY	OPTIONAL  [default]			- column conditions. Ex: "SELECT id FROM table WHERE id=5" conditions is ['id=5']
-	    - limit		   STRING	OPTIONAL  [default]			- limits the number of rows to passbac. Ex: "SELECT * FROM table LIMIT 10" limit is '10'
+	    - conditions   ARRAY	OPTIONAL  [default]			- column conditions. Ex: "SELECT id FROM table WHERE id=5" conditions is ['id="5"']
+	    - limit		   STRING	OPTIONAL  [default]			- limits the number of rows to passbac. Ex: "SELECT * FROM table LIMIT 10" limit:10
 		- orderby	   STRING	OPTIONAL  [default]			- orders the resulting rows by a column and DESC or ASC. Ex: "SELECT * FROM table
-																ORDERBY date DESC" orderby is 'date desc'
+																ORDERBY date DESC" orderby:'date desc'
 	3. call_back	   FUNCTON	MANDATORY					- returns the rows to the function to handle
-
- 	Example: results = find('table_name', { properties:['id','date'], conditions:['id="4" OR id="5"','user_id="3"'], limit:5, orderby:'date asc' }, callback);
+	
+ 	Example: find('table_name', { properties:['id','date'], conditions:['id="4" OR id="5"','user_id="3"'], limit:5, orderby:'date asc' }, callback);
+	-- where function callback(error, results) {..}
+	-- var results will contain the result
 	
 #### UPDATE ####
 >> dbAccess.update(table, params, call_back)
 update - updates row information.
 	1. table 		   STRING 	MANDATORY					- table to select from
-	2. params  		   ARRAY								- Array containing all the variables
-		- values  	   ARRAY 	OPTIONAL  [default: '*']	- Array of columns and new values. Ex: ['id=5', 'title='new']
-	    - conditions   ARRAY	OPTIONAL  [default]			- Array of conditions of which rows to be updated. Ex: ['id=5', 'user_id=1']
-	3. call_back	   FUNCTON	MANDATORY					- return function
+	2. params  		   OBJECT								- Object containing all the variables
+		- values  	   ARRAY 	OPTIONAL  [default: '*']	- Array of columns and new values. Ex: ['id="5"', 'title="new"']
+	    - conditions   ARRAY	OPTIONAL  [default]			- Array of conditions of which rows to be updated. Ex: ['id="5"', 'user_id="1"']
+	3. call_back	   FUNCTON	OPTIONAL					- return function for erors
 
 	Example: update('table_name', { values:['column_1="value"','column_2="value"'], conditions:['condition_1="value1"', 'condition_2="value2" OR condition_3="value3"'] }, callback);
 	
@@ -68,15 +71,17 @@ update - updates row information.
 >> dbAccess.remove(table, params, call_back)
 remove - updates row information.
 	1. table 		   STRING 	MANDATORY					- table to select from
-	2. params  		   ARRAY								- Array containing all the variables
-	    - conditions   ARRAY	OPTIONAL  [default]			- Array of conditions of which rows to be updated. Ex: ['id=5', 'user_id=1']
-	3. call_back	   FUNCTON	MANDATORY					- return function
+	2. params  		   OBJECT								- Object containing all the variables
+	    - conditions   ARRAY	OPTIONAL  [default]			- Array of conditions of which rows to be updated. Ex: ['id="5"', 'user_id="1"']
+	3. call_back	   FUNCTON	OPTIONAL					- return function for errors
 
 	Example: remove('table_name', { conditions:['condition_1="value1"', 'condition_2="value2" OR condition_3="value3"'] }, callback);
 
 #### RUN QUERY ####
 >> dbAccess.runQuery(query, call_back)
-this method is used if you would like to run your own query
+this method is used if you would like to run your own query,
+if the query is SELECT, callback is expected to take in a result parameter:
+-- function callback(error, results) {...}
 
 	
 ## Testing Infrastructure ##

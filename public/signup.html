@@ -1,20 +1,37 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-
-<head>
-<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-<title>Signup</title>
-</head>
-
-<body>
-<h1>Signup</h1>
-<form action="signup" method="post" enctype="application/x-www-form-urlencoded">
-Username<br><input type="text" name="username"><br><br>
-Email<br><input type="text" name="email"><br><br>
-Password<br><input type="password" name="password"><br><br>
-<input type="submit" value="Submit">
-</form>
-</body>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>Signup</title>
+		<link rel="stylesheet" href="css/style.css" type="text/css" />
+	</head>
+	<body>
+		<div id="page">
+			<div id="header">
+				<a href="signup.html">join</a> |
+				<a href="#">login</a> 
+			</div>
+			
+			<div id="menu">
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="about.html">About</a></li>
+				</ul>
+			</div>
+			
+			
+			<div id="content">
+				<h1>Signup</h1>
+				<form action="signup" method="post" enctype="application/x-www-form-urlencoded">
+					<p>Username<br><input type="text" name="username"></p>
+					<p>Email<br><input type="text" name="email"></p>
+					<p>Password<br><input type="password" name="password"></p>
+					
+					<input type="submit" value="Submit">
+				</form>
+			</div>
+		</div>
+	</body>
 
 </html>

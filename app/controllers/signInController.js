@@ -7,7 +7,7 @@ var util = require('util');
 var signInController = exports.signInController = function(){
 	
 }
-signInController.__proto__ = require('./applicationController');
+this.prototype = require('./applicationController');
 
 exports.index = signInController.index = function(req, res){
 	if(req.method != 'POST'){

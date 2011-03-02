@@ -6,7 +6,7 @@ var applicationController = exports.applicationController = function(){
 	
 }
 
-applicationController.prototype.render = function(view, req, res){
+exports.render = function(view, req, res){
 	if(rendered)
 		throw 'View already rendered';
 	render = true;

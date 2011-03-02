@@ -1,25 +1,23 @@
-var http = require('http');
-var fs = require('fs');
+var fs = require('fs'), 
+	http = require('http'),
+	url = require('url'),
+	util = require('util'), 
+	router = require('./lib/routes').router,
+	querystring = require('querystring'); 
 
-var fileLoader = function(dir){
-	fs.readdir(dir, function(err, files){
-		for(file in files){
-			filename = files[file].split('.');
-			if(filename[1] == 'js'){
-				this[filename[0]] = require('./' + dir + filename[0]);
-			}else{
-				return;
-			}
-		}
-	});
+var port = 8124; 
+
+// Process command line arguments 
+var argv = process.argv.slice(2);
+for (var i = 0; i < argv.length; i++) {
+	switch (argv[i]) {
+		case '--port':
+			port = parseInt(argv[i + 1], 10); 
+			break; 
+		default: 
+			break; 
+	}
 }
-
-//load Controllers
-fileLoader('app/controllers/');
-fileLoader('app/models/');
-
-//load database
-var db = require('./db/database');
 
 // Parses the giving url string and sets the params to the corresponding values.
 var parseGETParameters = function(url){
@@ -33,38 +31,14 @@ var parseGETParameters = function(url){
 // Sets the params array accordingly. For the above example params.username == user && params.password == five
 // Returns nothing.
 var parseParameters = function(string){
-	keyValuePairs = string.split('&');
-	this['params'] = new Array();
-	for(index in keyValuePairs){
-	 	splitKeyValue = keyValuePairs[index].split('=');
-		key = splitKeyValue[0];
-		value = splitKeyValue[1];
-		this['params'][key] = value;
-	}
+	this['params'] = queryString.parse(string);
+}
+ 
+var server = function(req, res) {
+	util.log('Received ' + req.method + ' request for ' + req.url); 
+	var parsedUrl = url.parse(req.url, true);
+	router.handle(parsedUrl.pathname, req, res); 
 }
 
-var server = function(request, response){
-	applicationController.request = request;
-	applicationController.response = response;
-	
-	if(request.method == 'GET')
-		parseGETParameters(request.url);
-	
-	request.content = '';
-	request.on('data', function(chunk){
-		request.content += chunk;
-	})
-	request.on('end', function(){
-		if(request.method == 'POST')
-			parseParameters(request.content);
-			
-			
-		
-		//routing needed. for not just assume index of signInController.
-		signInController.index();
-		console.log(params);
-	})
-	
-}
-
-http.createServer(server).listen(1234);
+http.createServer(server).listen(port); 
+util.log('Server running on port ' + port);

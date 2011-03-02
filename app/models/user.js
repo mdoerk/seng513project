@@ -12,19 +12,22 @@ var sha1hash = function(string){
  * 
  * 'email': The email address of the user.
  * 'password': The password to check.
- * 'callback': returns (error, isAuthenticated), where error is null unless
- *    an error occured and isAuthenticated is boolean.
+ * 'callback': returns (error, user), where error is null unless
+ *    an error occured and user is null if the password hashes don't
+ *    match or the user record otherwise.
  */
 exports.authenticate = function(email, password, callback){
 	dbAccess.find('users', { values:['email="' + email + '"']}, function(error, records){
 		if(error)
-			callback(error, null);
+			return callback(error, null);
 		
 		if(records.length == 0)
-			callback("Email not found in database.", null);
+			return callback("Email not found in database.", null);
 		
-		isAuthenticated = records[0].password == sha1hash(password);
+		user = records[0];
+		if(user && user.password != sha1hash(password));
+			user = null;
 		
-		callback(null, isAuthenticated);
+		callback(null, user);
 	});	
 }

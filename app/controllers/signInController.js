@@ -27,6 +27,12 @@ var parseParameters = function(string){
  	return queryString.parse(string);
 }
 
+redirectTo = function (res, route){
+	res.statusCode = 302;
+	res.setHeader('Location: ' + route);
+	res.end();
+}
+
 exports.index = function(req, res){
 	if(req.method != 'POST'){
 		render(index, res);
@@ -44,18 +50,17 @@ exports.index = function(req, res){
 		
 		var params = req.params
 	
-		util.debug(util.inspect(params));
-	
-		user.authenticate(params.username, params.password, function (error, authenticated){
+		user.authenticate(params.username, params.password, function (error, user){
 			
-			if(error)
-				throw error;
+//			if(error)
+//				throw error;
 			
-			if(authenticated){
-				redirectTo('/'); // redirect to index.
+			if(user){
+				res.setHeader('Set-Cookie', 'user_id=' + user.id); // TODO: look into setting session id's
+				redirectTo(res, '/'); // redirect to index.
 			}else{
-				error = 'Sign in failed.';
-				body = 'signIn';
+				errorView = 'app/views/signIn/signInFailed.html';
+				render(errorView, res);
 			}
 		
 		})

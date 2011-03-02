@@ -11,8 +11,6 @@ exports.render = function(view, req, res){
 		throw 'View already rendered';
 	render = true;
 	
-	console.log(arguments.callee);
-	
 	viewPage = viewRoot + 'signIn/signIn.html';
 	router.handle(viewPage, req, res);
 }

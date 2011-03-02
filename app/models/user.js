@@ -17,17 +17,34 @@ var sha1hash = function(string){
  *    match or the user record otherwise.
  */
 exports.authenticate = function(email, password, callback){
-	dbAccess.find('users', { values:['email="' + email + '"']}, function(error, records){
+	dbAccess.find('users', { conditions:['email="' + email + '"']}, function(error, records){
 		if(error)
 			return callback(error, null);
 		
 		if(records.length == 0)
-			return callback("Email not found in database.", null);
+			return callback(null, null); // no user found.
 		
 		user = records[0];
-		if(user && user.password != sha1hash(password));
+		if(user && (user.password != sha1hash(password)))
 			user = null;
 		
 		callback(null, user);
 	});	
+}
+
+/*
+ * given the cookie data (likely a session id) return the user or null if
+ * not logged in.
+ * returns: callback(error, user)
+ */
+exports.isLoggedIn = function(session, callback){
+	dbAccess.find('users', { conditions:['id="' + session + '"']}, function(error, records){
+		if(error)
+			return callback(error, null);
+			
+		if(records.length == 0)
+			return callback(null, null); // no user found.
+		
+		callback(null, records[0]);
+	});
 }

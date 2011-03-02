@@ -29,7 +29,7 @@ var parseParameters = function(string){
 
 redirectTo = function (res, route){
 	res.statusCode = 302;
-	res.setHeader('Location: ' + route);
+	res.setHeader('Location', route);
 	res.end();
 }
 
@@ -52,11 +52,13 @@ exports.index = function(req, res){
 	
 		user.authenticate(params.username, params.password, function (error, user){
 			
-//			if(error)
-//				throw error;
+			if(error)
+				throw error;
 			
 			if(user){
-				res.setHeader('Set-Cookie', 'user_id=' + user.id); // TODO: look into setting session id's
+				// For now this just uses the user id as the session id.
+				// It works but, is a security flaw.
+				res.setHeader('Set-Cookie', 'session=' + user.id); // TODO: look into setting real session id's
 				redirectTo(res, '/'); // redirect to index.
 			}else{
 				errorView = 'app/views/signIn/signInFailed.html';
@@ -65,5 +67,10 @@ exports.index = function(req, res){
 		
 		})
 	})
+}
+
+exports.logout = function(req, res){
+	res.setHeader('Set-Cookie', 'session=' + 0);
+	redirectTo(res, '/');
 }
 

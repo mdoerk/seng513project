@@ -23,9 +23,15 @@ For example, if I have a route to static file foo.html, the path would be:
 not: 
 	r.add('/myroute', 'public/foo.html'); // INCORRECT 
 	
+For routes, it is usually good enough to define a route as a simple string as shown in previous examples.  
+However, if you need to handle more dynamic routes you may also define a regular expression as a route. 
+For example, say you would like to match routes like '/Issue/<Year>' (e.g. /Issues/2011', 'Issue/2010' etc). 
+You could define your route like this: 
+	r.add(/^\/Issues\/\d{4}$/, Issue.showIssue); 
+	
 ### Example ###
 
-Let's say we have a link on our web page:
+Let's say we have a link 'My Route' on our web page:
 
 	<html> 
 		<body>
@@ -37,13 +43,13 @@ Let's say we have a link on our web page:
 		</body>
 	</html>
 
-When the link is clicked (which generating a request for '/myroute'), we would like to to call a method 'foo()' in our JavaScript module 'FooBar':
+When the link is clicked (which generates a request for '/myroute'), we would like to to call a method 'foo()' in our JavaScript module 'FooBar':
 
 	var FooBar = exports.FooBar = function() { 
 		this.bar = 'bar';  
 	};
 	
-	// The function we would like to call 
+	// THE FUNCTION TO CALL 
 	FooBar.foo = function(req, res) {
 		res.writeHead(200, { 'Content-Type' : 'text/html' }); 
 		res.end('<html><body><h1>FooBar</h1></body></html>');
@@ -61,7 +67,7 @@ In the routes.js file, add a new route for '/myroute' using the add() function:
 	 */
 	r.add('/', 'index.html');
 	r.add('/handleForm', FooBar.foo);	
-	r.add('/myroute', FooBar.foo); // My added route 
+	r.add('/myroute', FooBar.foo); // MY ADDED ROUTE
 	
 Now when the link is clicked, you FooBar.foo() function is called with the request and response objects passed to it. 
 

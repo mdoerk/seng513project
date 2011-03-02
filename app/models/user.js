@@ -23,11 +23,8 @@ exports.authenticate = function(email, password, callback){
 		if(records.length == 0)
 			callback("Email not found in database.", null);
 		
-		passwordMatches = records[0].password == sha1hash(password);
+		isAuthenticated = records[0].password == sha1hash(password);
 		
-		callback(null, passwordMatches);
-		
-		return passwordMatches;
-	});
-	
+		callback(null, isAuthenticated);
+	});	
 }

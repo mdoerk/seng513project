@@ -1,19 +1,35 @@
-var util = require('util');
+var util = require('util'),
+fs = require('fs'),
+queryString = require('querystring');
 
+var user = require('../models/user');
+var index = 'app/views/signIn/signIn.html'
 
-//this.__proto__ = require('./applicationController'); //superclass
-//util.inherits(this, require('./applicationController'));
-
-var signInController = exports.signInController = function(){
-	
+function render(view, res){
+	util.pump(fs.createReadStream(view), res, function(err){
+		if(err)
+			throw err;
+	});
 }
-this.prototype = require('./applicationController');
 
-exports.index = signInController.index = function(req, res){
+// Parses the giving url string and sets the params to the corresponding values.
+var parseGETParameters = function(url){
+	questionMarkIndex = url.indexOf('?');
+	if(questionMarkIndex == -1)
+		return;
+	parseParameters(url.slice(questionMarkIndex + 1));
+}
+// Parses the given string and set he params to the corresponding values.
+// Takes a string of the form 'username=user&password=five'
+// Sets the params array accordingly. For the above example params.username == user && params.password == five
+// Returns nothing.
+var parseParameters = function(string){
+ 	return queryString.parse(string);
+}
+
+exports.index = function(req, res){
 	if(req.method != 'POST'){
-		console.log('debug: ' + arguments.callee.caller.name );
-		console.log('dubug: ' + util.inspect(arguments.callee.caller.caller));
-		render('signIn', req, res);
+		render(index, res);
 		return;
 	}
 		
@@ -24,14 +40,19 @@ exports.index = signInController.index = function(req, res){
 	})
 	
 	req.on('end', function(){
-		parseParameters(req.content);
-	
+		req.params = parseParameters(req.content);
+		
 		var params = req.params
 	
-		user.authenticate(params.username, params.password, function (authenticated){
-		
+		util.debug(util.inspect(params));
+	
+		user.authenticate(params.username, params.password, function (error, authenticated){
+			
+			if(error)
+				throw error;
+			
 			if(authenticated){
-				redirectTo(index);
+				redirectTo('/'); // redirect to index.
 			}else{
 				error = 'Sign in failed.';
 				body = 'signIn';

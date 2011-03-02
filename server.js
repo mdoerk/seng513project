@@ -2,8 +2,7 @@ var fs = require('fs'),
 	http = require('http'),
 	url = require('url'),
 	util = require('util'), 
-	router = require('./lib/routes').router,
-	querystring = require('querystring'); 
+	router = require('./lib/routes').router; 
 
 var port = 8124; 
 
@@ -17,21 +16,6 @@ for (var i = 0; i < argv.length; i++) {
 		default: 
 			break; 
 	}
-}
-
-// Parses the giving url string and sets the params to the corresponding values.
-var parseGETParameters = function(url){
-	questionMarkIndex = url.indexOf('?');
-	if(questionMarkIndex == -1)
-		return;
-	parseParameters(url.slice(questionMarkIndex + 1));
-}
-// Parses the given string and set he params to the corresponding values.
-// Takes a string of the form 'username=user&password=five'
-// Sets the params array accordingly. For the above example params.username == user && params.password == five
-// Returns nothing.
-var parseParameters = function(string){
-	this['params'] = queryString.parse(string);
 }
  
 var server = function(req, res) {

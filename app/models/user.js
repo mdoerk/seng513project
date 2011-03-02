@@ -1,5 +1,5 @@
-
-var crypto = require('crypto');
+var crypto = require('crypto'),
+dbAccess = require('../../node_modules/dbAccess');
 
 // Maybe this should use a salt to secure the password in the database.
 var sha1hash = function(string){
@@ -7,23 +7,27 @@ var sha1hash = function(string){
 	hash.update(string + 'randomness');
 	return hash.digest('hex');
 }
-
-
-//Should this be blocking? I'm not sure a dataase call shoudl be blocking but I'm not sure how to go about this.
-//Should every method have a callback? maybe.
-exports.authenticate = function(username, password, callback){
-	db.query('SELECT * FROM users WHERE username = \'' + username + '\'', function(records){
-		//TODO: check to make sure we didn't return more then one record.
-		//		or maybe this is assumed?
+/*
+ * Checks if email and password match.
+ * 
+ * 'email': The email address of the user.
+ * 'password': The password to check.
+ * 'callback': returns (error, isAuthenticated), where error is null unless
+ *    an error occured and isAuthenticated is boolean.
+ */
+exports.authenticate = function(email, password, callback){
+	dbAccess.find('users', { values:['email="' + email + '"']}, function(error, records){
+		if(error)
+			callback(error, null);
 		
 		if(records.length == 0)
-			return false;
+			callback("Email not found in database.", null);
 		
-		passwordMatches = records[0].password_hash == sha1hash(password);
+		passwordMatches = records[0].password == sha1hash(password);
 		
-		callback(passwordMatches);
+		callback(null, passwordMatches);
 		
 		return passwordMatches;
-	})
+	});
 	
 }

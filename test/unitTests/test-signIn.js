@@ -4,7 +4,10 @@ var testCase = require('nodeunit/nodeunit').testCase;
 
 module.exports = testCase({
 	setUp: function (callback) {
-		dbAccess.create('users', { values: ['email = "user"', 'password = "five"']}, callback);
+		dbAccess.create('users', { values: 
+			['"name"="John"',
+			'"email"="user"', 
+			'"password"="b8572e307fcb2694778271edc56638cf7ee68969"']}, callback);
 		callback();
 	},
 	tearDown: function (callback) {
@@ -12,7 +15,7 @@ module.exports = testCase({
 		callback();
 	},
 	testSignInEmailAndPasswordCorrect: function (test) {
-		signIn.authenticate('user','five', function(error, user){
+		signIn.authenticate('user','two', function(error, user){
 			test.equal(error, null);
 			test.ok(user);
 			test.done();
@@ -26,7 +29,7 @@ module.exports = testCase({
 		});
 	},
 	testSignInUserIncorrect: function (test) {
-		signIn.authenticate('user', 'four', function(error, user){
+		signIn.authenticate('nonUser', 'two', function(error, user){
 			test.equal(error, null);
 			test.equal(user, null);
 			test.done();

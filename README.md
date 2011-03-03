@@ -175,3 +175,21 @@ In order to run tests in the test folder there are a few different ways to do it
 * To run **a specific** test file or test folder just provide the path inside the 'test/' folder like this:
 
 	`node runTests.js unitTests/test-yourTestName.js`
+	
+## Parsing an address to latitude and longitude ##
+
+### Instructions ###
+
+* Load the parseAddr.js module:
+
+	`var parseAddr = require('parseAddr);`
+	
+* Input an address of string and receive results:
+
+	`var result;
+	`parseAddr.geocode("7205 4st ne calgary ab canada", function(ret) {
+		result = ret;
+	});`
+	`result { "latitude" : "78.02020", "longitude" : "-23.49482" }`
+	
+* If the input does not exist or validate, the "latitude" and "longitude" fields will be empty.

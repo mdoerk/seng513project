@@ -4,6 +4,8 @@ var testCase = require('nodeunit/nodeunit').testCase;
 
 module.exports = testCase({
 	setUp: function (callback) {
+		
+		// whan to load db/fixtures/users.sql
 		dbAccess.create('users', { values: 
 			['"name"="John"',
 			'"email"="user"', 

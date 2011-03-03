@@ -231,3 +231,27 @@ In order to run tests in the test folder there are a few different ways to do it
 * To run **a specific** test file or test folder just provide the path inside the 'test/' folder like this:
 
 	`node runTests.js unitTests/test-yourTestName.js`
+	
+## Reputation System ##
+
+### Description ###
+For each user, an overall reputation score is recorded and updated to give an indication of
+the level and quality of contributions made by the user.  
+
+The reputation system is based on 'actions'.  For example, the action of adding an issue will improve the issue author's reputation by a certain number of points. 
+It is also possible for 'actions' to affect the reputation of other users.  For example, a user voting up on a issue will affect both the voter and the issue author.  
+
+### Adding Reputation Modifiers to Your Actions ###
+A number of reputation modifiers have already been exposed in reputation.js.  
+If you have an action such as adding/voting for issues/comments, make sure to include the appropriate reputation modifier in your code.  For example: 
+	
+	var reputation = require('reputation'); 
+	reputation.updateOnAddComment(1, 1, comment); 
+
+### Reputation API ###
+
+* **reputation.updateOnAddComment(issueId, userId, comment)** - Updates reputation for issue author and commenter when comment is added 
+* **reputation.updateOnIssueUpVote(issueId, userId)** - Updates reputation for the issue author and commenter when an issue is voted up 
+* **reputation.updateOnIssueDownVote(issueId, userId)** - Updates reputation for the issue author and commenter when an issue is voted down
+* **reputation.updateOnCommentUpVote(issueId, userId)** - Updates reputation for the comment author and commenter when an comment is voted up
+* **reputation.updateOnCommentDownVote(issueId, userId)** - Updates reputation for the comment author and commenter when an comment is voted down

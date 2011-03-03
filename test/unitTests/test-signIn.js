@@ -1,5 +1,5 @@
 var testCase = require('nodeunit/nodeunit').testCase;
-	signIn = require('../app/models/user');
+	signIn = require('../../node_modules/user');
 	dbAccess = require('../../node_modules/dbAccess');
 
 module.exports = testCase({
@@ -11,16 +11,25 @@ module.exports = testCase({
 		dbAccess.remove('users', { conditions: ['email = "user"']}, callback);
 		callback();
 	},
-	exports['Email & Password Correct'] = function (test) {
-		test.equal(signIn.authenticate('user','five'), (null, true));
-		test.done();
+	testSignInEmailAndPasswordCorrect: function (test) {
+		signIn.authenticate('user','five', function(error, user){
+			test.equal(error, null);
+			test.ok(user);
+			test.done();
+		});
 	},
-	exports['Password Incorrect'] = function (test) {
-		test.equal(signIn.authenticate('user', 'four'), (null, false));
-		test.done();
+	testSignInPasswordIncorrect: function (test) {
+		signIn.authenticate('user', 'four', function(error, user){
+			test.equal(error, null);
+			test.equal(user, null);
+			test.done();
+		});
 	},
-	exports['User Incorrect'] = function (test) {
-		test.equal(signIn.authenticate('users', 'five'), ("Email not found in database.", null));
-		test.done();
+	testSignInUserIncorrect: function (test) {
+		signIn.authenticate('user', 'four', function(error, user){
+			test.equal(error, null);
+			test.equal(user, null);
+			test.done();
+		});
 	}
 });

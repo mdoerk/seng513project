@@ -250,6 +250,7 @@ If you have an action such as adding/voting for issues/comments, make sure to in
 
 ### Reputation API ###
 
+* **reputation.updateOnSignUp(name, email)** - Updates reputation when a user signs up to the site
 * **reputation.updateOnAddComment(issueId, userId, comment)** - Updates reputation for issue author and commenter when comment is added 
 * **reputation.updateOnIssueUpVote(issueId, userId)** - Updates reputation for the issue author and commenter when an issue is voted up 
 * **reputation.updateOnIssueDownVote(issueId, userId)** - Updates reputation for the issue author and commenter when an issue is voted down

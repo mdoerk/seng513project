@@ -2,25 +2,81 @@ This is the repository for the course project of SENG 513.
 
 # Basic Features #
 
-
 ## Dispatching and Error Handling ##
 
-The dispatcher determines the required action based on the URL. Routes are defined
-in /lib/routes.js.
+The dispatcher determines the required action to call or resource to retrieve based on a given URL. 
 
-Note that only files in /public are available to the outside world.
+### Usage ###
+The dispatcher requires two components to be defined in order to properly route your requests: 
+1) A route 
+2) A specific function call or resource 
 
-Please see /lib/routes.js for examples on how to register routes. Essentially, it 
-is as simple as adding a new 'r.add' line under the existing routes. Notice that
-you should omit the '/public' from the path when defining routes to static files.
+Routes are defined in '/lib/routes.js' and should be added using the 'r.add' under the existing routes.
+Each route should be unique in this list.  
 
+Only files located in the '/public' folder can be accessed by clients. 
+Therefore, images, html files, and javascript files that need to be accessed by http clients should be placed in this folder or a subfolder within this folder.
+
+If you want to route to a static file (e.g. foo.html), you should omit the '/public' from the path name.
+For example, if I have a route to static file foo.html, the path would be: 
+	r.add('/myroute', 'foo.html'); // CORRECT 
+not: 
+	r.add('/myroute', 'public/foo.html'); // INCORRECT 
+	
+For routes, it is usually good enough to define a route as a simple string as shown in previous examples.  
+However, if you need to handle more dynamic routes you may also define a regular expression as a route. 
+For example, say you would like to match routes like '/Issue/<Year>' (e.g. /Issues/2011', 'Issue/2010' etc). 
+You could define your route like this: 
+	r.add(/^\/Issues\/\d{4}$/, Issue.showIssue); 
+	
+### Example ###
+
+Let's say we have a link 'My Route' on our web page:
+
+	<html> 
+		<body>
+			<a href="/myroute">My Route</a> 
+			<form method="post" action="/handleForm">
+				<input type="text" /> 
+				<input type="submit" /> 
+			</form>
+		</body>
+	</html>
+
+When the link is clicked (which generates a request for '/myroute'), we would like to to call a method 'foo()' in our JavaScript module 'FooBar':
+
+	var FooBar = exports.FooBar = function() { 
+		this.bar = 'bar';  
+	};
+	
+	// THE FUNCTION TO CALL 
+	FooBar.foo = function(req, res) {
+		res.writeHead(200, { 'Content-Type' : 'text/html' }); 
+		res.end('<html><body><h1>FooBar</h1></body></html>');
+	}
+	
+In the routes.js file, add a new route for '/myroute' using the add() function: 
+
+	var Router = require('./router').Router; 
+	var TestModule = require('testModule').TestModule; 
+
+	var r = new Router();
+
+	/*
+	 * Define routes here!
+	 */
+	r.add('/', 'index.html');
+	r.add('/handleForm', FooBar.foo);	
+	r.add('/myroute', FooBar.foo); // MY ADDED ROUTE
+	
+Now when the link is clicked, you FooBar.foo() function is called with the request and response objects passed to it. 
 
 ## Basic Object Storage and Fixtures ##
 
 The basic object storage will handle inserting, finding, updating and deleting of records from
 the database.
 	
-### Usage ###
+### Examples ###
 
 First import the module in the file where you require to access the database by:
 var dbAccess = require('dbAccess');

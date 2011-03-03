@@ -9,3 +9,6 @@ VALUES (1, '17/02/11', 'closed', 'Third Issue', 'Hail Damage to uninsurable prop
 
 INSERT INTO users(name, email, password)
 VALUES ('john', 'john@example.com', 'foo');
+
+INSERT INTO users(name, email, password)
+VALUES ('jane', 'jane@example.com', 'foo');

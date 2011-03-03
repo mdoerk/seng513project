@@ -227,6 +227,11 @@ a#add-issue-button:hover
 	padding: 1px 10px 1px 10px; 
 }
 
+.text-center-style
+{
+	text-align:center;
+}
+
 /* Forms */ 
 /* ------------------------------*/ 
 fieldset
@@ -312,6 +317,8 @@ legend
 {
 	background-color: #d85933;
 }
+
+
 
 /* Validation */ 
 /* ------------------------------*/ 

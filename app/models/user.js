@@ -41,7 +41,7 @@ exports.isLoggedIn = function(session, callback){
 	dbAccess.find('users', { conditions:['id="' + session + '"']}, function(error, records){
 		if(error)
 			return callback(error, null);
-			
+		
 		if(records.length == 0)
 			return callback(null, null); // no user found.
 		

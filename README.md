@@ -187,9 +187,9 @@ In order to run tests in the test folder there are a few different ways to do it
 * Input an address of string and receive results:
 
 	`var result;
-	`parseAddr.geocode("7205 4st ne calgary ab canada", function(ret) {
-		result = ret;
-	});`
+	`parseAddr.geocode("7205 4st ne calgary ab canada", function(ret) {`
+		`result = ret;`
+	`});`
 	`result { "latitude" : "78.02020", "longitude" : "-23.49482" }`
 	
 * If the input does not exist or validate, the "latitude" and "longitude" fields will be empty.

@@ -186,7 +186,7 @@ In order to run tests in the test folder there are a few different ways to do it
 	
 * Input an address of string and receive results:
 
-	`var result;
+	`var result;`
 	`parseAddr.geocode("7205 4st ne calgary ab canada", function(ret) {`
 		`result = ret;`
 	`});`

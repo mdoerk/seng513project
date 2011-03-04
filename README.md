@@ -182,7 +182,7 @@ In order to run tests in the test folder there are a few different ways to do it
 
 * Load the parseAddr.js module:
 
-	`var parseAddr = require('parseAddr);`
+	`var parseAddr = require('parseAddr');`
 	
 * Input an address of string and receive results:
 

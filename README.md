@@ -273,5 +273,5 @@ If you have an action such as adding/voting for issues/comments, make sure to in
 * **reputation.updateOnAddComment(issueId, userId, comment)** - Updates reputation for issue author and commenter when comment is added 
 * **reputation.updateOnIssueUpVote(issueId, userId)** - Updates reputation for the issue author and commenter when an issue is voted up 
 * **reputation.updateOnIssueDownVote(issueId, userId)** - Updates reputation for the issue author and commenter when an issue is voted down
-* **reputation.updateOnCommentUpVote(issueId, userId)** - Updates reputation for the comment author and commenter when an comment is voted up
-* **reputation.updateOnCommentDownVote(issueId, userId)** - Updates reputation for the comment author and commenter when an comment is voted down
+* **reputation.updateOnCommentUpVote(commentId, userId)** - Updates reputation for the comment author and commenter when an comment is voted up
+* **reputation.updateOnCommentDownVote(commentId, userId)** - Updates reputation for the comment author and commenter when an comment is voted down

@@ -233,7 +233,7 @@ In order to run tests in the test folder there are a few different ways to do it
 	`node runTests.js unitTests/test-yourTestName.js`
 	
 
-# How To Check If The User Is Logged In #
+## How To Check If The User Is Logged In ##
 
 There is a a method in the request object called 'getUser'. This must be passed a callback method has two parameters (error, user). 'user' will be the user record from the 'users' table if he is logged in, it will be null otherwise.
 
@@ -275,3 +275,23 @@ If you have an action such as adding/voting for issues/comments, make sure to in
 * **reputation.updateOnIssueDownVote(issueId, userId)** - Updates reputation for the issue author and commenter when an issue is voted down
 * **reputation.updateOnCommentUpVote(issueId, userId)** - Updates reputation for the comment author and commenter when an comment is voted up
 * **reputation.updateOnCommentDownVote(issueId, userId)** - Updates reputation for the comment author and commenter when an comment is voted down
+
+
+## Parsing an address to latitude and longitude ##
+
+### Instructions ###
+
+* Load the parseAddr.js module:
+
+	`var parseAddr = require('parseAddr');`
+	
+* Input an address of string and receive results:
+
+	`var result;`
+	`parseAddr.geocode("7205 4st ne calgary ab canada", function(ret) {`
+		`result = ret;`
+	`});`
+	`result { "latitude" : "78.02020", "longitude" : "-23.49482" }`
+	
+* If the input does not exist or validate, the "latitude" and "longitude" fields will be empty.
+

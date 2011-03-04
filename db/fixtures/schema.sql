@@ -17,11 +17,12 @@ CREATE TABLE issues (
 		created DATETIME DEFAULT CURRENT_TIMESTAMP,
 		lastModified DATETIME DEFAULT CURRENT_TIMESTAMP,
 		status TEXT,
-      title TEXT,
+    title TEXT,
 		description TEXT,
+		tags TEXT,
 		link TEXT,
 		location TEXT
-		);
+);
 
 DROP TABLE comments;
 CREATE TABLE comments (
@@ -39,3 +40,15 @@ CREATE TABLE votes (
 		issue_id INTEGER NOT NULL,
 		vote INTEGER NOT NULL
 		);
+
+CREATE TABLE keywords (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		keyword TEXT,
+		UNIQUE (keyword)
+		);
+
+CREATE TABLE indexTable (
+		keyword_id INTEGER NOT NULL,
+		issue_id INTEGER NOT NULL,
+		PRIMARY KEY (keyword_id, issue_id)
+	);

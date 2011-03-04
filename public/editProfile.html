@@ -1,0 +1,64 @@
+<!doctype html> 
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>CivicConnect</title>
+		<link rel="stylesheet" href="css/style.css" type="text/css" />
+	</head>
+	<body> 
+		<div id="page">
+			<div id="header">
+				<a href="signup.html">join</a> |
+				<a href="#">login</a> 
+			</div>
+			
+			<div id="menu">
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="about.html">About</a></li>
+				</ul>
+			</div>
+			
+			<div id="quick-task-bar"> 
+				<a href="#" id="add-issue-button">Add Issue</a>
+				<form id="search-form">
+					<input type="text" id="search-box" name="search" value="" />
+					<input type="submit" id="search-button" value="Search" /> 
+				</form>
+			</div>
+		
+			<div id="content">
+			
+				<h1>Edit Your Profile</h1>
+				<form id="editProfile_form" action="editProfile" method="post" enctype="application/x-www-form-urlencoded" onsubmit="return editProfileValidate(this);">
+					<table cellspacing="10">
+						<tr>
+							<td>Username<br><input type="text" name="username"></td>
+							<td>Email<br><input type="text" name="email"></td>	
+						</tr>
+						<tr>
+							<td>Neighborhood<br><input type="text" name="neighborhood"></td>
+							<td>Postal Code<br><input type="text" name="postal_code"></td>
+						</tr>
+					</table>
+					<br>
+					<table cellspacing="10">
+						<tr>
+							<td>New Password (optional)<br><input type="password" name="new_password"></td>
+						</tr>
+						<tr>
+							<td>Confirm New Password<br><input type="password" name="confirm_password"></td>
+						</tr>
+					</table>
+					<br><br><br>
+					<p>Password (required)<br><input type="password" name="password"></p>
+								
+					<input type="submit" value="Update" />
+				</form>
+											
+			</div> 
+
+		</div>	
+		
+	</body> 
+</html>

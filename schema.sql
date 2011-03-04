@@ -26,3 +26,15 @@ CREATE TABLE comments (
 		created DATETIME DEFAULT CURRENT_TIMESTAMP,
 		content TEXT
 		);
+
+CREATE TABLE keywords (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		keyword TEXT,
+		UNIQUE (keyword)
+		);
+
+CREATE TABLE indexTable (
+		keyword_id INTEGER NOT NULL,
+		issue_id INTEGER NOT NULL,
+		PRIMARY KEY (keyword_id, issue_id)
+		);

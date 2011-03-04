@@ -39,3 +39,15 @@ CREATE TABLE votes (
 		issue_id INTEGER NOT NULL,
 		vote INTEGER NOT NULL
 		);
+
+CREATE TABLE keywords (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		keyword TEXT,
+		UNIQUE (keyword)
+		);
+
+CREATE TABLE indexTable (
+		keyword_id INTEGER NOT NULL,
+		issue_id INTEGER NOT NULL,
+		PRIMARY KEY (keyword_id, issue_id)
+		);

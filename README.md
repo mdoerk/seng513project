@@ -275,3 +275,22 @@ If you have an action such as adding/voting for issues/comments, make sure to in
 * **reputation.updateOnIssueDownVote(issueId, userId)** - Updates reputation for the issue author and commenter when an issue is voted down
 * **reputation.updateOnCommentUpVote(commentId, userId)** - Updates reputation for the comment author and commenter when an comment is voted up
 * **reputation.updateOnCommentDownVote(commentId, userId)** - Updates reputation for the comment author and commenter when an comment is voted down
+
+
+## Parsing an address to latitude and longitude ##
+
+### Instructions ###
+
+* Load the parseAddr.js module:
+
+	var parseAddr = require('parseAddr');
+	
+* Input an address of string and receive results:
+
+	var result;
+	parseAddr.geocode("7205 4st ne calgary ab canada", function(ret) {
+		result = ret;
+	});
+	result { "latitude" : "78.02020", "longitude" : "-23.49482" }
+	
+* If the input does not exist or validate, the "latitude" and "longitude" fields will be empty.

@@ -233,7 +233,7 @@ In order to run tests in the test folder there are a few different ways to do it
 	`node runTests.js unitTests/test-yourTestName.js`
 	
 
-# How To Check If The User Is Logged In #
+## How To Check If The User Is Logged In ##
 
 There is a a method in the request object called 'getUser'. This must be passed a callback method has two parameters (error, user). 'user' will be the user record from the 'users' table if he is logged in, it will be null otherwise.
 

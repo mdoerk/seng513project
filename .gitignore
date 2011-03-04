@@ -1,2 +1,6 @@
+# Temporary files of editors
+*~
+*.swp
+
 # databases
 *.db

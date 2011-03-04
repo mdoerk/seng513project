@@ -1,4 +1,4 @@
-DROP TABLE users; 
+DROP TABLE IF EXISTS users; 
 CREATE TABLE users (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		name TEXT NOT NULL,
@@ -10,20 +10,20 @@ CREATE TABLE users (
 		reputation_score INTEGER
 		);
 
-DROP TABLE issues;		
+DROP TABLE IF EXISTS issues;		
 CREATE TABLE issues (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		user_id INTEGER NOT NULL,
 		created DATETIME DEFAULT CURRENT_TIMESTAMP,
 		lastModified DATETIME DEFAULT CURRENT_TIMESTAMP,
 		status TEXT,
-      title TEXT,
+		title TEXT,
 		description TEXT,
 		link TEXT,
 		location TEXT
 		);
 
-DROP TABLE comments;
+DROP TABLE IF EXISTS comments;
 CREATE TABLE comments (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		user_id INTEGER NOT NULL,

@@ -21,7 +21,8 @@ CREATE TABLE issues (
 		title TEXT,
 		description TEXT,
 		link TEXT,
-		location TEXT
+		location TEXT,
+		tags TEXT
 		);
 
 DROP TABLE comments;

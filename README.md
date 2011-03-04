@@ -231,3 +231,23 @@ In order to run tests in the test folder there are a few different ways to do it
 * To run **a specific** test file or test folder just provide the path inside the 'test/' folder like this:
 
 	`node runTests.js unitTests/test-yourTestName.js`
+	
+## Tagging of Issues ##
+
+This feature allows users to 'tag' issues. Users may enter a (space separated) list of tags when creating an 
+issue, and the application will proceed as follows:
+	
+	- addIssue will create the issue in the issues table, in order to get the id of the new issue
+	- addIssue will pass the issue id, as well as the relevant form data (what the user entered in the 'Tags' 
+		box) to the tagIssue(issueId, tags)
+	- tagIssue will parse the tags and create a list of tags
+	- each tag will be checked against the tags table
+		-> if it exists, we get the id of tag
+		-> if it does not exist, we insert this new tag into the table and temporarily store the id of this new tag
+	- a new row will be added to issuetags table describing this new tag relationship
+		-> 'INSERT INTO issuetags (issue_id, tag_id) VALUES (<issueId>, <tagId>);
+	
+### Usage ###
+
+	
+### Example ###

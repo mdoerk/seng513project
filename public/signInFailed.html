@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Sign In</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>
+	p.error{color: red;}
+</style>
+</head>
+<body>
+
+<h1>Sign In</h1>
+
+<form action="/signin" method="post">
+	
+	<p class='error'>
+		Sign In Failed. Please try again.
+	</p>
+	
+	<p>
+	<label for ="username">Username:</label> <br>
+	<input type="text" id="username" name="username">
+	</p>
+
+	<p>
+	<label for="password">Password:</label> <br>
+	<input type="password" id="password" name="password">
+	</p>
+	
+	<input type='submit' value='Sign In'>
+</form>
+
+</body>
+</html>

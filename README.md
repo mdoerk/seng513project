@@ -81,10 +81,13 @@ the database.
 First import the module in the file where you require to access the database by:
 var dbAccess = require('dbAccess');
 
-Creating the database from the .sql file, run the following commands on the terminal
-	sqlite3 CivicConnect.db
-	> .read schema.sql
-	> .exit
+To set up the production database environment simply type in the terminal:
+	
+	`node setupDB.js`
+
+This will create a new copy of the 'CivicConnect.db' in the 'db/' folder that is populated with the sample data in the 'db/fixtures/' folder.  It will also make a backup copy called 'CivicConnect-back.db' of the previous existing database. Alternatively, if you want to create a test database simply type in the terminal:
+
+	`node setupDB.js -t`
 
 #### CREATE ####
 >> dbAccess.create(table, params, call_back)
@@ -252,7 +255,7 @@ issue, and the application will proceed as follows:
 	
 ### Example ###
 
-# How To Check If The User Is Logged In #
+## How To Check If The User Is Logged In ##
 
 There is a a method in the request object called 'getUser'. This must be passed a callback method has two parameters (error, user). 'user' will be the user record from the 'users' table if he is logged in, it will be null otherwise.
 
@@ -294,3 +297,23 @@ If you have an action such as adding/voting for issues/comments, make sure to in
 * **reputation.updateOnIssueDownVote(issueId, userId)** - Updates reputation for the issue author and commenter when an issue is voted down
 * **reputation.updateOnCommentUpVote(issueId, userId)** - Updates reputation for the comment author and commenter when an comment is voted up
 * **reputation.updateOnCommentDownVote(issueId, userId)** - Updates reputation for the comment author and commenter when an comment is voted down
+
+
+## Parsing an address to latitude and longitude ##
+
+### Instructions ###
+
+* Load the parseAddr.js module:
+
+	`var parseAddr = require('parseAddr');`
+	
+* Input an address of string and receive results:
+
+	`var result;`
+	`parseAddr.geocode("7205 4st ne calgary ab canada", function(ret) {`
+		`result = ret;`
+	`});`
+	`result { "latitude" : "78.02020", "longitude" : "-23.49482" }`
+	
+* If the input does not exist or validate, the "latitude" and "longitude" fields will be empty.
+

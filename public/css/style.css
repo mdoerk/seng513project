@@ -170,6 +170,11 @@ a#add-issue-button:hover
 	min-height: 600px; 
 }
 
+#pager
+{
+        text-align: center;
+}
+
 #footer
 {
 	background: #262626; 

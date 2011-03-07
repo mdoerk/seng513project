@@ -1,4 +1,4 @@
-DROP TABLE users; 
+DROP TABLE IF EXISTS users; 
 CREATE TABLE users (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		name TEXT NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE users (
 		isEditor BOOLEAN
 		);
 
-DROP TABLE issues;		
+DROP TABLE IF EXISTS issues;
 CREATE TABLE issues (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		user_id INTEGER NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE issues (
 		location TEXT
 );
 
-DROP TABLE comments;
+DROP TABLE IF EXISTS comments;
 CREATE TABLE comments (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		user_id INTEGER NOT NULL,
@@ -33,21 +33,21 @@ CREATE TABLE comments (
 		content TEXT
 		);
 
--- Table storing tags (each one must be unique), each with a corresponding id
-DROP TABLE tags;
+-- Table storing tags (each one must be unique, enforced by the tags.addTag method), each with a corresponding id
+DROP TABLE IF EXISTS tags;
 CREATE TABLE tags (
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	tag TEXT
 );
 
 -- Table used for defining the many to many relationship between tags and issues
-DROP TABLE issuetags;
+DROP TABLE IF EXISTS issuetags;
 CREATE TABLE issuetags (
 	issue_id INTEGER,
 	tag_id INTEGER
 );
 
-DROP TABLE votes;		
+DROP TABLE IF EXISTS votes;		
 CREATE TABLE votes (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		user_id INTEGER NOT NULL,
@@ -55,14 +55,14 @@ CREATE TABLE votes (
 		vote INTEGER NOT NULL
 		);
 
-DROP TABLE keywords;
+DROP TABLE IF EXISTS keywords;
 CREATE TABLE keywords (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		keyword TEXT,
 		UNIQUE (keyword)
 		);
 
-DROP TABLE indexTable;
+DROP TABLE IF EXISTS indexTable;
 CREATE TABLE indexTable (
 		keyword_id INTEGER NOT NULL,
 		issue_id INTEGER NOT NULL,

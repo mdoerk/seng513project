@@ -258,24 +258,24 @@ issue, and the application will proceed as follows:
 		-> 'INSERT INTO issuetags (issue_id, tag_id) VALUES (<issueId>, <tagId>);
 	
 ### TODO ###
-tags.removeAllTags(<issueId>, function(error){}); // Removes all rows in the issuetags table where issue_id = issueId
-tags.getTags(<issueId>, function(tagList) { // Will return the list of tags
-	for (i = 0; i < tagList.length; i++)
-		util.log(tagList[i]); 
-});
+	tags.removeAllTags(<issueId>, function(error){}); // Removes all rows in the issuetags table where issue_id = issueId
+	tags.getTags(<issueId>, function(tagList) { // Will return the list of tags
+		for (i = 0; i < tagList.length; i++)
+			util.log(tagList[i]); 
+	});
 
 Right now we can only add tags when creating an issue... once the edit issue page is working, it will load the tags for the issue
 (using the to-be-implemented getTags function), then if the user makes changes to the tags, it will removeAllTags for the issue,
 then call tagIssue with the id and the new tags.
 	
 ### Example ###
-// Parse form data, create an issue (remember to get the id of the issue when creating it)
-tags.tagIssue(<issueId>, <tags separated by a space>, function(error) {
-	if (error)
-		// Handle error
-	else
-		// finish whatever you need to do
-});
+	// Parse form data, create an issue (remember to get the id of the issue when creating it)
+	tags.tagIssue(<issueId>, <tags separated by a space>, function(error) {
+		if (error)
+			// Handle error
+		else
+			// finish whatever you need to do
+	});
 
 ## How To Check If The User Is Logged In ##
 

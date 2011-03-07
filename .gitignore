@@ -2,5 +2,8 @@
 *~
 *.swp
 
+# Invisible OS files
+.DS_Store
+
 # databases
 *.db

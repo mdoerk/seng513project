@@ -95,9 +95,16 @@ create - insert a new row into the database
 	1. table 		   STRING 	MANDATORY					- table to select from
 	2. params  		   OBJECT								- object containing all the variables
 		- values	   ARRAY	MANDATORY					- data to be inserted.  Ex: "INSERT INTO table (a,b,c) VALUES ('x','y','z')" values is ['a="x"','b="y"','c="z"']
-	3. call_back	   METHOD	OPTIONAL					- return function for errors
+	3. call_back	   METHOD	OPTIONAL					- callback function can have two optional parameters. first one is error, second is 
+																the id of the row that was just inserted
 
-	Example: create('table_name', { values:['column_1="value1"', 'column_2="value2"']}, callback);
+	Example: 
+	create('table_name', { values:['column_1="value1"', 'column_2="value2"']}, function(error, rowId {
+		if (error)
+			// handle error
+		else
+			util.log("row successfully inserted with id " + rowId);
+	});
 
 #### FIND ####
 >> dbAccess.find(table, params, call_back)
@@ -243,17 +250,32 @@ issue, and the application will proceed as follows:
 	- addIssue will create the issue in the issues table, in order to get the id of the new issue
 	- addIssue will pass the issue id, as well as the relevant form data (what the user entered in the 'Tags' 
 		box) to the tagIssue(issueId, tags)
-	- tagIssue will parse the tags and create a list of tags
-	- each tag will be checked against the tags table
-		-> if it exists, we get the id of tag
-		-> if it does not exist, we insert this new tag into the table and temporarily store the id of this new tag
+	- tagIssue will parse the tags and create a list of tags. addTag is called for each tag
+	- this tag will be checked against the tags table
+		-> if it exists, we get the id of tag and return it
+		-> if it does not exist, we insert this new tag into the table return the id of this new tag
 	- a new row will be added to issuetags table describing this new tag relationship
 		-> 'INSERT INTO issuetags (issue_id, tag_id) VALUES (<issueId>, <tagId>);
 	
-### Usage ###
+### TODO ###
+tags.removeAllTags(<issueId>, function(error){}); // Removes all rows in the issuetags table where issue_id = issueId
+tags.getTags(<issueId>, function(tagList) { // Will return the list of tags
+	for (i = 0; i < tagList.length; i++)
+		util.log(tagList[i]); 
+});
 
+Right now we can only add tags when creating an issue... once the edit issue page is working, it will load the tags for the issue
+(using the to-be-implemented getTags function), then if the user makes changes to the tags, it will removeAllTags for the issue,
+then call tagIssue with the id and the new tags.
 	
 ### Example ###
+// Parse form data, create an issue (remember to get the id of the issue when creating it)
+tags.tagIssue(<issueId>, <tags separated by a space>, function(error) {
+	if (error)
+		// Handle error
+	else
+		// finish whatever you need to do
+});
 
 ## How To Check If The User Is Logged In ##
 

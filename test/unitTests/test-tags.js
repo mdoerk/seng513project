@@ -8,59 +8,52 @@
 
 var testCase = require('nodeunit/nodeunit').testCase,
 	tags = require('../../node_modules/tags'),
-	//sqlite = require('sqlite');
 	dbAccess = require('../../node_modules/dbAccess');
 
 module.exports = testCase({
 	setUp: function (callback) {
-		// Use this function to setup any thing you might 
-      // need to test (ie. connections to a test db).
-
 		callback();
 	},
 	tearDown: function (callback) {
-		// clean up
 		callback();
 	},
-	// testParsing: function (test) {
-		// // Try a simple one first
-		// var s = 'mytag';
-		// var listOfTags = tags.parseTags(s);
-		// // Check that the length, then the contents
-		// test.equals(listOfTags.length, 1, 
-			// 'List should have length of 1. Actual length is ' + listOfTags.length);
-		// test.equals(listOfTags[0], 'mytag',
-			// "First element should be 'mytag'. Actual: " + listOfTags[0]);
-		// // Another simple one
-		// s = 'first second';
-		// listOfTags = tags.parseTags(s);
-		// test.equals(listOfTags.length, 2,
-			// 'List should have length of 2. Actual length is ' + listOfTags.length);
-		// test.equals(listOfTags[0], 'first',
-			// "First element should be 'first'. Actual: " + listOfTags[0]);
-		// test.equals(listOfTags[1], 'second',
-			// "Second element should be 'second'. Actual: " + listOfTags[1]);
-		// // Test with numbers
-		// test.done();
-	// },
 	testGetTagId: function(test) {
-		// First add a tag
-		// var t = 'uniquetag';
-		// tags.addTag(t, function() {
-			// // Now get the id of the tag we just added
-			// tags.getTagId(t, function(tagId){
-				// test.notEqual(tagId, -1);
-			// });
-		// });
-		
-		test.done();
+		// First add a new unique tag
+		var d = new Date();
+		var t1 = d.getTime();
+		tags.addTag(t1, function(error, t1Id) {
+			test.notEqual(t1Id, -1); // id will be -1 if there was an error
+			// Now look up the tag, and compare it with the id
+			tags.getTagId(t1, function(error, t1LookUpId) {
+				test.equal(t1LookUpId, t1Id);
+				// Now look up one that doesn't exist, make sure it returns -1
+				tags.getTagId(t1 + 'x', function(error, t2Id) {
+					test.equal(t2Id, -1);
+					test.done();
+				});
+			});
+		});
 	},
 	testAddTag: function(test) {
 		// Make a uniqe tag
-		var t = 'uniquetag2';
-		tags.addTag(t, function(id) {
-			test.notEqual(id, -1); // id will be -1 if it didn't work
-			test.done();
+		var d = new Date();
+		var t1 = d.getTime();
+		tags.addTag(t1, function(error, t1Id) {
+			test.notEqual(t1Id, -1); // id will be -1 if there was an error
+			// Add another unique tag
+			var t2 = t1 + 'x';
+			tags.addTag(t2, function(error, t2Id) {
+				// Ensure this one isn't -1, and isn't the same as t1's id
+				test.notEqual(t2Id, -1);
+				test.notEqual(t2Id, t1Id);
+				// Try to add t1 again
+				tags.addTag(t1, function (error, t3Id) {
+					// Ensure it isn't -1, but that it does match t1's id
+					test.notEqual(t3Id, -1);
+					test.equal(t3Id, t1Id);
+					test.done();
+				});
+			});
 		});
 	},
 	testTagIssue: function(test) {

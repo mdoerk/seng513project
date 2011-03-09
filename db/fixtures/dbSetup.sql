@@ -4,6 +4,4 @@
 .read ./fixtures/issues.sql
 .read ./fixtures/comments.sql
 .read ./fixtures/votes.sql
-.read ./fixtures/keywords.sql
-.read ./fixtures/indexTable.sql
 .quit

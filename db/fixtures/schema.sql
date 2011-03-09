@@ -55,8 +55,8 @@ CREATE TABLE indexTable (
 		PRIMARY KEY (keyword_id, issue_id)
 	);
 	
-DROP TABLE IF EXISTS follows
-CREATE TABLE follows
+DROP TABLE IF EXISTS follows;
+CREATE TABLE follows (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		user_id INTEGER NOT NULL,
 		issue_id INTEGER NOT NULL

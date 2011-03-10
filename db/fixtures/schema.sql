@@ -8,6 +8,8 @@ CREATE TABLE users (
 		postal_code TEXT,
 		created DATETIME DEFAULT CURRENT_TIMESTAMP,
 		reputation_score INTEGER
+		facebook_account TEXT,
+		twitter_account TEXT
 		);
 
 DROP TABLE IF EXISTS issues;		

@@ -1,23 +1,7 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<title>Sign In</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<style>
-	p.error{color: red;}
-</style>
-</head>
-<body>
-
 <h1>Sign In</h1>
 
 <form action="/signin" method="post">
-	
-	{{#error}}
-	<p class='error'>
-		{{error}}
-	</p>
-	{{/error}}
+
 	<p>
 	<label for ="username">Username:</label> <br>
 	<input type="text" id="username" name="username">
@@ -30,6 +14,3 @@
 	
 	<input type='submit' value='Sign In'>
 </form>
-
-</body>
-</html>

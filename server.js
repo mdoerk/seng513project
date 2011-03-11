@@ -21,7 +21,7 @@ for (var i = 0; i < argv.length; i++) {
  
 var server = function(req, res) {
 	
-	req.getUser = require('./node_modules/user').getUser;
+	req.getUser = require('user').getUser;
 	res.render = templating.render;
 	res.redirectTo = templating.redirectTo;
 	

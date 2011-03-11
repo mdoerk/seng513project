@@ -1,33 +1,34 @@
 <!doctype html>
+
 <html>
-
-<head>
-	<title>CivicConnect: Add New Issue</title>
-	<link rel="stylesheet" href="css/style.css" type="text/css" />
-	<meta http-equiv="content-type" 
-		content="text/html;charset=utf-8" />
-	<script type="text/javascript">
-
-	function checkMandatoryFields()
-	{	
-		var message = "Oops, you forgot to include the following mandatory fields:";
-		if (document.new_issue.title.value == "" )
-			message += "\nTitle";
-		if (document.new_issue.description.value == "")
-			message += "\nDescription"
-		
-		if (message != "Oops, you forgot to include the following mandatory fields:")
-		{
-			alert(message);
-			return false;
+	<head>
+		<title>CivicConnect: Add New Issue</title>
+		<link rel="stylesheet" href="css/style.css" type="text/css" />
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<script type="text/javascript">
+		function checkMandatoryFields()
+		{	
+			var message = "Oops, you forgot to include the following mandatory fields:";
+			
+			if (document.new_issue.title.value == "" )
+				message += "\nTitle";
+				
+			if (document.new_issue.description.value == "")
+				message += "\nDescription";
+				
+			if (message != "Oops, you forgot to include the following mandatory fields:")
+			{
+				alert(message);
+				return false;
+			}
 		}
-					
-	}
-	</script>
-</head>
-<body>
-<!---Menu Bar--->
-	<div id="page">
+		</script>
+	</head>
+	<body>
+
+	<!---Menu Bar--->
+
+		<div id="page">
 			<div id="header">
 				<a href="signup.html">join</a> |
 				<a href="#">login</a> 
@@ -39,7 +40,7 @@
 					<li><a href="about.html">About</a></li>
 				</ul>
 			</div>
-			
+
 			<div id="quick-task-bar"> 
 				<a href="add.html" id="add-issue-button">Add Issue</a>
 				<form id="search-form">
@@ -47,29 +48,27 @@
 					<input type="submit" id="search-button" value="Search" /> 
 				</form>
 			</div>
-<!---End Menu Bar--->		
-<div id="content"> 
 
-	<h1>Add New Issue</h1>
-What do you feel is an important issue that should be addressed by your city? Create a new issue here! (Fields marked with a <font color="#cc0000">*</font> are mandatory)<br>
-	
-	<form id="new_issue" name="new_issue" action="/add" method="post" onsubmit="return checkMandatoryFields();">
+	<!---End Menu Bar--->		
 
-	<p>Title<font color="#cc0000">*</font><input type="text" name="title" /></p>
-
-	<p>Description<font color="#cc0000">*</font><br>
-	<textarea rows="10" cols="50" name="description"></textarea></p>
-
-	<p>Location <input type="text" name="location" /></p>
-
-	<p>Relevant Link <input type="text" name="link" /></p>
-	
-	<p>Tags <input type="text" name="tags" /></p>
-
-	<p><input type="submit" value="Create Issue" " /></p>
-
-</form>
-</div>
-
-</body>
+			<div id="content"> 
+				<h1>Add New Issue</h1>
+				What do you feel is an important issue that should be addressed by your city? Create a new issue here! 
+				(Fields marked with a <font color="#cc0000">*</font> are mandatory)<br>
+				<form id="new_issue" name="new_issue" action="/add" method="post" onsubmit="return checkMandatoryFields();">
+					<p>Title<font color="#cc0000">*</font><input type="text" name="title" /></p>
+					<p>Description<font color="#cc0000">*</font><br>
+					<textarea rows="10" cols="50" name="description"></textarea></p>
+					<p>Location <input type="text" name="location" /></p>
+					<p>Relevant Link <input type="text" name="link" /></p>
+					<p>Tags <input type="text" name="tags" /></p>
+					<p><input type="submit" value="Create Issue" /></p>
+				</form>
+			</div>
+			
+			<div id="footer">
+				<p>&copy; 2011 University of Calgary. All rights reserved.</p>
+			</div>
+		</div>
+	</body>
 </html>

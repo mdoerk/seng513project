@@ -25,10 +25,11 @@
 
 <form action="/signin" method="post">
 	
+	{{#error}}
 	<p class='error'>
-		Sign In Failed. Please try again.
+		{{error}}
 	</p>
-	
+	{{/error}}
 	<p>
 	<label for ="username">Username:</label> <br>
 	<input type="text" id="username" name="username">

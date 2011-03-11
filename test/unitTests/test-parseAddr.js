@@ -27,7 +27,7 @@ module.exports = testCase({
 	parseValidAddr: function(test) {
 		// expecting the results not to be empty
 		var actual;		
-		parseAddr.geocode(this.validAddr, function(ret) { this.actual1=ret; console.log(ret.laitude);});
+		parseAddr.geocode(this.validAddr, function(ret) { this.actual1=ret; console.log(ret.latitude);});
 		//parseAddr.geocode(this.validAddr, function(ret) { 
 			//actual=ret;
 			

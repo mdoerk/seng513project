@@ -81,10 +81,13 @@ the database.
 First import the module in the file where you require to access the database by:
 var dbAccess = require('dbAccess');
 
-Creating the database from the .sql file, run the following commands on the terminal
-	sqlite3 CivicConnect.db
-	> .read schema.sql
-	> .exit
+To set up the production database environment simply type in the terminal:
+	
+	`node setupDB.js`
+
+This will create a new copy of the 'CivicConnect.db' in the 'db/' folder that is populated with the sample data in the 'db/fixtures/' folder.  It will also make a backup copy called 'CivicConnect-back.db' of the previous existing database. Alternatively, if you want to create a test database simply type in the terminal:
+
+	`node setupDB.js -t`
 
 #### CREATE ####
 >> dbAccess.create(table, params, call_back)

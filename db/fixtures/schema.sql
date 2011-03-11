@@ -40,3 +40,25 @@ CREATE TABLE votes (
 		issue_id INTEGER NOT NULL,
 		vote INTEGER NOT NULL
 		);
+		
+DROP TABLE IF EXISTS keywords;
+CREATE TABLE keywords (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		keyword TEXT,
+		UNIQUE (keyword)
+		);
+
+DROP TABLE IF EXISTS indexTable;
+CREATE TABLE indexTable (
+		keyword_id INTEGER NOT NULL,
+		issue_id INTEGER NOT NULL,
+		PRIMARY KEY (keyword_id, issue_id)
+	);
+	
+DROP TABLE IF EXISTS follows;
+CREATE TABLE follows (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		user_id INTEGER NOT NULL,
+		issue_id INTEGER NOT NULL
+		);
+

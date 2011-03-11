@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>Signup</title>
+		<link rel="stylesheet" href="css/style.css" type="text/css" />	
+		<script src="fieldValidations.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<div id="page">
+			<div id="header">
+				<a href="signup.html">join</a> |
+				<a href="signIn.html">login</a> 
+			</div>
+			
+			<div id="menu">
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="about.html">About</a></li>
+				</ul>
+			</div>
+			
+			
+			<div id="content">
+				<h1>Signup</h1>
+				<form id="signup_form" action="signup" method="post" enctype="application/x-www-form-urlencoded" onsubmit="return signupValidate(this);">
+					<p>Username<br><input type="text" name="username"></p>
+					<p>Email<br><input type="text" name="email"></p>
+					<p>Password<br><input type="password" name="new_password" value=""></p>
+					<p>Confirm Password<br><input type="password" name="confirm_password" value=""></p>
+								
+					<input type="submit" value="Submit" />
+				</form>
+			</div>
+		</div>
+	</body>
+
+</html>

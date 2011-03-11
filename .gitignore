@@ -1,0 +1,9 @@
+# Temporary files of editors
+*~
+*.swp
+
+# Invisible OS files
+.DS_Store
+
+# databases
+*.db

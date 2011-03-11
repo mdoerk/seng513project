@@ -170,6 +170,11 @@ a#add-issue-button:hover
 	min-height: 600px; 
 }
 
+#pager
+{
+        text-align: center;
+}
+
 #footer
 {
 	background: #262626; 
@@ -225,6 +230,11 @@ a#add-issue-button:hover
 	display: block; 
 	list-style: none;
 	padding: 1px 10px 1px 10px; 
+}
+
+.text-center-style
+{
+	text-align:center;
 }
 
 /* Forms */ 
@@ -312,6 +322,8 @@ legend
 {
 	background-color: #d85933;
 }
+
+
 
 /* Validation */ 
 /* ------------------------------*/ 

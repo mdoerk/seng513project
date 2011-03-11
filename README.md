@@ -2,22 +2,147 @@ This is the repository for the course project of SENG 513.
 
 # Basic Features #
 
-
 ## Dispatching and Error Handling ##
 
-The dispatcher determines the required action based on the URL. Routes are defined
-in /lib/routes.js.
+The dispatcher determines the required action to call or resource to retrieve based on a given URL. 
 
-Note that only files in /public are available to the outside world.
+### Usage ###
+The dispatcher requires two components to be defined in order to properly route your requests: 
+1) A route 
+2) A specific function call or resource 
 
-Please see /lib/routes.js for examples on how to register routes. Essentially, it 
-is as simple as adding a new 'r.add' line under the existing routes. Notice that
-you should omit the '/public' from the path when defining routes to static files.
+Routes are defined in '/lib/routes.js' and should be added using the 'r.add' under the existing routes.
+Each route should be unique in this list.  
 
+Only files located in the '/public' folder can be accessed by clients. 
+Therefore, images, html files, and javascript files that need to be accessed by http clients should be placed in this folder or a subfolder within this folder.
+
+If you want to route to a static file (e.g. foo.html), you should omit the '/public' from the path name.
+For example, if I have a route to static file foo.html, the path would be: 
+	r.add('/myroute', 'foo.html'); // CORRECT 
+not: 
+	r.add('/myroute', 'public/foo.html'); // INCORRECT 
+	
+For routes, it is usually good enough to define a route as a simple string as shown in previous examples.  
+However, if you need to handle more dynamic routes you may also define a regular expression as a route. 
+For example, say you would like to match routes like '/Issue/<Year>' (e.g. /Issues/2011', 'Issue/2010' etc). 
+You could define your route like this: 
+	r.add(/^\/Issues\/\d{4}$/, Issue.showIssue); 
+	
+### Example ###
+
+Let's say we have a link 'My Route' on our web page:
+
+	<html> 
+		<body>
+			<a href="/myroute">My Route</a> 
+			<form method="post" action="/handleForm">
+				<input type="text" /> 
+				<input type="submit" /> 
+			</form>
+		</body>
+	</html>
+
+When the link is clicked (which generates a request for '/myroute'), we would like to to call a method 'foo()' in our JavaScript module 'FooBar':
+
+	var FooBar = exports.FooBar = function() { 
+		this.bar = 'bar';  
+	};
+	
+	// THE FUNCTION TO CALL 
+	FooBar.foo = function(req, res) {
+		res.writeHead(200, { 'Content-Type' : 'text/html' }); 
+		res.end('<html><body><h1>FooBar</h1></body></html>');
+	}
+	
+In the routes.js file, add a new route for '/myroute' using the add() function: 
+
+	var Router = require('./router').Router; 
+	var TestModule = require('testModule').TestModule; 
+
+	var r = new Router();
+
+	/*
+	 * Define routes here!
+	 */
+	r.add('/', 'index.html');
+	r.add('/handleForm', FooBar.foo);	
+	r.add('/myroute', FooBar.foo); // MY ADDED ROUTE
+	
+Now when the link is clicked, you FooBar.foo() function is called with the request and response objects passed to it. 
 
 ## Basic Object Storage and Fixtures ##
 
+The basic object storage will handle inserting, finding, updating and deleting of records from
+the database.
+	
+### Examples ###
 
+First import the module in the file where you require to access the database by:
+var dbAccess = require('dbAccess');
+
+To set up the production database environment simply type in the terminal:
+	
+	`node setupDB.js`
+
+This will create a new copy of the 'CivicConnect.db' in the 'db/' folder that is populated with the sample data in the 'db/fixtures/' folder.  It will also make a backup copy called 'CivicConnect-back.db' of the previous existing database. Alternatively, if you want to create a test database simply type in the terminal:
+
+	`node setupDB.js -t`
+
+#### CREATE ####
+>> dbAccess.create(table, params, call_back)
+create - insert a new row into the database
+	1. table 		   STRING 	MANDATORY					- table to select from
+	2. params  		   OBJECT								- object containing all the variables
+		- values	   ARRAY	MANDATORY					- data to be inserted.  Ex: "INSERT INTO table (a,b,c) VALUES ('x','y','z')" values is ['a="x"','b="y"','c="z"']
+	3. call_back	   METHOD	OPTIONAL					- return function for errors
+
+	Example: create('table_name', { values:['column_1="value1"', 'column_2="value2"']}, callback);
+
+#### FIND ####
+>> dbAccess.find(table, params, call_back)
+find - returns rows based on certain parameters.
+	1. table 		   STRING 	MANDATORY					- table to select from
+	2. params  		   OBJECT								- Object containing all the variables
+		- properties   ARRAY 	OPTIONAL  [default: '*']	- columns to select. Ex: "SELECT id, date FROM table" properties is ['id', 'date']
+	    - conditions   ARRAY	OPTIONAL  [default]			- column conditions. Ex: "SELECT id FROM table WHERE id=5" conditions is ['id="5"']
+	    - limit		   STRING	OPTIONAL  [default]			- limits the number of rows to passbac. Ex: "SELECT * FROM table LIMIT 10" limit:10
+		- orderby	   STRING	OPTIONAL  [default]			- orders the resulting rows by a column and DESC or ASC. Ex: "SELECT * FROM table
+																ORDERBY date DESC" orderby:'date desc'
+	3. call_back	   FUNCTON	MANDATORY					- returns the rows to the function to handle
+	
+ 	Example: find('table_name', { properties:['id','date'], conditions:['id="4" OR id="5"','user_id="3"'], limit:5, orderby:'date asc' }, callback);
+	-- where function callback(error, results) {..}
+	-- var results will contain the result
+	
+#### UPDATE ####
+>> dbAccess.update(table, params, call_back)
+update - updates row information.
+	1. table 		   STRING 	MANDATORY					- table to select from
+	2. params  		   OBJECT								- Object containing all the variables
+		- values  	   ARRAY 	OPTIONAL  [default: '*']	- Array of columns and new values. Ex: ['id="5"', 'title="new"']
+	    - conditions   ARRAY	OPTIONAL  [default]			- Array of conditions of which rows to be updated. Ex: ['id="5"', 'user_id="1"']
+	3. call_back	   FUNCTON	OPTIONAL					- return function for erors
+
+	Example: update('table_name', { values:['column_1="value"','column_2="value"'], conditions:['condition_1="value1"', 'condition_2="value2" OR condition_3="value3"'] }, callback);
+	
+#### DELETE ####
+>> dbAccess.remove(table, params, call_back)
+remove - updates row information.
+	1. table 		   STRING 	MANDATORY					- table to select from
+	2. params  		   OBJECT								- Object containing all the variables
+	    - conditions   ARRAY	OPTIONAL  [default]			- Array of conditions of which rows to be updated. Ex: ['id="5"', 'user_id="1"']
+	3. call_back	   FUNCTON	OPTIONAL					- return function for errors
+
+	Example: remove('table_name', { conditions:['condition_1="value1"', 'condition_2="value2" OR condition_3="value3"'] }, callback);
+
+#### RUN QUERY ####
+>> dbAccess.runQuery(query, call_back)
+this method is used if you would like to run your own query,
+if the query is SELECT, callback is expected to take in a result parameter:
+-- function callback(error, results) {...}
+
+	
 ## Testing Infrastructure ##
 
 The test infrastructure is built upon the [nodeunit](https://github.com/caolan/nodeunit) open source testing platform which is in turn, is built upon the node assert module. Currently there is only unit testing with the nodeunit framework but there is planned implementation for functional tests to be integrated into nodeunit as well, so that you can test the requests you pass to the server and the responses you get back. For those of you that have done testing before this TDD style of testing should be somewhat familiar.
@@ -109,3 +234,67 @@ In order to run tests in the test folder there are a few different ways to do it
 * To run **a specific** test file or test folder just provide the path inside the 'test/' folder like this:
 
 	`node runTests.js unitTests/test-yourTestName.js`
+	
+
+## How To Check If The User Is Logged In ##
+
+There is a a method in the request object called 'getUser'. This must be passed a callback method has two parameters (error, user). 'user' will be the user record from the 'users' table if he is logged in, it will be null otherwise.
+
+Example:
+	req.getUser(function(error, user){
+		if(error)
+			throw error;
+		if(user){
+			//user is logged in.
+			//continue. 
+		}else{
+			//user is not logged in.
+			//maybe redirectTo('/login')
+		}
+	})
+
+
+## Reputation System ##
+
+### Description ###
+For each user, an overall reputation score is recorded and updated to give an indication of
+the level and quality of contributions made by the user.  
+
+The reputation system is based on 'actions'.  For example, the action of adding an issue will improve the issue author's reputation by a certain number of points. 
+It is also possible for 'actions' to affect the reputation of other users.  For example, a user voting up on a issue will affect both the voter and the issue author.  
+
+### Adding Reputation Modifiers to Your Actions ###
+A number of reputation modifiers have already been exposed in reputation.js.  
+If you have an action such as adding/voting for issues/comments, make sure to include the appropriate reputation modifier in your code.  For example: 
+	
+	var reputation = require('reputation'); 
+	reputation.updateOnAddComment(1, 1, comment); 
+
+### Reputation API ###
+
+* **reputation.updateOnSignUp(name, email)** - Updates reputation when a user signs up to the site
+* **reputation.updateOnAddComment(issueId, userId, comment)** - Updates reputation for issue author and commenter when comment is added 
+* **reputation.updateOnIssueUpVote(issueId, userId)** - Updates reputation for the issue author and commenter when an issue is voted up 
+* **reputation.updateOnIssueDownVote(issueId, userId)** - Updates reputation for the issue author and commenter when an issue is voted down
+* **reputation.updateOnCommentUpVote(issueId, userId)** - Updates reputation for the comment author and commenter when an comment is voted up
+* **reputation.updateOnCommentDownVote(issueId, userId)** - Updates reputation for the comment author and commenter when an comment is voted down
+
+
+## Parsing an address to latitude and longitude ##
+
+### Instructions ###
+
+* Load the parseAddr.js module:
+
+	`var parseAddr = require('parseAddr');`
+	
+* Input an address of string and receive results:
+
+	`var result;`
+	`parseAddr.geocode("7205 4st ne calgary ab canada", function(ret) {`
+		`result = ret;`
+	`});`
+	`result { "latitude" : "78.02020", "longitude" : "-23.49482" }`
+	
+* If the input does not exist or validate, the "latitude" and "longitude" fields will be empty.
+

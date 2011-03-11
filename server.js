@@ -17,12 +17,15 @@ for (var i = 0; i < argv.length; i++) {
 			break; 
 	}
 }
-
+ 
 var server = function(req, res) {
+	
+	req.getUser = require('./node_modules/user').getUser;
+	
 	util.log('Received ' + req.method + ' request for ' + req.url); 
 	var parsedUrl = url.parse(req.url, true);
 	router.handle(parsedUrl.pathname, req, res); 
 }
 
 http.createServer(server).listen(port); 
-util.log('Server running at http://127.0.0.1:' + port);
+util.log('Server running on port ' + port);

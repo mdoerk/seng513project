@@ -24,6 +24,7 @@ var server = function(req, res) {
 	req.getUser = require('user').getUser;
 	res.render = templating.render;
 	res.redirectTo = templating.redirectTo;
+	res.request = req;
 	
 	util.log('Received ' + req.method + ' request for ' + req.url); 
 	var parsedUrl = url.parse(req.url, true);

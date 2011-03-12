@@ -9,8 +9,14 @@
 	<body> 
 		<div id="page">
 			<div id="header">
+				{{#user}}
+				<a href="/viewProfile">profile</a> |
+				<a href="/signout">logout</a>
+				{{/user}}
+				{{^user}}
 				<a href="/signup.html">join</a> |
-				<a href="/signin">login</a> 
+				<a href="/signin">login</a>
+				{{/user}}
 			</div>
 			
 			<div id="menu">

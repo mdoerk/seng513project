@@ -3,13 +3,13 @@ CREATE TABLE users (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		name TEXT NOT NULL,
 		email TEXT NOT NULL,
+		facebook_account TEXT,
+		twitter_account TEXT,
 		password TEXT NOT NULL,
 		neighborhood TEXT,
 		postal_code TEXT,
 		created DATETIME DEFAULT CURRENT_TIMESTAMP,
 		reputation_score INTEGER
-		facebook_account TEXT,
-		twitter_account TEXT
 		);
 
 DROP TABLE IF EXISTS issues;		

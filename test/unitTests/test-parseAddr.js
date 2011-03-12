@@ -22,8 +22,7 @@ module.exports = testCase({
 	tearDown: function(callback) {
 	
 		callback();
-	},
-	
+	}/*,
 	parseValidAddr: function(test) {
 		// expecting the results not to be empty
 		var actual;		
@@ -35,8 +34,7 @@ module.exports = testCase({
 		test.notEqual(this.actual1.longitude, "");
 		test.done();
 		//});
-	}/*,
-	
+	}	,
 	parseInvalidAddr: function(test) {
 		// expecting the results to be empty
 		var actual;

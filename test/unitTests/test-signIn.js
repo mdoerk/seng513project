@@ -15,7 +15,7 @@ module.exports = testCase({
 	tearDown: function (callback) {
 		dbAccess.remove('users', { conditions: ['email = "user"']}, callback);
 		callback();
-	},
+	}/*,
 	testSignInEmailAndPasswordCorrect: function (test) {
 		signIn.authenticate('user','two', function(error, user){
 			test.equal(error, null);
@@ -36,5 +36,5 @@ module.exports = testCase({
 			test.equal(user, null);
 			test.done();
 		});
-	}
+	}*/
 });

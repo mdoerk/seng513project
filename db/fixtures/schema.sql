@@ -7,7 +7,8 @@ CREATE TABLE users (
 		neighborhood TEXT,
 		postal_code TEXT,
 		created DATETIME DEFAULT CURRENT_TIMESTAMP,
-		reputation_score INTEGER
+		reputation_score INTEGER,
+		isEditor BOOLEAN
 		);
 
 DROP TABLE IF EXISTS issues;		

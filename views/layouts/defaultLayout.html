@@ -1,0 +1,53 @@
+<!DOCTYPE html> 
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>{{pageTitle}}</title>
+		<link rel="stylesheet" href="css/style.css" type="text/css" />
+	</head>
+
+	<body> 
+		<div id="page">
+			<div id="header">
+				{{#user}}
+				<a href="/viewProfile">profile</a> |
+				<a href="/signout">logout</a>
+				{{/user}}
+				{{^user}}
+				<a href="/signup.html">join</a> |
+				<a href="/signin">login</a>
+				{{/user}}
+			</div>
+			
+			<div id="menu">
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="about.html">About</a></li>
+				</ul>
+			</div>
+			
+			<div id="quick-task-bar"> 
+				{{>quickTaskButtons}}
+				<form id="search-form">
+					<input type="text" id="search-box" name="search" value="" />
+					<input type="submit" id="search-button" value="Search" /> 
+				</form>
+			</div>
+			
+			{{#error}}
+			<div class="flash validation-error">
+				{{error}}
+			</div>
+			{{/error}}
+		
+			<div id="content"> 
+				{{{content}}}
+			</div> 
+			
+			<div id="footer">
+				<p>&copy; 2011 University of Calgary. All rights reserved.</p>
+			</div>
+		</div>	
+		
+	</body> 
+</html>

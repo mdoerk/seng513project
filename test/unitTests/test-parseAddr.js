@@ -4,45 +4,41 @@
 **/
 
 var testCase = require('nodeunit/nodeunit').testCase,
-	parseAddr = require('parseAddr');
+	parseAddr = require('../../node_modules/parseAddr');
 	
 module.exports = testCase({
 	setUp: function (callback) {
-		// a valid input
-		this.validAddr = "#32 7205 4St. N.E. Calgary, AB, Canada";
-		// an invalid input
-		this.invalidAddr = "i don't know where i am";
-		this.actual1;
-		this.actual2;		
-		//parseAddr.geocode(this.invalidAddr, function(ret) { this.actual2=ret;});
-		//this.actual2 = parseAddr(this.invalidAddr);
 		callback();
 	},
 	
 	tearDown: function(callback) {
-	
 		callback();
-	}/*,
-	parseValidAddr: function(test) {
-		// expecting the results not to be empty
-		var actual;		
-		parseAddr.geocode(this.validAddr, function(ret) { this.actual1=ret; console.log(ret.latitude);});
-		//parseAddr.geocode(this.validAddr, function(ret) { 
-			//actual=ret;
-			
-		test.notEqual(this.actual1.latitude, "");
-		test.notEqual(this.actual1.longitude, "");
-		test.done();
-		//});
-	}	,
-	parseInvalidAddr: function(test) {
-		// expecting the results to be empty
-		var actual;
-		parseAddr.geocode(this.invalidAddr, function(ret) { 
-			actual=ret;
-		test.throws(this.actual.latitude);
-		test.throws(this.actual.longitude);
-		test.done();
+	},
+	
+	testParseValidAddress: function(test) {
+		var tolerance = 0.00001;
+		var expectedLat = 51.117; 
+		var expectedLong = -114.054; 
+		parseAddr.geocode("#32 7205 4St. N.E. Calgary, AB, Canada", function(location) { 
+			test.notEqual(location.latitude, '');
+			test.notEqual(location.longitude, '');
+			test.ok(isEqual(location.latitude, expectedLat, tolerance));
+			test.ok(isEqual(location.longitude, expectedLong, tolerance));
+			test.done();
 		});
-	}*/
+	},
+	
+	testparseInvalidAddress: function(test) {
+		parseAddr.geocode("i don't know where i am", function(location) { 
+			test.equals(location.latitude, '');
+			test.equals(location.longitude, '');	
+			test.done(); 
+		});
+	}
 });
+
+function isEqual(actual, expected, tolerance) { 
+	var lowerBound = actual - Math.abs(actual * tolerance);
+	var upperBound = actual + Math.abs(actual * tolerance); 
+	return (expected >= lowerBound && expected <= upperBound) ? true : false; 
+}

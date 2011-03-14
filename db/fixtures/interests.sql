@@ -1,0 +1,1 @@
+INSERT INTO interests (user_id, interest_topic, interest_location) VALUES (27, 'Traffic', 'Brentwood'); 

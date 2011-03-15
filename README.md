@@ -366,3 +366,8 @@ Here are a few mustache command:
 For more information on mustache.js see [https://github.com/janl/mustache.js/](https://github.com/janl/mustache.js/) or message
 [codr](https://github.com/inbox/new/codr)
 
+### Redirecting ###
+
+Calling `response.redirectTo(path)` will generate a redirect HTTP 302. `path` is the url path, for example:
+	res.redirectTo('/signin');
+

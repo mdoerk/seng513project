@@ -10,14 +10,23 @@ module.exports = testCase({
 		callback();
 	},
 	
-	testCase: function (test) {
-		
-		recentActivity.getRecentActivityList(27, function(error, results) {
-			if (error) { throw error; } 
-			console.log('TEST: ' + results.length); 
-			for (i in results) {
-				console.log(results[i].contents.created); 
+	testGetUserRecentActivityList: function (test) {
+		recentActivity.getUserRecentActivityList(27, 20, function(error, results) {
+			test.equals(error, null); 
+			test.equals(results.length, 20);
+			var previousRank = results[0].relevance; 
+			for (r in results) {
+				test.ok(results[r].relevance <= previousRank); 
+				previousRank = results[r].relevance; 
 			}
+			test.done(); 
+		});  
+	}, 
+	
+	testGetRecentActivityList: function (test) {
+		recentActivity.getRecentActivityList(10, function(error, results) {
+			test.equals(error, null); 
+			test.equals(results.length, 10);
 			test.done(); 
 		});  
 	}

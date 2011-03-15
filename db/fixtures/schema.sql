@@ -10,7 +10,7 @@ CREATE TABLE users (
 		postal_code TEXT,
 		created DATETIME DEFAULT CURRENT_TIMESTAMP,
 		reputation_score INTEGER,
-		isEditor BOOLEAN
+		isEditor INTEGER
 		);
 
 DROP TABLE IF EXISTS issues;

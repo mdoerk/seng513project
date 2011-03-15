@@ -10,7 +10,7 @@ CREATE TABLE users (
 		postal_code TEXT,
 		created DATETIME DEFAULT CURRENT_TIMESTAMP,
 		reputation_score INTEGER,
-		isEditor BOOLEAN
+		isEditor INTEGER
 		);
 
 DROP TABLE IF EXISTS issues;
@@ -39,7 +39,7 @@ CREATE TABLE comments (
 DROP TABLE IF EXISTS tags;
 CREATE TABLE tags (
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
-	tag TEXT
+	tag TEXT UNIQUE
 );
 
 -- Table used for defining the many to many relationship between tags and issues

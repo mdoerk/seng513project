@@ -85,6 +85,7 @@ function editProfileValidate(form) {
 function writeError(obj, msg) {
 	var sp = document.createElement('span');
 	sp.className = 'error';
+	sp.style.color = 'red';
 	sp.appendChild(document.createTextNode(msg));
 	obj.parentNode.appendChild(sp);
 	obj.hasError = sp;
@@ -194,3 +195,25 @@ function validateConfirmPassword(e){
 	}
 	return true;
 }
+
+/**
+ * checkMandatoryFields - checks the Title and Description field on the add issue page. 
+ * NOTE: 	'new_issue' is the form name, 'title' and 'description' are the names of their respective fields in the HTML form.
+ * 			All of these can are found in the addIssue.js. 
+ */
+function checkMandatoryFields()
+{	
+		var message = "Oops, you forgot to include the following mandatory fields:";
+		if (document.new_issue.title.value == "" )
+			message += "\nTitle";
+		if (document.new_issue.description.value == "")
+			message += "\nDescription"
+		
+		if (message != "Oops, you forgot to include the following mandatory fields:")
+		{
+			alert(message);
+			return false;
+		}
+					
+}
+

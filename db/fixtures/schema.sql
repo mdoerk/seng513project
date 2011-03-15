@@ -64,3 +64,10 @@ CREATE TABLE follows (
 		issue_id INTEGER NOT NULL
 		);
 
+DROP TABLE IF EXISTS interest;
+CREATE TABLE interests (
+		user_id INTEGER NOT NULL,
+		interest_topic TEXT,
+		interest_location TEXT
+		);
+

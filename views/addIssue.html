@@ -1,0 +1,29 @@
+<h1> {{title}} </h1>
+{{#display}}
+	{{#loggedIn}}
+	What do you feel is an important issue that should be addressed by your city? Create a new issue here! (Fields marked with a <font color="#cc0000">*</font> are mandatory)<br>
+	<form id="new_issue" name="new_issue" action="/add" method="post" onsubmit="return checkMandatoryFields();">
+	<p>Title<font color="#cc0000">*</font><input type="text" name="title" /></p>
+	<p>Description<font color="#cc0000">*</font><br>
+	<textarea rows="10" cols="50" name="description"></textarea></p>
+	<p>Location <input type="text" name="location" /></p>
+	<p>Relevant Link <input type="text" name="link" /></p>
+	<p>Tags <input type="text" name="tags" /></p>
+	<p><input type="submit" value="Create Issue" /></p></form>
+	{{/loggedIn}}
+	{{^loggedIn}}
+	You must be <a href="signin">logged in</a> to add a new issue.
+	{{/loggedIn}}
+{{/display}}
+{{#add}}
+	{{#error}}
+		Failed to add issue. Click <a href="javascript:history.back()">here</a> to try again.
+	{{/error}}
+	{{#fail}}
+		Failed to add issue due to tagging error. Click <a href="javascript:history.back()">here</a> to try again.
+	{{/fail}}
+	{{#success}}
+		Issue successfully added! Redirecting back to home page in 5 seconds.... or click <a href="/index.html">here</a> if you do not wish to wait.
+		<script type="text/javascript">window.setTimeout("window.location.href={{index}}", 5000");</script>
+	{{/success}}
+{{/add}}

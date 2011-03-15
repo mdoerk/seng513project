@@ -12,3 +12,68 @@
 	<p>Password (required)<br><input type="password" name="password"></p>
 <input type="submit" value="Update" />
 </form>
+
+
+
+
+
+
+<table width = "100%" align ="top"> 
+	<tr valign=top>
+		<td width="50%" align = "top">
+			<table width = "100%" align ="top">
+				<tr>
+					<td><h1>Edit Your Profile</h1></td>
+				</tr>
+				<tr>
+					<td>
+						<form id="editProfile_form" action="handleEditProfile" method="post" enctype="application/x-www-form-urlencoded" onsubmit="return editProfileValidate(this);">
+							<p>Username<br><input type="text" name="username" value="{{username}}"></p>
+							<p>Email<br><input type="text" name="email" value="{{email}}"></p>
+							<p>Neighborhood<br><input type="text" name="neighborhood" value="{{neighborhood}}"></p>
+							<p>Postal Code<br><input type="text" name="postal_code" value="{{postal_code}}"></p>
+							<p>Your Facebook Account<br> <input type="text" name="facebook" value="{{facebook_account}}" /></p>
+							<p>Your Twitter Account<br> <input type="text" name="twitter" value="{{twitter_account}}" /></p>
+							<br>
+							<p>New Password (optional)<br><input type="password" name="new_password"></p>
+							<p>Confirm New Password<br><input type="password" name="confirm_password"></p>
+							<p><input type="text" name="userid" style="visibility: hidden;" value="{{userid}}"><p>
+							<br>
+							<p>Password (required)<br><input type="password" name="password"></p>
+	
+							<input type="submit" value="Update" />
+						</form>
+					</td>
+				</tr>
+			</table>
+	
+		</td>
+
+		<td width ="50%" align="top">
+			<table width = "100%" align ="top">
+				<tr>
+					<td align="top"><h1>Edit Your Interest</h1></td>
+				</tr>
+				<tr>
+					<td align="top">
+						<form id="editInterest_form" action="saveInterest" method="post" enctype="application/x-www-form-urlencoded" >
+		      				<p>Topics:<br>(list multiple topic interest seperated by comma)<br>
+								<textarea rows="6" cols="40" type="text" name="interest_topic" >
+									{{interest_topic}}
+								</textarea>
+							</p>
+		      				<p>Location:<br>(list multiple location interest seperated by comma)<br>
+								<textarea rows="6" cols="40" type="text" name="interest_location">
+									{{interest_location}}
+								</textarea>
+							</p> 
+		      				<input type=HIDDEN name="user_id" value="{{user_id}}">
+	    					<br> 
+		      				<input type="submit" value="Update Interest" />
+		      			</form>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>

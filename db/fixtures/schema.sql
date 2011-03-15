@@ -23,7 +23,9 @@ CREATE TABLE issues (
 		title TEXT,
 		description TEXT,
 		link TEXT,
-		location TEXT
+		location TEXT,
+		likes INTEGER,
+		dislikes INTEGER
 );
 
 DROP TABLE IF EXISTS comments;
@@ -64,7 +66,7 @@ CREATE TABLE follows (
 		issue_id INTEGER NOT NULL
 		);
 
-DROP TABLE IF EXISTS interest;
+DROP TABLE IF EXISTS interests;
 CREATE TABLE interests (
 		user_id INTEGER NOT NULL,
 		interest_topic TEXT,

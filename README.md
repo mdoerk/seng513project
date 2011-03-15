@@ -339,3 +339,30 @@ If you have an action such as adding/voting for issues/comments, make sure to in
 	
 * If the input does not exist or validate, the "latitude" and "longitude" fields will be empty.
 
+
+## Templating ##
+
+For temaplating we've used [mustache.js](https://github.com/janl/mustache.js/). In it's simplest form you can call `response.render(viewPath);` where `viewPath` is the location of the path. For example, `response.render('views/signup.html');`
+
+In many cases the view requires variables. In this case you pass them in a object like this:
+	variables = { title: 'One time...', status: 'online', creator: user };
+	response.render('views/viewIssue.html', variables);
+The view itself is generated with mustache tags (`{{` and `}}`). For example,
+	<h1> {{title}} </h1>
+	Created on {{created}}
+	{{#user}}
+		by	<a href="/viewProfile?id={{user_id}}" id="user_profile">{{user_name}}</a>
+	{{/user}}
+	<br />
+	Status: {{status}}<br/>
+	Location: {{location}}
+	<h3>Description</h3>
+	<p>{{description}}</p>
+Here are a few mustache command:
+	{{a}} // prints the value of a
+	{{#b}} prints if b is non-null {{/b}}
+	{{^c}} prints is c is null {{/c}}
+	{{{d}}}	// does not escape d (normal {{,}} will escape html strings.)
+For more information on mustache.js see [https://github.com/janl/mustache.js/](https://github.com/janl/mustache.js/) or message
+[codr](https://github.com/inbox/new/codr)
+

@@ -1,0 +1,20 @@
+{{#canEdit}}
+<h1> Edit Issue Details </h1>
+<form id="edit_issue" action="saveIssue" method="post">
+	<p><input type="hidden" name="id" value= "{{id}}"/></p>
+	<p>Title</p> <p><input type="text" name="title" value= "{{title}}"/></p>
+	<p>Description</p><p><textarea rows="10" cols="50" name="description">{{description}}</textarea></p>
+	<p>Location</p> <p><input type="text" name="location" value= "{{location}}"/></p>
+	<p>Link</p> <p><input type="text" name="link" value= "{{link}}"/></p>
+	<p>Status</p> <SELECT name="status">
+		<OPTION VALUE="open" {{#openSelected}}SELECTED{{/openSelected}}>Open</OPTION>
+		<OPTION VALUE="resolved" {{#resolvedSelected}}SELECTED{{/resolvedSelected}}>Resolved</OPTION>
+	</SELECT>
+	<p><input type="submit" value="Save Issue" /></p>
+</form>
+<br />
+{{/canEdit}}
+{{^canEdit}}
+<p>You must be logged in as the original poster or an editor to edit this issue. Click <a href="viewIssue?id={{id}}">here</a> to view the issue again.</p>
+<br />
+{{/canEdit}}

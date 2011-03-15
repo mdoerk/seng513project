@@ -331,9 +331,9 @@ If you have an action such as adding/voting for issues/comments, make sure to in
 	
 * Input an address of string and receive results:
 
-	parseAddr.geocode("7205 4st ne calgary ab canada", function(location) {
-		var lat = location.latitude; // lat = 78.02020
-		var long = location.logitude; // long = -23.49482
-	});
+		parseAddr.geocode("7205 4st ne calgary ab canada", function(location) {
+			var lat = location.latitude; // lat = 78.02020
+			var long = location.logitude; // long = -23.49482
+		});
 	
 * If the input does not exist or validate, the "latitude" and "longitude" fields will be empty.

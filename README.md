@@ -327,9 +327,9 @@ If you have an action such as adding/voting for issues/comments, make sure to in
 
 * Load the parseAddr.js module:
 
-	var parseAddr = require('parseAddr');
+		var parseAddr = require('parseAddr');
 	
-* Input an address of string and receive results:
+* Input an address string and get the results on callback:
 
 		parseAddr.geocode("7205 4st ne calgary ab canada", function(location) {
 			var lat = location.latitude; // lat = 78.02020

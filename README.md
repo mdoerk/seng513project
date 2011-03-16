@@ -267,7 +267,19 @@ issue, and the application will proceed as follows:
 Right now we can only add tags when creating an issue... once the edit issue page is working, it will load the tags for the issue
 (using the to-be-implemented getTags function), then if the user makes changes to the tags, it will removeAllTags for the issue,
 then call tagIssue with the id and the new tags.
-	
+
+### Tagging API ###
+	var tags = require('tags'); - Do this first
+* **tags.tagIssue(<issueId>, <tags>, function (error) {})** - Tags the provided issueId with the provided tags (a space-separated string of tags)
+* **tags.getTagId(<tag>, function (error, tagId) {})** - Gets the id of a given tag (tag is a single tag). tagId will be the id of the tag in the tags database table if it exists, or -1 if the tag is not in the table.
+* **tags.addTag(<tag>, function (error, tagId) {})** - Attempts to add the given tag to the tags table, and returns the id of the tag (if it already exists, will return the id of the existing tag, otherwise it will return the id of the newly inserted tag). If there is an error, tagId will be -1.
+* **tags.getTags(<issueId>, function (error, results) {})** - Typically should not be called since it returns raw database results (use one of the following two instead). Looks up which tags are associated with the provided issueId. Returns raw database data.
+* **tags.getTagsList(<issueId>, function (tagList) {})** - Looks up which tags are associated with the provided issueId. Returns a collection (List) of tags (strings), in alphabetical order. If there are no tags associated with the issue, the returned list will be empty. If there is an error, it will be logged and the returned collection will be empty.
+* **tags.getTagsString(<issueId>, function (tags) {})** - Looks up which tags are associated with the provided issueId. Returns the tags as a string (space separated, alphabetical order). If there are no tags associated with the issue, the returned string will be empty. If there is an error, it will be logged and the returned string will be empty.
+* **tags.getIssuesByTag(<tag>, function (issueIds) {})** - Looks up which issues are associated with the given tag. Returns a collection (List) of issue_ids. If there are no issues tagged with the given tag, the returned list will be empty. If there is an error, the error will be logged and the returned list will be empty.
+* **tags.untagIssue(<issueId>, function (error) {})** - Removes all tags associated with issue (removes the relevant rows in the 'issuetags' table, not the actual tags in the 'tags' table)
+* **tags.updateTags(<issueId>, <tags>, function (error) {})** - Used when editing an issue.. This function will update the tags for the given issueId with the new list of tags
+
 ### Example ###
 	// Parse form data, create an issue (remember to get the id of the issue when creating it)
 	tags.tagIssue(<issueId>, <tags separated by a space>, function(error) {

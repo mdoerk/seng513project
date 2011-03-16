@@ -101,3 +101,4 @@ INSERT INTO users (id,name,email,password,neighborhood,postal_code,reputation_sc
 INSERT INTO users (id,name,email,password,neighborhood,postal_code,reputation_score) VALUES ('98','Jade Banks','tincidunt@aliquam.edu','5f4dcc3b5aa765d61d8327deb882cf99','In','H1U 2R4','10');
 INSERT INTO users (id,name,email,password,neighborhood,postal_code,reputation_score) VALUES ('99','Keaton Massey','consectetuer.cursus@rutrum.org','5f4dcc3b5aa765d61d8327deb882cf99','rutrum,','K2T 9K7','8');
 INSERT INTO users (id,name,email,password,neighborhood,postal_code,reputation_score) VALUES ('100','Kirsten Holloway','nec@massalobortisultrices.edu','5f4dcc3b5aa765d61d8327deb882cf99','per','F8J 2G4','9');
+INSERT INTO users (id,name,email,password,neighborhood,postal_code,reputation_score, isEditor) VALUES ('101','John Doe','jd@gmail.com','5f4dcc3b5aa765d61d8327deb882cf99','Red Deer','F8J 2G4','9','1');

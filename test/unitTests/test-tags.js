@@ -15,9 +15,11 @@ module.exports = testCase({
 	setUp: function (callback) {
 		callback();
 	},
+	
 	tearDown: function (callback) {
 		callback();
 	},
+	
 	testGetTagId: function(test) {
 		// First add a new unique tag
 		var d = new Date();
@@ -38,8 +40,9 @@ module.exports = testCase({
 			});
 		});
 	},
+	
 	testAddTag: function(test) {
-		// Make a uniqe tag
+		// Make a unique tag
 		var d = new Date();
 		var t1 = d.getTime();
 		tags.addTag(t1, function(error, t1Id) {
@@ -63,6 +66,7 @@ module.exports = testCase({
 			});
 		});
 	},
+	
 	testGetTags: function(test) {
 		// First create a new issue
 		dbAccess.create('issues', { values: ['user_id="332338"',
@@ -82,6 +86,7 @@ module.exports = testCase({
 			});
 		});
 	},
+	
 	testTagIssue: function(test) {
 		// First create a new issue
 		dbAccess.create('issues', { values: ['user_id="332338"',

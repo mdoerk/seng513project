@@ -4,4 +4,5 @@
 .read ./fixtures/issues.sql
 .read ./fixtures/comments.sql
 .read ./fixtures/votes.sql
+.read ./fixtures/interests.sql
 .quit

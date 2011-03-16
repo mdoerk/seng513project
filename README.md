@@ -247,15 +247,14 @@ In order to run tests in the test folder there are a few different ways to do it
 This feature allows users to 'tag' issues. Users may enter a (space separated) list of tags when creating an 
 issue, and the application will proceed as follows:
 	
-	- addIssue will create the issue in the issues table, in order to get the id of the new issue
-	- addIssue will pass the issue id, as well as the relevant form data (what the user entered in the 'Tags' 
-		box) to the tagIssue(issueId, tags)
-	- tagIssue will parse the tags and create a list of tags. addTag is called for each tag
-	- this tag will be checked against the tags table
-		-> if it exists, we get the id of tag and return it
-		-> if it does not exist, we insert this new tag into the table return the id of this new tag
-	- a new row will be added to issuetags table describing this new tag relationship
-		-> 'INSERT INTO issuetags (issue_id, tag_id) VALUES (<issueId>, <tagId>);
+	1) addIssue() will create the issue in the issues table, in order to get the id of the new issue
+	2) addIssue() will pass the issue id, as well as the relevant form data (what the user entered in the 'Tags' box) to the tagIssue(issueId, tags)
+	3) tagIssue() will parse the tags and create a list of tags. addTag() is called for each tag
+	4) this tag will be checked against the tags table
+		i)  if it exists, we get the id of tag and return it
+		ii) if it does not exist, we insert this new tag into the table return the id of this new tag
+	5 a new row will be added to issuetags table describing this new tag relationship: 
+		* 'INSERT INTO issuetags (issue_id, tag_id) VALUES (<issueId>, <tagId>);
 	
 ### TODO ###
 	tags.removeAllTags(<issueId>, function(error){}); // Removes all rows in the issuetags table where issue_id = issueId
@@ -293,18 +292,19 @@ then call tagIssue with the id and the new tags.
 
 There is a a method in the request object called 'getUser'. This must be passed a callback method has two parameters (error, user). 'user' will be the user record from the 'users' table if he is logged in, it will be null otherwise.
 
-Example:
+### Example ###
 	req.getUser(function(error, user){
-		if(error)
+		if (error)
 			throw error;
-		if(user){
+		if (user){
 			//user is logged in.
 			//continue. 
-		}else{
+		} 
+		else {
 			//user is not logged in.
 			//maybe redirectTo('/login')
 		}
-	})
+	}); 
 
 
 ## Reputation System ##
@@ -339,15 +339,45 @@ If you have an action such as adding/voting for issues/comments, make sure to in
 
 * Load the parseAddr.js module:
 
-	`var parseAddr = require('parseAddr');`
+	var parseAddr = require('parseAddr');
 	
 * Input an address of string and receive results:
 
-	`var result;`
-	`parseAddr.geocode("7205 4st ne calgary ab canada", function(ret) {`
-		`result = ret;`
-	`});`
-	`result { "latitude" : "78.02020", "longitude" : "-23.49482" }`
+		parseAddr.geocode("7205 4st ne calgary ab canada", function(location) {
+			var lat = location.latitude; // lat = 78.02020
+			var long = location.logitude; // long = -23.49482
+		});
 	
 * If the input does not exist or validate, the "latitude" and "longitude" fields will be empty.
+
+## Templating ##
+
+For templating we've used [mustache.js](https://github.com/janl/mustache.js/). In it's simplest form you can call `response.render(viewPath);` where `viewPath` is the location of the path. For example, `response.render('views/signup.html');`
+
+In many cases the view requires variables. In this case you pass them in a object like this:
+	variables = { title: 'One time...', status: 'online', creator: user };
+	response.render('views/viewIssue.html', variables);
+The view itself is generated with mustache tags (`{{` and `}}`). For example,
+	<h1> {{title}} </h1>
+	Created on {{created}}
+	{{#user}}
+		by	<a href="/viewProfile?id={{user_id}}" id="user_profile">{{user_name}}</a>
+	{{/user}}
+	<br />
+	Status: {{status}}<br/>
+	Location: {{location}}
+	<h3>Description</h3>
+	<p>{{description}}</p>
+Here are a few mustache command:
+	{{a}} // prints the value of a
+	{{#b}} prints if b is non-null {{/b}}
+	{{^c}} prints is c is null {{/c}}
+	{{{d}}}	// does not escape d (normal {{,}} will escape html strings.)
+For more information on mustache.js see [https://github.com/janl/mustache.js/](https://github.com/janl/mustache.js/) or message
+[codr](https://github.com/inbox/new/codr)
+
+### Redirecting ###
+
+Calling `response.redirectTo(path)` will generate a redirect HTTP 302. `path` is the url path, for example:
+	res.redirectTo('/signin');
 

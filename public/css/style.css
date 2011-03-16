@@ -330,11 +330,25 @@ legend
 .validation-error
 {
     color: #ff0000;
+	border: 1px solid red;
 }
 
 .validation-success
 {
     color: #00b450; 
+}
+
+/* Flash */
+/* ------------------------------*/ 
+.flash
+{
+	background-color: #ffffff;
+	font-weight: bold; 
+	margin: 10px auto 10px auto; 
+	clear: both;
+	padding: 5px 10px 5px 10px; 
+	width: 500px;
+	position: relative;
 }
 
 /* Miscellaneous */ 

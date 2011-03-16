@@ -85,6 +85,7 @@ function editProfileValidate(form) {
 function writeError(obj, msg) {
 	var sp = document.createElement('span');
 	sp.className = 'error';
+	sp.style.color = 'red';
 	sp.appendChild(document.createTextNode(msg));
 	obj.parentNode.appendChild(sp);
 	obj.hasError = sp;

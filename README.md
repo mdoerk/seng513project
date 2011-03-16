@@ -242,7 +242,7 @@ In order to run tests in the test folder there are a few different ways to do it
 
 	`node runTests.js unitTests/test-yourTestName.js`
 	
-## Tagging of Issues ##
+## Tagging ##
 
 This feature allows users to 'tag' issues. Users may enter a (space separated) list of tags when creating an 
 issue, and the application will proceed as follows:
@@ -253,22 +253,12 @@ issue, and the application will proceed as follows:
 	4) this tag will be checked against the tags table
 		i)  if it exists, we get the id of tag and return it
 		ii) if it does not exist, we insert this new tag into the table return the id of this new tag
-	5 a new row will be added to issuetags table describing this new tag relationship: 
-		* 'INSERT INTO issuetags (issue_id, tag_id) VALUES (<issueId>, <tagId>);
-	
-### TODO ###
-	tags.removeAllTags(<issueId>, function(error){}); // Removes all rows in the issuetags table where issue_id = issueId
-	tags.getTags(<issueId>, function(tagList) { // Will return the list of tags
-		for (i = 0; i < tagList.length; i++)
-			util.log(tagList[i]); 
-	});
-
-Right now we can only add tags when creating an issue... once the edit issue page is working, it will load the tags for the issue
-(using the to-be-implemented getTags function), then if the user makes changes to the tags, it will removeAllTags for the issue,
-then call tagIssue with the id and the new tags.
+	5) a new row will be added to issuetags table describing this new tag relationship: 
+		* 'INSERT INTO issuetags (issue_id, tag_id) VALUES (<issueId>, <tagId>);'
 
 ### Tagging API ###
-	var tags = require('tags'); - Do this first
+**Load the tagging library:**
+	var tags = require('tags');
 * **tags.tagIssue(<issueId>, <tags>, function (error) {})** - Tags the provided issueId with the provided tags (a space-separated string of tags)
 * **tags.getTagId(<tag>, function (error, tagId) {})** - Gets the id of a given tag (tag is a single tag). tagId will be the id of the tag in the tags database table if it exists, or -1 if the tag is not in the table.
 * **tags.addTag(<tag>, function (error, tagId) {})** - Attempts to add the given tag to the tags table, and returns the id of the tag (if it already exists, will return the id of the existing tag, otherwise it will return the id of the newly inserted tag). If there is an error, tagId will be -1.

@@ -100,8 +100,13 @@ module.exports = testCase({
 						test.ifError(error);
 						tags.untagIssue(issueId, function(error) {
 							test.ifError(error);
-							// TODO: delete the 3 tags
-							test.done();
+							dbAccess.remove('tags', { conditions:['tag="tag1"'] }, function (error) {
+								dbAccess.remove('tags', { conditions:['tag="tag2"'] }, function (error) {
+									dbAccess.remove('tags', { conditions:['tag="tag3"'] }, function (error) {
+										test.done();
+									});
+								});
+							});
 						});
 					});
 				});
@@ -127,8 +132,13 @@ module.exports = testCase({
 					test.ifError(error);
 					tags.untagIssue(issueId, function(error) {
 						test.ifError(error);
-						// TODO: delete the 3 tags
-						test.done();
+						dbAccess.remove('tags', { conditions:['tag="tag1"'] }, function (error) {
+							dbAccess.remove('tags', { conditions:['tag="tag2"'] }, function (error) {
+								dbAccess.remove('tags', { conditions:['tag="tag3"'] }, function (error) {
+									test.done();
+								});
+							});
+						});
 					});
 				});
 			});
@@ -156,8 +166,13 @@ module.exports = testCase({
 						test.ifError(error);
 						tags.untagIssue(issueId, function(error) {
 							test.ifError(error);
-							// TODO: delete the 3 tags
-							test.done();
+							dbAccess.remove('tags', { conditions:['tag="tag1"'] }, function (error) {
+								dbAccess.remove('tags', { conditions:['tag="tag2"'] }, function (error) {
+									dbAccess.remove('tags', { conditions:['tag="tag3"'] }, function (error) {
+										test.done();
+									});
+								});
+							});
 						});
 					});
 				});
@@ -182,8 +197,13 @@ module.exports = testCase({
 						test.ifError(error);
 						tags.untagIssue(issueId, function(error) {
 							test.ifError(error);
-							// TODO: delete the 3 tags
-							test.done();
+							dbAccess.remove('tags', { conditions:['tag="tag1"'] }, function (error) {
+								dbAccess.remove('tags', { conditions:['tag="tag2"'] }, function (error) {
+									dbAccess.remove('tags', { conditions:['tag="tag3"'] }, function (error) {
+										test.done();
+									});
+								});
+							});
 						});
 					});
 				});
@@ -206,19 +226,22 @@ module.exports = testCase({
 				tags.getIssuesByTag(t1, function(result) {
 					test.equal(result[0], issueId);
 					// Now create a new unique tag that shouldn't have any issues associated with it
-					t1 += 'x';
-					tags.addTag(t1, function(error, tagId) {
+					var t2 = t1 + 'x';
+					tags.addTag(t2, function(error, tagId) {
 						test.ifError(error);
 						// Confirm that there are no issues that match this tag
-						tags.getIssuesByTag(t1, function(result) {
+						tags.getIssuesByTag(t2, function(result) {
 							test.equal(result.length, 0);
 							// Clean up - delete the 2 tags, delete the issue, untag the issue
 							dbAccess.remove('issues', { conditions:['id="' + issueId + '"'] }, function (error) {
 								test.ifError(error);
 								tags.untagIssue(issueId, function(error) {
 									test.ifError(error);
-									// TODO: delete the 2 tags
-									test.done();
+									dbAccess.remove('tags', { conditions:['tag="' + t1 + '"'] }, function (error) {
+										dbAccess.remove('tags', { conditions:['tag="' + t2 + '"'] }, function (error) {
+											test.done();
+										});
+									});
 								});
 							});
 						});
@@ -251,8 +274,9 @@ module.exports = testCase({
 								test.ifError(error);
 								tags.untagIssue(issueId, function(error) {
 									test.ifError(error);
-									// TODO: delete the tag
-									test.done();
+									dbAccess.remove('tags', { conditions:['tag="tag1"'] }, function (error) {
+										test.done();
+									});
 								});
 							});
 						});
@@ -285,8 +309,11 @@ module.exports = testCase({
 								test.ifError(error);
 								tags.untagIssue(issueId, function(error) {
 									test.ifError(error);
-									// TODO: delete the tags
-									test.done();
+									dbAccess.remove('tags', { conditions:['tag="tag1"'] }, function (error) {
+										dbAccess.remove('tags', { conditions:['tag="tag2"'] }, function (error) {
+											test.done();
+										});
+									});
 								});
 							});
 						});

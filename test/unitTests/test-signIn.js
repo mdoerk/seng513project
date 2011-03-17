@@ -1,35 +1,43 @@
-var testCase = require('nodeunit/nodeunit').testCase;
-	users = require('user');
-	dbAccess = require('dbAccess');
+/* test-signIn.js 
+ * Tests the authentication functionality for sign-in 
+ */ 
+
+var testCase = require('nodeunit/nodeunit').testCase,
+	signIn = require('../../node_modules/user'),
+	dbAccess = require('../../node_modules/dbAccess');
 
 module.exports = testCase({
 	setUp: function (callback) {
-		
-		// when to load db/fixtures/users.sql
-		dbAccess.create('users', { values: 
-			['"name"="John"',
-			'"email"="user"', 
-			'"password"="b8a9f715dbb64fd5c56e7783c6820a61"']}, callback);
+		dbAccess.create('users', { values: ['"name"="TestUser"', '"email"="testuser"', 
+			'"password"="5f4dcc3b5aa765d61d8327deb882cf99"']}, function(error, results) {
+				callback();
+			});
 	},
+	
 	tearDown: function (callback) {
-		dbAccess.remove('users', { conditions: ['email = "user"']}, callback);
+		dbAccess.remove('users', { conditions: ['name="TestUser"', 'email="testuser"']}, function(error, results) {
+			callback();
+		});
 	},
-	testSignInEmailAndPasswordCorrect: function (test) {
-		users.authenticate('John','two', function(error, user){
+	
+	testSignInNameAndPasswordCorrect: function (test) {
+		signIn.authenticate('TestUser','password', function(error, user) {
 			test.equal(error, null);
 			test.ok(user);
 			test.done();
 		});
 	},
+	
 	testSignInPasswordIncorrect: function (test) {
-		users.authenticate('John', 'four', function(error, user){
+		signIn.authenticate('TestUser', 'wrongpassword', function(error, user) {
 			test.equal(error, null);
 			test.equal(user, null);
 			test.done();
 		});
 	},
-	testSignInUserIncorrect: function (test) {
-		users.authenticate('notJohn', 'two', function(error, user){
+	
+	testSignInUserDoesNotExist: function (test) {
+		signIn.authenticate('NullTestUser', 'password', function(error, user){
 			test.equal(error, null);
 			test.equal(user, null);
 			test.done();

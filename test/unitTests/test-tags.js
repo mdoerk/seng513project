@@ -15,9 +15,11 @@ module.exports = testCase({
 	setUp: function (callback) {
 		callback();
 	},
+	
 	tearDown: function (callback) {
 		callback();
 	},
+	
 	testGetTagId: function(test) {
 		// First add a new unique tag
 		var d = new Date();
@@ -33,13 +35,18 @@ module.exports = testCase({
 				tags.getTagId(t1 + 'x', function(error, t2Id) {
 					test.ifError(error);
 					test.equal(t2Id, -1);
-					test.done();
+					// Clean up (delete the tag we just made)
+					dbAccess.remove('tags', { conditions:['id="' + t1Id + '"'] }, function (error) {
+						test.ifError(error);
+						test.done();
+					});
 				});
 			});
 		});
 	},
+	
 	testAddTag: function(test) {
-		// Make a uniqe tag
+		// Make a unique tag
 		var d = new Date();
 		var t1 = d.getTime();
 		tags.addTag(t1, function(error, t1Id) {
@@ -58,11 +65,16 @@ module.exports = testCase({
 					// Ensure it isn't -1, but that it does match t1's id
 					test.notEqual(t3Id, -1);
 					test.equal(t3Id, t1Id);
-					test.done();
+					// Clean up - delete the two tags we just made
+					dbAccess.remove('tags', { conditions:['id="' + t1Id + '" OR id="' + t2Id + '"'] }, function (error) {
+						test.ifError(error);
+						test.done();
+					});
 				});
 			});
 		});
 	},
+	
 	testGetTags: function(test) {
 		// First create a new issue
 		dbAccess.create('issues', { values: ['user_id="332338"',
@@ -73,15 +85,35 @@ module.exports = testCase({
 											'location="NE"']}, function(error, issueId) {
 			test.ifError(error);
 			// Now tag it
-			var sampleTags = 'tag1 tag2 tag3';
+			var sampleTags = 'tag2 tag1 tag3';
 			tags.tagIssue(issueId, sampleTags, function (error) {
 				test.ifError(error);
-				// Now call getTages on this issue, and ensure that it returns the right thing
-				//test.equal(tags.getTagList(issueId), sampleTags.split(' '));
-				test.done();
+				// // Now call getTags on this issue, and ensure that it returns the right thing
+				tags.getTags(issueId, function(error, results) {
+					test.ifError(error);
+					test.equal(results.length, 3);
+					test.equal(results[0].tag, 'tag1');
+					test.equal(results[1].tag, 'tag2');
+					test.equal(results[2].tag, 'tag3');
+					// Clean up - delete the 3 tags, delete the issue, untag the issue
+					dbAccess.remove('issues', { conditions:['id="' + issueId + '"'] }, function (error) {
+						test.ifError(error);
+						tags.untagIssue(issueId, function(error) {
+							test.ifError(error);
+							dbAccess.remove('tags', { conditions:['tag="tag1"'] }, function (error) {
+								dbAccess.remove('tags', { conditions:['tag="tag2"'] }, function (error) {
+									dbAccess.remove('tags', { conditions:['tag="tag3"'] }, function (error) {
+										test.done();
+									});
+								});
+							});
+						});
+					});
+				});
 			});
 		});
 	},
+	
 	testTagIssue: function(test) {
 		// First create a new issue
 		dbAccess.create('issues', { values: ['user_id="332338"',
@@ -95,7 +127,198 @@ module.exports = testCase({
 			var sampleTags = 'tag1 tag2 tag3';
 			tags.tagIssue(issueId, sampleTags, function (error) {
 				test.ifError(error);
-				test.done();
+				// Clean up - delete the 3 tags, delete the issue, untag issue
+				dbAccess.remove('issues', { conditions:['id="' + issueId + '"'] }, function (error) {
+					test.ifError(error);
+					tags.untagIssue(issueId, function(error) {
+						test.ifError(error);
+						dbAccess.remove('tags', { conditions:['tag="tag1"'] }, function (error) {
+							dbAccess.remove('tags', { conditions:['tag="tag2"'] }, function (error) {
+								dbAccess.remove('tags', { conditions:['tag="tag3"'] }, function (error) {
+									test.done();
+								});
+							});
+						});
+					});
+				});
+			});
+		});
+	},
+	testGetTagsList: function(test) {
+		// First create a new issue
+		dbAccess.create('issues', 
+		{ values: ['user_id="332338"', 'status="online"', 'title="myissue"', 'description="desc"', 'link=""', 'location="NE"']},
+		function(error, issueId) {
+			test.ifError(error);
+			// Now tag it
+			var sampleTags = 'tag2 tag1 tag3'; // not in alphabetical order
+			tags.tagIssue(issueId, sampleTags, function (error) {
+				test.ifError(error);
+				// Now call getTagsList on this issue, and ensure that it is what we expect
+				tags.getTagsList(issueId, function(results) {
+					test.equal(results.length, 3);
+					//test.equal(results, sampleTags.split(' ')); // unfortunately this doesn't work :(
+					test.equal(results[0], 'tag1'); // ensure it sends it back in alphabetical order (i.e tag1 is before tag2)
+					test.equal(results[1], 'tag2');
+					test.equal(results[2], 'tag3');
+					// Clean up - delete the 3 tags, delete the issue, untag issue
+					dbAccess.remove('issues', { conditions:['id="' + issueId + '"'] }, function (error) {
+						test.ifError(error);
+						tags.untagIssue(issueId, function(error) {
+							test.ifError(error);
+							dbAccess.remove('tags', { conditions:['tag="tag1"'] }, function (error) {
+								dbAccess.remove('tags', { conditions:['tag="tag2"'] }, function (error) {
+									dbAccess.remove('tags', { conditions:['tag="tag3"'] }, function (error) {
+										test.done();
+									});
+								});
+							});
+						});
+					});
+				});
+			});
+		});
+	},
+	testGetTagsString: function(test) {
+		// First create a new issue
+		dbAccess.create('issues', 
+		{ values: ['user_id="332338"', 'status="online"', 'title="myissue"', 'description="desc"', 'link=""', 'location="NE"']},
+		function(error, issueId) {
+			test.ifError(error);
+			// Now tag it
+			var sampleTags = 'tag2 tag1 tag3'; // Not in alphabetical order
+			tags.tagIssue(issueId, sampleTags, function (error) {
+				test.ifError(error);
+				// Now call getTagsString on this issue, and ensure that it is what we expect
+				tags.getTagsString(issueId, function(result) {
+					test.equal(result, 'tag1 tag2 tag3'); // Make sure it returns them in alphabetical order
+					// Clean up - delete the 3 tags, delete the issue, untag the issue
+					dbAccess.remove('issues', { conditions:['id="' + issueId + '"'] }, function (error) {
+						test.ifError(error);
+						tags.untagIssue(issueId, function(error) {
+							test.ifError(error);
+							dbAccess.remove('tags', { conditions:['tag="tag1"'] }, function (error) {
+								dbAccess.remove('tags', { conditions:['tag="tag2"'] }, function (error) {
+									dbAccess.remove('tags', { conditions:['tag="tag3"'] }, function (error) {
+										test.done();
+									});
+								});
+							});
+						});
+					});
+				});
+			});
+		});
+	},
+	testGetIssuesByTag: function(test) {
+		// First create a new issue
+		dbAccess.create('issues', 
+		{ values: ['user_id="332338"', 'status="online"', 'title="myissue"', 'description="desc"', 'link=""', 'location="NE"']},
+		function(error, issueId) {
+			test.ifError(error);
+			// Now tag it with a unique tag
+			var t1 = '';
+			var d = new Date();
+			t1 += d.getTime();
+			tags.tagIssue(issueId, t1, function (error) {
+				test.ifError(error);
+				// Now call getIssuesByTag using one of the tags, and ensure that the issueId is in the list of issues returned
+				tags.getIssuesByTag(t1, function(result) {
+					test.equal(result[0], issueId);
+					// Now create a new unique tag that shouldn't have any issues associated with it
+					var t2 = t1 + 'x';
+					tags.addTag(t2, function(error, tagId) {
+						test.ifError(error);
+						// Confirm that there are no issues that match this tag
+						tags.getIssuesByTag(t2, function(result) {
+							test.equal(result.length, 0);
+							// Clean up - delete the 2 tags, delete the issue, untag the issue
+							dbAccess.remove('issues', { conditions:['id="' + issueId + '"'] }, function (error) {
+								test.ifError(error);
+								tags.untagIssue(issueId, function(error) {
+									test.ifError(error);
+									dbAccess.remove('tags', { conditions:['tag="' + t1 + '"'] }, function (error) {
+										dbAccess.remove('tags', { conditions:['tag="' + t2 + '"'] }, function (error) {
+											test.done();
+										});
+									});
+								});
+							});
+						});
+					});
+				});
+			});
+		});
+	},
+	testUntagIssue: function(test) {
+		// First create a new issue
+		dbAccess.create('issues', 
+		{ values: ['user_id="332338"', 'status="online"', 'title="myissue"', 'description="desc"', 'link=""', 'location="NE"']},
+		function(error, issueId) {
+			test.ifError(error);
+			// Now tag it
+			var t1 = 'tag1';
+			tags.tagIssue(issueId, t1, function (error) {
+				test.ifError(error);
+				// Ensure that it was tagged correctly
+				tags.getTagsString(issueId, function(ts) {
+					test.equal(ts, t1);
+					// Now untag the issue
+					tags.untagIssue(issueId, function(error) {
+						test.ifError(error);
+						// Ensure getTagsString returns an empty string now
+						tags.getTagsString(issueId, function(ts2) {
+							test.equal(ts2, '');
+							// Clean up - delete the tag, delete the issue, untag the issue
+							dbAccess.remove('issues', { conditions:['id="' + issueId + '"'] }, function (error) {
+								test.ifError(error);
+								tags.untagIssue(issueId, function(error) {
+									test.ifError(error);
+									dbAccess.remove('tags', { conditions:['tag="tag1"'] }, function (error) {
+										test.done();
+									});
+								});
+							});
+						});
+					});
+				});
+			});
+		});
+	},
+	testUpdateTags: function(test) {
+		// First create a new issue
+		dbAccess.create('issues', 
+		{ values: ['user_id="332338"', 'status="online"', 'title="myissue"', 'description="desc"', 'link=""', 'location="NE"']},
+		function(error, issueId) {
+			test.ifError(error);
+			// Now tag it
+			var t1 = 'tag1';
+			tags.tagIssue(issueId, t1, function (error) {
+				test.ifError(error);
+				// Ensure that it was tagged correctly
+				tags.getTagsString(issueId, function(ts) {
+					test.equal(ts, t1);
+					// Now update the tag to be something else instead of 'tag1'
+					tags.updateTags(issueId, 'tag2', function(error) {
+						test.ifError(error);
+						// Ensure it returns the updated tags
+						tags.getTagsString(issueId, function(ts) {
+							test.equal(ts, 'tag2');
+							// Clean up - delete the tags, delete the issue, untag the issue
+							dbAccess.remove('issues', { conditions:['id="' + issueId + '"'] }, function (error) {
+								test.ifError(error);
+								tags.untagIssue(issueId, function(error) {
+									test.ifError(error);
+									dbAccess.remove('tags', { conditions:['tag="tag1"'] }, function (error) {
+										dbAccess.remove('tags', { conditions:['tag="tag2"'] }, function (error) {
+											test.done();
+										});
+									});
+								});
+							});
+						});
+					});
+				});
 			});
 		});
 	}

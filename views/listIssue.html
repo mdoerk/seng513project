@@ -1,0 +1,40 @@
+<h1> {{title}} </h1>
+<div class="issue-container">
+<table style="width: 100%">
+<tr>
+<td class="text-center-style" style="width: 69px"><h3><a href="listIssues?sortby=status&page={{pageNumber}}">Status</a></h3></td>
+<td class="text-center-style" style="width: 201px"><h3><a href="listIssues?sortby=title&page={{pageNumber}}">Title</a></h3></td>
+<td class="text-center-style"><h3><a href="listIssues?sortby=lastModified&page={{pageNumber}}">Last Modified</a></h3></td>
+</tr>
+{{#content}}
+<tr>
+<td style="width: 69px" class="text-center-style">
+{{iStatus}}
+</td>
+<td style="width: 201px" class="text-center-style">
+<a href="./viewIssue?id={{iId}}">{{iTitle}}</a>
+</td>
+<td class="text-center-style">
+{{iLastModified}}
+</td>
+</tr>
+{{/content}}
+</table>
+	<div id="pager">
+	<a href="/?{{sortByGetString}}page=1">First</a>
+
+	{{#previous}}
+	<a href="/?{{sortByGetString}}page={{previous}}"><</a> 
+	{{/previous}}
+
+	{{#pager}}
+		{{{page}}}
+	{{/pager}}
+
+	{{#next}}
+	<a href="/?{{sortByGetString}}page={{next}}">></a>
+	{{/next}}
+
+	<a href="/?{{sortByGetString}}page={{totalPages}}"> Last</a>
+	</div>
+</div>

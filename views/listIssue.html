@@ -5,6 +5,7 @@
 <td class="text-center-style" style="width: 69px"><h3><a href="listIssues?sortby=status&page={{pageNumber}}">Status</a></h3></td>
 <td class="text-center-style" style="width: 201px"><h3><a href="listIssues?sortby=title&page={{pageNumber}}">Title</a></h3></td>
 <td class="text-center-style"><h3><a href="listIssues?sortby=lastModified&page={{pageNumber}}">Last Modified</a></h3></td>
+<td class="text-center-style"><h3>Votes</h3></td>
 </tr>
 {{#content}}
 <tr>
@@ -17,6 +18,20 @@
 <td class="text-center-style">
 {{iLastModified}}
 </td>
+<td style="width: 100px">
+<!-- This view of votes is similar to the one seen in youtube -->
+<li class="NoBullet">
+<div class="small_view_votes_bar" style="width: 100px">
+	<div style="width: {{likepercentage}}%;" class="small_view_votes_bar_likes"></div>
+	<div style="width: {{dislikepercentage}}%;" class="small_view_votes_bar_dislikes"></div>
+</div>
+	<span class="like_dislike_count" style="font-size: 0.84em;">
+		<span class="likes">{{likecount}}</span>
+		likes,
+		<span class="dislikes">{{dislikecount}}</span>
+		dislikes
+	</span>
+</li>
 </tr>
 {{/content}}
 </table>

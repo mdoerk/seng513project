@@ -34,7 +34,9 @@ CREATE TABLE comments (
 		user_id INTEGER NOT NULL,
 		issue_id INTEGER NOT NULL,
 		created DATETIME DEFAULT CURRENT_TIMESTAMP,
-		content TEXT
+		content TEXT,
+		likes INTEGER DEFAULT 0,
+		dislikes INTEGER DEFAULT 0
 		);
 
 DROP TABLE IF EXISTS tags;
@@ -70,3 +72,12 @@ CREATE TABLE interests (
 	interest_topic TEXT,
 	interest_location TEXT
 );
+
+
+-- Table used for storing the user votes on comments
+DROP TABLE IF EXISTS cmntvotes;		
+CREATE TABLE cmntvotes (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		user_id INTEGER NOT NULL,
+		comment_id INTEGER NOT NULL
+		);

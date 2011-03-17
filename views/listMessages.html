@@ -20,26 +20,16 @@
 <table cellpadding="4" cellspacing="1" border="1" width="100%">
 <tbody>
 <tr valign="bottom" class="forumsubheading">
-	<td align="center">Message Title</td>
+	<td align="center">Message Subject</td>
 	<td align="center" nowrap="">Sender</td>
 	<td align="center" nowrap="">Date/Time Sent</td>
 </tr>
-
-<tr align="center">
-	<td bgcolor="#F1F1F1" align="left" width="75%"><font size="2"><a href="private.php?s=&amp;action=show&amp;privatemessageid=3860265">Re: Software Engineering</a></font>
-	</td>
-	<td bgcolor="#DFDFDF" width="25%" align="center"><font size="2">Little Dragon</font></td>
-	<td bgcolor="#F1F1F1" align="left" nowrap=""><span class="smaller">03-15-2011<br>
-		<font color="#666686">10:13 PM</font></span></td>
+{{#inboxMsgList}}
+<tr align="center"><td bgcolor="#F1F1F1" align="left" width="75%"><font size="2"><a href="viewMessage?msgid="{{id}}">{{subject}}</a></font></td>
+	<td bgcolor="#DFDFDF" width="25%" align="center"><font size="2">{{user}}</font></td>
+	<td bgcolor="#F1F1F1" align="left" nowrap=""><span class="smaller">{{date}}</span></td>
 </tr>
-<tr align="center"> 
-	<td bgcolor="#F1F1F1" align="left" width="75%"><font size="2"><a href="private.php?s=&amp;action=show&amp;privatemessageid=3229456">Re: Sunglasses</a></font> 
-	</td> 
-	<td bgcolor="#DFDFDF" width="25%" align="center"><font size="2">repsol77</font></td> 
-	<td bgcolor="#F1F1F1" align="left" nowrap><span class="smaller">05-20-2009<br> 
-		<font color="#666686">01:35 PM</font></span></td> 
-</tr> 
-
+{{/inboxMsgList}}
 </tbody>
 </table>
     </div>

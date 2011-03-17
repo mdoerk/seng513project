@@ -25,6 +25,12 @@ module.exports = testCase({
 		test.done(); 
 	}, 
 	
+	testGoodString: function(test) {
+		var goodString = 'notempty';
+		test.ok(!goodString.isNullOrEmptyOrBlank());
+		test.done();
+	},
+	
 	testAbbreviateString: function (test) {
 		var stringToTruncate = 'Lorem ipsum dolor sit amet.'; 
 		test.equals(stringToTruncate.abbreviate(5), 'Lorem...'); 

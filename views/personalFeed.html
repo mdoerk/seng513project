@@ -1,0 +1,12 @@
+<h1>Activity Feed</h1>
+
+<table> 
+{{#content}}
+	{{#isIssue}}
+		<p><a href="/viewProfile?id={{userId}}">{{username}}</a> posted an {{type}} {{howLongAgo}} (<a href="/viewIssue?id={{id}}">{{title}}</a>)</p>
+	{{/isIssue}}
+	{{#isComment}}
+		<p><a href="/viewProfile?id={{userId}}">{{username}}</a> posted a {{type}} {{howLongAgo}} (<a href="/viewIssue?id={{issueId}}">{{comment}}</a>)</p>
+	{{/isComment}} 
+{{/content}}
+</table> 

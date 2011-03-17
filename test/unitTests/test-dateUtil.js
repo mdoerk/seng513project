@@ -93,10 +93,25 @@ module.exports = testCase({
 		test.done(); 
 	},
 	
-	testDateHowLongAgoWMonthsAgo: function (test) {
+	testDateHowLongAgoMonthsAgo: function (test) {
 		var d1 = new Date('June 30, 2011 11:00:00'); 
 		var d2 = new Date('April 30, 2011 06:50:00'); 
 		test.equals(d1.howLongAgo(d2), '2 months ago'); 
+		d2 = new Date('May 30, 2011 11:00:00'); 
+		test.equals(d1.howLongAgo(d2), '1 month ago'); 
+		d2 = new Date('May 25, 2011 11:00:00'); 
+		test.equals(d1.howLongAgo(d2), '1 month ago'); 
+		d2 = new Date('July 5, 2010 11:00:00'); 
+		test.equals(d1.howLongAgo(d2), '11 months ago'); 
+		test.done(); 
+	},
+	
+	testDateHowLongAgoYearsAgo: function (test) {
+		var d1 = new Date('June 30, 2011 11:00:00'); 
+		var d2 = new Date('June 20, 2010 11:00:00'); 
+		test.equals(d1.howLongAgo(d2), '1 year ago'); 
+		var d2 = new Date('July 5, 2007 11:00:00'); 
+		test.equals(d1.howLongAgo(d2), '3 years ago');
 		test.done(); 
 	}
 });

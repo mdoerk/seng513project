@@ -5,7 +5,7 @@ var fs = require('fs'),
 	router = require('./lib/routes').router,
 	templating = require('templatingModule'); 
 
-var port = 8124; 
+var port = 31337; 
 
 // Process command line arguments 
 var argv = process.argv.slice(2);

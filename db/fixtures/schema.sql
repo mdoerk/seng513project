@@ -68,3 +68,23 @@ CREATE TABLE interests (
 	interest_topic TEXT,
 	interest_location TEXT
 );
+
+DROP TABLE IF EXISTS inbox_msgs;
+CREATE TABLE inbox_msgs (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	from_id INTEGER,
+	to_id INTEGER,
+	sent_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+	subject TEXT,
+	body TEXT
+);
+
+DROP TABLE IF EXISTS sent_msgs;
+CREATE TABLE sent_msgs (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	from_id INTEGER,
+	to_id INTEGER,
+	sent_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+	subject TEXT,
+	body TEXT
+);

@@ -1,0 +1,39 @@
+.view_votes_bar {
+	border: 1px solid #CCCCCC;
+	height: 10px;
+	margin: 2px 0;
+	overflow: hidden;
+}
+.view_votes_bar_likes {
+	background: none repeat scroll 0 0 #006600;
+	border-right: 1px solid #FFFFFF;
+	float: left;
+	height: 10px;
+}
+.view_votes_bar_dislikes {
+	background: none repeat scroll 0 0 #CC0000;
+	float: right;
+	height: 10px;
+	margin-right: -1px;
+}
+.NoBullet{
+	list-style-type: none
+}
+
+.small_view_votes_bar {
+	border: 1px solid #CCCCCC;
+	height: 5px;
+	margin: 2px 0;
+	overflow: hidden;
+}
+.small_view_votes_bar_likes {
+	background: none repeat scroll 0 0 #006600;
+	border-right: 1px solid #FFFFFF;
+	float: left;
+	height: 5px;
+}
+.small_view_votes_bar_dislikes {
+	background: none repeat scroll 0 0 #CC0000;
+	float: right;
+	height: 5px;
+	margin-right: -1px;

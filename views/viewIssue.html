@@ -18,20 +18,33 @@ Location: {{location}}
 			<table style="width: 100%">
 				<tr>
 					<td style="width: 31px">
-						<a href="/voteIssues?issueid={{id}}&vote=0">
+						<a href="/voteIssues?issueid={{issue_id}}&vote=0">
 							<img src="images/thumb_up.png">
 						</a>
 					</td>
 					<td style="width: 49px">Like</td>
 					<td style="width: 31px">
-						<a href="/voteIssues?issueid={{id}}&vote=1">
+						<a href="/voteIssues?issueid={{issue_id}}&vote=1">
 							<img src="images/thumb_down.png">
 						</a>
 					</td>
-					<td>Unlike</td>
+					<td>Dislike</td>
 				</tr>
 			</table>
-		</p> 
+		</p>
+		<!-- This view of votes is similar to the one seen in youtube -->
+		<li class="NoBullet">
+			<div class="view_votes_bar" style="width: 200px">
+				<div style="width: {{likepercentage}}%;" class="view_votes_bar_likes"></div>
+				<div style="width: {{dislikepercentage}}%;" class="view_votes_bar_dislikes"></div>
+			</div>
+			<span class="like_dislike_count" style="font-size: 0.85em;">
+				<span class="likes">{{likecount}}</span>
+				likes,
+				<span class="dislikes">{{dislikecount}}</span>
+				dislikes
+			</span>
+		</li>
 	{{/userHasVoted}}
 	{{#userHasVoted}}
 		{{#userLiked}}

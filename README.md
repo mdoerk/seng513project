@@ -81,10 +81,13 @@ the database.
 First import the module in the file where you require to access the database by:
 var dbAccess = require('dbAccess');
 
-Creating the database from the .sql file, run the following commands on the terminal
-	sqlite3 CivicConnect.db
-	> .read schema.sql
-	> .exit
+To set up the production database environment simply type in the terminal:
+	
+	`node setupDB.js`
+
+This will create a new copy of the 'CivicConnect.db' in the 'db/' folder that is populated with the sample data in the 'db/fixtures/' folder.  It will also make a backup copy called 'CivicConnect-back.db' of the previous existing database. Alternatively, if you want to create a test database simply type in the terminal:
+
+	`node setupDB.js -t`
 
 #### CREATE ####
 >> dbAccess.create(table, params, call_back)
@@ -92,9 +95,16 @@ create - insert a new row into the database
 	1. table 		   STRING 	MANDATORY					- table to select from
 	2. params  		   OBJECT								- object containing all the variables
 		- values	   ARRAY	MANDATORY					- data to be inserted.  Ex: "INSERT INTO table (a,b,c) VALUES ('x','y','z')" values is ['a="x"','b="y"','c="z"']
-	3. call_back	   METHOD	OPTIONAL					- return function for errors
+	3. call_back	   METHOD	OPTIONAL					- callback function can have two optional parameters. first one is error, second is 
+																the id of the row that was just inserted
 
-	Example: create('table_name', { values:['column_1="value1"', 'column_2="value2"']}, callback);
+	Example: 
+	create('table_name', { values:['column_1="value1"', 'column_2="value2"']}, function(error, rowId {
+		if (error)
+			// handle error
+		else
+			util.log("row successfully inserted with id " + rowId);
+	});
 
 #### FIND ####
 >> dbAccess.find(table, params, call_back)
@@ -232,23 +242,59 @@ In order to run tests in the test folder there are a few different ways to do it
 
 	`node runTests.js unitTests/test-yourTestName.js`
 	
+## Tagging ##
+
+This feature allows users to 'tag' issues. Users may enter a (space separated) list of tags when creating an 
+issue, and the application will proceed as follows:
+	
+	1) addIssue() will create the issue in the issues table, in order to get the id of the new issue
+	2) addIssue() will pass the issue id, as well as the relevant form data (what the user entered in the 'Tags' box) to the tagIssue(issueId, tags)
+	3) tagIssue() will parse the tags and create a list of tags. addTag() is called for each tag
+	4) this tag will be checked against the tags table
+		i)  if it exists, we get the id of tag and return it
+		ii) if it does not exist, we insert this new tag into the table return the id of this new tag
+	5) a new row will be added to issuetags table describing this new tag relationship: 
+		* 'INSERT INTO issuetags (issue_id, tag_id) VALUES (<issueId>, <tagId>);'
+
+### Tagging API ###
+**Load the tagging library:**
+	var tags = require('tags');
+* **tags.tagIssue(issueId, tags, function (error) {})** - Tags the provided _issueId_ with the provided _tags_ (a space-separated string of tags)
+* **tags.getTagId(tag, function (error, tagId) {})** - Gets the id of a given _tag_ (tag is a single tag). tagId will be the id of the tag in the tags database table if it exists, or -1 if the tag is not in the table.
+* **tags.addTag(tag, function (error, tagId) {})** - Attempts to add the given _tag_ to the tags table, and returns the id of the tag (if it already exists, will return the id of the existing tag, otherwise it will return the id of the newly inserted tag). If there is an error, tagId will be -1.
+* **tags.getTags(issueId, function (error, results) {})** - Typically should not be called since it returns raw database results (use one of the following two instead). Looks up which tags are associated with the provided _issueId_. Returns raw database data.
+* **tags.getTagsList(issueId, function (tagList) {})** - Looks up which tags are associated with the provided _issueId_. Returns a collection (List) of tags (strings), in alphabetical order. If there are no tags associated with the issue, the returned list will be empty. If there is an error, it will be logged and the returned collection will be empty.
+* **tags.getTagsString(issueId, function (tagsString) {})** - Looks up which tags are associated with the provided _issueId_. Returns the tags as a string (space separated, alphabetical order). If there are no tags associated with the issue, the returned string will be empty. If there is an error, it will be logged and the returned string will be empty.
+* **tags.getIssuesByTag(tag, function (issueIds) {})** - Looks up which issues are associated with the given tag. Returns a collection (List) of issue_ids. If there are no issues tagged with the given tag, the returned list will be empty. If there is an error, the error will be logged and the returned list will be empty.
+* **tags.untagIssue(issueId, function (error) {})** - Removes all tags associated with the _issueId_ (removes the relevant rows in the 'issuetags' table, not the actual tags from the 'tags' table)
+* **tags.updateTags(issueId, updatedTags, function (error) {})** - Used when editing an issue.. This function will update the tags for the given _issueId_ with the new tags (_updatedTags_)
+
+### Example ###
+	// Parse form data, create an issue (remember to get the id of the issue when creating it)
+	tags.tagIssue(<issueId>, <tags separated by a space>, function(error) {
+		if (error)
+			// Handle error
+		else
+			// finish whatever you need to do
+	});
 
 ## How To Check If The User Is Logged In ##
 
 There is a a method in the request object called 'getUser'. This must be passed a callback method has two parameters (error, user). 'user' will be the user record from the 'users' table if he is logged in, it will be null otherwise.
 
-Example:
+### Example ###
 	req.getUser(function(error, user){
-		if(error)
+		if (error)
 			throw error;
-		if(user){
+		if (user){
 			//user is logged in.
 			//continue. 
-		}else{
+		} 
+		else {
 			//user is not logged in.
 			//maybe redirectTo('/login')
 		}
-	})
+	}); 
 
 
 ## Reputation System ##
@@ -283,14 +329,44 @@ If you have an action such as adding/voting for issues/comments, make sure to in
 
 * Load the parseAddr.js module:
 
-	var parseAddr = require('parseAddr');
+		var parseAddr = require('parseAddr');
 	
-* Input an address of string and receive results:
+* Input an address string and get the results on callback:
 
-	var result;
-	parseAddr.geocode("7205 4st ne calgary ab canada", function(ret) {
-		result = ret;
-	});
-	result { "latitude" : "78.02020", "longitude" : "-23.49482" }
+		parseAddr.geocode("7205 4st ne calgary ab canada", function(location) {
+			var lat = location.latitude; // lat = 78.02020
+			var long = location.logitude; // long = -23.49482
+		});
 	
 * If the input does not exist or validate, the "latitude" and "longitude" fields will be empty.
+
+## Templating ##
+
+For templating we've used [mustache.js](https://github.com/janl/mustache.js/). In it's simplest form you can call `response.render(viewPath);` where `viewPath` is the location of the path. For example, `response.render('views/signup.html');`
+
+In many cases the view requires variables. In this case you pass them in a object like this:
+	variables = { title: 'One time...', status: 'online', creator: user };
+	response.render('views/viewIssue.html', variables);
+The view itself is generated with mustache tags (`{{` and `}}`). For example,
+	<h1> {{title}} </h1>
+	Created on {{created}}
+	{{#user}}
+		by	<a href="/viewProfile?id={{user_id}}" id="user_profile">{{user_name}}</a>
+	{{/user}}
+	<br />
+	Status: {{status}}<br/>
+	Location: {{location}}
+	<h3>Description</h3>
+	<p>{{description}}</p>
+Here are a few mustache command:
+	{{a}} // prints the value of a
+	{{#b}} prints if b is non-null {{/b}}
+	{{^c}} prints is c is null {{/c}}
+	{{{d}}}	// does not escape d (normal {{,}} will escape html strings.)
+For more information on mustache.js see [https://github.com/janl/mustache.js/](https://github.com/janl/mustache.js/) or message
+[codr](https://github.com/inbox/new/codr)
+
+### Redirecting ###
+
+Calling `response.redirectTo(path)` will generate a redirect HTTP 302. `path` is the url path, for example:
+	res.redirectTo('/signin');

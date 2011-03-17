@@ -2,9 +2,10 @@ var fs = require('fs'),
 	http = require('http'),
 	url = require('url'),
 	util = require('util'), 
-	router = require('./lib/routes').router; 
+	router = require('./lib/routes').router,
+	templating = require('templatingModule'); 
 
-var port = 8124; 
+var port = 31337; 
 
 // Process command line arguments 
 var argv = process.argv.slice(2);
@@ -20,7 +21,10 @@ for (var i = 0; i < argv.length; i++) {
  
 var server = function(req, res) {
 	
-	req.getUser = require('./node_modules/user').getUser;
+	req.getUser = require('user').getUser;
+	res.render = templating.render;
+	res.redirectTo = templating.redirectTo;
+	res.request = req;
 	
 	util.log('Received ' + req.method + ' request for ' + req.url); 
 	var parsedUrl = url.parse(req.url, true);

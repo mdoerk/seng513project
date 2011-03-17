@@ -1,6 +1,6 @@
 {{#found}}
 <h1>{{name}}</h1>
-<h2>Personal Information</h2>
+<h2>Personal Information{{#is_loggedin}} <a href="editProfile">Edit</a>{{/is_loggedin}}</h2>
 <p>
 	<strong>Neighborhood</strong> 
 		{{neighborhood}}
@@ -16,6 +16,7 @@
 	<br>
 </p>
 <h2>Issues</h2>
+{{#has_issues}}
 <table style="width: 100%">
 <tr>
 <td class="text-center-style" style="width: 69px"><h3>Status</h3></td>
@@ -36,8 +37,12 @@
 </tr>
 {{/issues_list}}
 </table>
+{{/has_issues}}
+{{^has_issues}}
+<p>You are not the author of any issues. Click <a href="/addIssue">here</a> to submit a new issue.</p>
+{{/has_issues}}
 {{/found}}
 {{^found}}
 <h1>User not found!</h1>
-<p>User with id <b>{{user_id}}</b> does not exist.<br/><br/><a href="/">Back to home</a></p>
+<p>{{#user_id}}User with id <b>{{user_id}}</b> does not exist.{{/user_id}}{{^user_id}}No user was selected.{{/user_id}}<br/><br/><a href="/">Back to home</a></p>
 {{/found}}

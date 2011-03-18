@@ -1,3 +1,4 @@
+{{#found}}
 <h1> {{title}} </h1>
 Created on {{created}}
 {{#user}}
@@ -42,3 +43,22 @@ Location: {{location}}
 		{{/userLiked}}
 	{{/userHasVoted}}
 {{/user}}
+
+
+{{#comments}}
+	<p>Created by: <a href="/viewProfile?id={{iCommentCreatorId}}" id="user_profile"> {{iCommentCreatorName}} </a> at {{iCommentCreatedTime}}</p>
+	<textarea name='comments' readonly cols='80' rows='5'>{{iCommentContent}}</textarea><br><br><br>
+	
+{{/comments}}
+
+<h3>Add Your Comment Here</h3>
+<form action="addcomments" method="post">
+<p><textarea name="comments" rows="8" cols="50"></textarea></p>
+<p><input type="submit" value="Submit Your Comment" /></p>
+</form>
+{{/found}}
+{{^found}}
+<h1>Issue not found!</h1>
+<p>Issue with id <b>{{issue_id}}</b> does not exist.<br/><br/><a href="/">Back to home</a></p>
+{{/found}}
+

@@ -25,8 +25,7 @@ h1, h2, h3
 h1
 {
 	font-size: 2.2em; 
-	font-weight: bold; 
-	
+	font-weight: bold; 	
 }
 
 h2
@@ -143,20 +142,39 @@ img.right
 
 a#add-issue-button
 {
-	position: absolute; 
-  	top: 10px; 
+	position: relative; 
+	top: 16px; 
 	text-decoration: none; 
 	text-align: center; 
 	background-color: #b2e136;
 	border: 1px solid #a0c92d; 
 	color: #ffffff;
-   font-size: 1.6em;
+	font-size: 1.6em;
 	padding: 10px 15px 10px 15px; 
 }
 
 a#add-issue-button:hover
 {
 	background-color : #acda33; 
+}
+
+
+a#new-msg-button:hover
+{
+	background-color : #acda33; 
+}
+
+a#new-msg-button
+{
+	position: relative; 
+	top: 16px; 
+	text-decoration: none; 
+	text-align: center; 
+	background-color: #b2e136;
+	border: 1px solid #a0c92d; 
+	color: #ffffff;
+	font-size: 1.6em;
+	padding: 10px 15px 10px 15px; 
 }
 
 #content 
@@ -288,8 +306,8 @@ legend
 
 #search-form 
 {
-	width: 510px; 
-	height: 40px; 
+	width: 520px; 
+	height: 45px; 
 	position: absolute; 
   	top: 15px; 
 	right: 10px;
@@ -297,9 +315,9 @@ legend
 
 #search-box
 {
-	position: relative; 
 	border: 1px solid #eceadb; 
 	color: #999999; 
+	float: left; 
 	font-size: 1.6em; 
 	width: 400px;
 	height: 40px;
@@ -307,11 +325,11 @@ legend
 
 #search-button
 {
-	text-align: center;
-	position: relative; 
+	float: right; 
 	font-size: 1.6em;
    font-family: "Trebuchet MS", Arial, Verdana, sans-serif;
    color: #FFFFFF;
+	text-align: center;
    width: 100px;
    height: 45px;
    background-color: #e05d37;
@@ -322,8 +340,6 @@ legend
 {
 	background-color: #d85933;
 }
-
-
 
 /* Validation */ 
 /* ------------------------------*/ 

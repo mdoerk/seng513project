@@ -4,6 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<title>{{pageTitle}}</title>
 		<link rel="stylesheet" href="/css/style.css" type="text/css" />
+		<link rel="stylesheet" href="/css/view_votes_style.css" type="text/css" />
 		<script src="/fieldValidations.js"></script>
 	</head>
 
@@ -22,13 +23,15 @@
 			
 			<div id="menu">
 				<ul>
-					<li><a href="/index.html">Home</a></li>
+					<li><a href="/">Home</a></li>
 					<li><a href="/about.html">About</a></li>
+					{{#user}}<li><a href="/messages">Messages</a></li>{{/user}}
 				</ul>
 			</div>
 			
-			<div id="quick-task-bar"> 
+			<div id="quick-task-bar">
 				{{>quickTaskButtons}}
+				{{#user}}<a href="/newMessage" id="new-msg-button">New Message</a>{{/user}}
 				<form action="searchIssue" id="search-form">
 					<input type="text" id="search-box" name="search" value="" />
 					<input type="submit" id="search-button" value="Search" /> 

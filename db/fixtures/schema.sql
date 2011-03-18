@@ -23,7 +23,9 @@ CREATE TABLE issues (
 		title TEXT,
 		description TEXT,
 		link TEXT,
-		location TEXT
+		location TEXT,
+		likes INTEGER,
+		dislikes INTEGER
 );
 
 DROP TABLE IF EXISTS comments;
@@ -71,6 +73,29 @@ CREATE TABLE interests (
 	interest_location TEXT
 );
 
+DROP TABLE IF EXISTS inbox_msgs;
+CREATE TABLE inbox_msgs (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	from_id INTEGER NOT NULL,
+	from_user TEXT NOT NULL,
+	to_id INTEGER NOT NULL,
+	to_user TEXT NOT NULL,
+	sent_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+	subject TEXT,
+	body TEXT
+);
+
+DROP TABLE IF EXISTS sent_msgs;
+CREATE TABLE sent_msgs (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	from_id INTEGER NOT NULL,
+	from_user TEXT NOT NULL,
+	to_id INTEGER NOT NULL,
+	to_user TEXT NOT NULL,
+	sent_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+	subject TEXT,
+	body TEXT
+);
 
 -- Table used for storing the user votes on comments
 DROP TABLE IF EXISTS cmntvotes;		
@@ -79,3 +104,10 @@ CREATE TABLE cmntvotes (
 		user_id INTEGER NOT NULL,
 		comment_id INTEGER NOT NULL
 		);
+
+DROP TABLE IF EXISTS sessions; 
+CREATE TABLE sessions (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	user_id INTEGER NOT NULL,
+	session_hash TEXT NOT NULL
+);

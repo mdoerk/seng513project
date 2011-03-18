@@ -81,6 +81,7 @@ CREATE TABLE cmntvotes (
 
 DROP TABLE IF EXISTS sessions; 
 CREATE TABLE sessions (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	user_id INTEGER NOT NULL,
 	session_hash TEXT NOT NULL
 );

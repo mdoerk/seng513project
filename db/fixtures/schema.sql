@@ -73,6 +73,29 @@ CREATE TABLE interests (
 	interest_location TEXT
 );
 
+DROP TABLE IF EXISTS inbox_msgs;
+CREATE TABLE inbox_msgs (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	from_id INTEGER NOT NULL,
+	from_user TEXT NOT NULL,
+	to_id INTEGER NOT NULL,
+	to_user TEXT NOT NULL,
+	sent_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+	subject TEXT,
+	body TEXT
+);
+
+DROP TABLE IF EXISTS sent_msgs;
+CREATE TABLE sent_msgs (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	from_id INTEGER NOT NULL,
+	from_user TEXT NOT NULL,
+	to_id INTEGER NOT NULL,
+	to_user TEXT NOT NULL,
+	sent_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+	subject TEXT,
+	body TEXT
+);
 
 -- Table used for storing the user votes on comments
 DROP TABLE IF EXISTS cmntvotes;		

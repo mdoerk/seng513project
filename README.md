@@ -370,3 +370,17 @@ For more information on mustache.js see [https://github.com/janl/mustache.js/](h
 
 Calling `response.redirectTo(path)` will generate a redirect HTTP 302. `path` is the url path, for example:
 	res.redirectTo('/signin');
+
+## Messages ##
+folderids: 	0 = inbox
+				1 = sent
+
+### Messages API ###
+**Load the messages library:**
+	var messages = require('messages');
+* **messages.sendMessage(fromId, toId, subject, body, function(error) {})**
+* **messages.deleteMessage(folderId, messageId, function(error) {})**
+* **messages.getMessages(userId, folderId, function(error, messageList) {})**
+* **messages.getMessage(messageId, folderId, function(error, message) {})**
+
+

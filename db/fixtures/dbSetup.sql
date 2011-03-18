@@ -9,4 +9,5 @@
 .read ./fixtures/issuetags.sql
 .read ./fixtures/follows.sql
 .read ./fixtures/updateIssueVotes.sql
+.read ./fixtures/messages.sql
 .quit

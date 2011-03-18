@@ -142,20 +142,39 @@ img.right
 
 a#add-issue-button
 {
-	position: absolute; 
-  	top: 10px; 
+	position: relative; 
+	top: 16px; 
 	text-decoration: none; 
 	text-align: center; 
 	background-color: #b2e136;
 	border: 1px solid #a0c92d; 
 	color: #ffffff;
-   font-size: 1.6em;
+	font-size: 1.6em;
 	padding: 10px 15px 10px 15px; 
 }
 
 a#add-issue-button:hover
 {
 	background-color : #acda33; 
+}
+
+
+a#new-msg-button:hover
+{
+	background-color : #acda33; 
+}
+
+a#new-msg-button
+{
+	position: relative; 
+	top: 16px; 
+	text-decoration: none; 
+	text-align: center; 
+	background-color: #b2e136;
+	border: 1px solid #a0c92d; 
+	color: #ffffff;
+	font-size: 1.6em;
+	padding: 10px 15px 10px 15px; 
 }
 
 #content 

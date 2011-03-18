@@ -80,7 +80,6 @@ CREATE TABLE cmntvotes (
 		user_id INTEGER NOT NULL,
 		comment_id INTEGER NOT NULL
 		);
-);
 
 DROP TABLE IF EXISTS sessions; 
 CREATE TABLE sessions (

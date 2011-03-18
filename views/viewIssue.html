@@ -1,3 +1,4 @@
+{{#found}}
 <h1> {{title}} </h1>
 Created on {{created}}
 {{#user}}
@@ -55,3 +56,8 @@ Location: {{location}}
 		{{/userLiked}}
 	{{/userHasVoted}}
 {{/user}}
+{{/found}}
+{{^found}}
+<h1>Issue not found!</h1>
+<p>Issue with id <b>{{issue_id}}</b> does not exist.<br/><br/><a href="/">Back to home</a></p>
+{{/found}}

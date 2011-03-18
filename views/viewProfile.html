@@ -1,4 +1,6 @@
+{{#found}}
 <h1>{{name}}</h1>
+<h2>Personal Information</h2>
 <p>
 	<strong>Neighborhood</strong> 
 		{{neighborhood}}
@@ -13,3 +15,29 @@
 		{{twitter_account}}
 	<br>
 </p>
+<h2>Issues</h2>
+<table style="width: 100%">
+<tr>
+<td class="text-center-style" style="width: 69px"><h3>Status</h3></td>
+<td class="text-center-style" style="width: 201px"><h3>Title</h3></td>
+<td class="text-center-style"><h3>Last Modified</h3></td>
+</tr>
+{{#issues_list}}
+<tr>
+<td style="width: 69px" class="text-center-style">
+{{status}}
+</td>
+<td style="width: 201px" class="text-center-style">
+<a href="./viewIssue?id={{id}}">{{title}}</a>
+</td>
+<td class="text-center-style">
+{{lastModified}}
+</td>
+</tr>
+{{/issues_list}}
+</table>
+{{/found}}
+{{^found}}
+<h1>User not found!</h1>
+<p>User with id <b>{{user_id}}</b> does not exist.<br/><br/><a href="/">Back to home</a></p>
+{{/found}}

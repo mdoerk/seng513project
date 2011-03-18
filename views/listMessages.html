@@ -25,8 +25,8 @@
 	<td align="center" nowrap="">Date/Time Sent</td>
 </tr>
 {{#inboxMsgList}}
-<tr align="center"><td bgcolor="#F1F1F1" align="left" width="75%"><font size="2"><a href="viewMessage?msgid="{{id}}">{{subject}}</a></font></td>
-	<td bgcolor="#DFDFDF" width="25%" align="center"><font size="2">{{user}}</font></td>
+<tr align="center"><td bgcolor="#F1F1F1" align="left" width="75%"><font size="2"><a href="viewMessage??folderid=0&msgid={{id}}">{{subject}}</a></font></td>
+	<td bgcolor="#DFDFDF" width="25%" align="center"><font size="2">{{user_name}}</font></td>
 	<td bgcolor="#F1F1F1" align="left" nowrap=""><span class="smaller">{{date}}</span></td>
 </tr>
 {{/inboxMsgList}}
@@ -34,8 +34,21 @@
 </table>
     </div>
     <div id="sent-msgs">
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+<table cellpadding="4" cellspacing="1" border="1" width="100%">
+<tbody>
+<tr valign="bottom" class="forumsubheading">
+	<td align="center">Message Subject</td>
+	<td align="center" nowrap="">Sent To</td>
+	<td align="center" nowrap="">Date/Time Sent</td>
+</tr>
+{{#sentMsgList}}
+<tr align="center"><td bgcolor="#F1F1F1" align="left" width="75%"><font size="2"><a href="viewMessage?folderid=1&msgid={{id}}">{{subject}}</a></font></td>
+	<td bgcolor="#DFDFDF" width="25%" align="center"><font size="2">{{user_name}}</font></td>
+	<td bgcolor="#F1F1F1" align="left" nowrap=""><span class="smaller">{{date}}</span></td>
+</tr>
+{{/sentMsgList}}
+</tbody>
+</table>
     </div>
 </div>
 

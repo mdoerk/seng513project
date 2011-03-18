@@ -39,7 +39,12 @@
 </table>
 {{/has_issues}}
 {{^has_issues}}
-<p>You are not the author of any issues. Click <a href="/addIssue">here</a> to submit a new issue.</p>
+{{#is_loggedin}}
+	<p>You are not the author of any issues. Click <a href="/addIssue">here</a> to submit a new issue.</p>
+{{/is_loggedin}}
+{{^is_loggedin}}
+	<p>This user is not an author of any issues.</p>
+{{/is_loggedin}}
 {{/has_issues}}
 {{/found}}
 {{^found}}

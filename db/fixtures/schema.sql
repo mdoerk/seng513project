@@ -73,7 +73,6 @@ CREATE TABLE interests (
 	interest_location TEXT
 );
 
-
 -- Table used for storing the user votes on comments
 DROP TABLE IF EXISTS cmntvotes;		
 CREATE TABLE cmntvotes (
@@ -81,3 +80,11 @@ CREATE TABLE cmntvotes (
 		user_id INTEGER NOT NULL,
 		comment_id INTEGER NOT NULL
 		);
+);
+
+DROP TABLE IF EXISTS sessions; 
+CREATE TABLE sessions (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	user_id INTEGER NOT NULL,
+	session_hash TEXT NOT NULL
+);

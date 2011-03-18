@@ -55,3 +55,27 @@ Location: {{location}}
 		{{/userLiked}}
 	{{/userHasVoted}}
 {{/user}}
+
+<div class = "SendEmail">
+  <h2> Send this to a friend </h2>
+    <CENTER>
+      <FORM METHOD=POST ACTION="mailto:"  ENCTYPE="text/plain">
+	Friend name: <BR>
+	<INPUT TYPE="text" NAME="To" ><BR>
+	Your name: <BR>
+	<INPUT TYPE="text" NAME="From"  ><BR><BR>
+	Your message here:<BR>
+	<TEXTAREA NAME="Message: " ROWS="10" COLS="100" WRAP="hard">
+Look what I found at the CivicConnect Website:
+  TITLE: {{title}}
+  DESCRIPTION: {{description}}
+	</TEXTAREA>
+	<INPUT NAME="redirect" TYPE="hidden" VALUE="index.html">
+	<INPUT NAME="NEXT_URL" TYPE="hidden" VALUE="index.html">
+	<BR>
+	<INPUT TYPE="submit" VALUE="Send">
+	<INPUT TYPE="reset" VALUE="Clear">
+      </FORM>
+    </CENTER>
+</div>
+

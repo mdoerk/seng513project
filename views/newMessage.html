@@ -1,0 +1,41 @@
+{{^user}}
+	<p><em><a href='/signin'>Sign in</a> to send messages.</em></p>
+{{/user}}
+{{#user}}
+<form action="sendMessage" method="POST">
+<table cellpadding="0" cellspacing="0" border="1" width="100%">
+	<tr><td align="center" colspan=2 bgcolor="#F1F1F1"><b>New Message</b></td></tr>
+	<tr>
+		<td bgcolor="#F1F1F1"><font size="2"><b>Logged in user:</b></font></td>
+		<td bgcolor="#F1F1F1"><font size="2">{{loggedInUser}}</font></td>
+	</tr>
+	<tr>
+		<td bgcolor="#F1F1F1"><font size="2"><b>Recipient:</b></font></td>
+		<td bgcolor="#F1F1F1"><font size="2"><input type="text" name="tousername" value="{{toUserName}}" size="25" maxlength="25" tabindex="1"></font>
+	</tr>
+	<tr>
+		<td bgcolor="#F1F1F1"><font size="2"><b>Subject:</b></font></td>
+		<td bgcolor="#F1F1F1"><font size="2"><input type="text" name="subject" value="" size="40" maxlength="85" tabindex="2"></font></td>
+	</tr>
+	<tr>
+		<td bgcolor="#F1F1F1" valign="top" nowrap=""><p><font size="2"><b>Your Message:</b></font></p>
+		</td>
+		
+		<td bgcolor="#F1F1F1">
+		<table cellpadding="0" cellspacing="0" border="0">
+		<tbody><tr valign="top">
+			<td><textarea name="body" rows="20" cols="60" wrap="virtual" tabindex="3"></textarea><br>
+		</tr>
+		</tbody></table>
+		</td>
+	</tr>
+</table>
+<table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+<tbody><tr>
+	<td align="center"><font size="2">
+	<input type="submit" name="submit" value="Send Message">
+	</font></td>
+</tr>
+</tbody></table>
+</form>
+{{/user}}

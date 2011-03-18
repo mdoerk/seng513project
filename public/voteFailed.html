@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Oooppss... You must be signed in to vote</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" href="css/style.css" type="text/css" />
+	<style>
+		p.error{color: red;}
+	</style>
+</head>
+<body>
+<div id="page">
+			<div id="header">
+				<a href="signup.html">join</a> |
+				<a href="signIn.html">login</a> 
+			</div>
+			
+			<div id="menu">
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="about.html">About</a></li>
+				</ul>
+			</div>
+<h1>Please Sign In to Vote</h1>
+
+<form action="/signin" method="post">
+	
+	<p class='error'>
+		To vote, you must be signed in. Please use the form below to sign in.</p>
+	
+	<p>
+	<label for ="username">Username:</label> <br>
+	<input type="text" id="username" name="username">
+	</p>
+
+	<p>
+	<label for="password">Password:</label> <br>
+	<input type="password" id="password" name="password">
+	</p>
+	
+	<input type='submit' value='Sign In'>
+</form>
+</div>
+</body>
+</html>

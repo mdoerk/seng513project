@@ -1,0 +1,9 @@
+{{#error}}
+<h1>Error</h1>
+<p>Your message was not sent!</p>
+{{/error}}
+{{^error}}
+<META HTTP-EQUIV="refresh" CONTENT="5;URL=/messages">
+<h1>Message sent!</h1>
+<p>Your message has been sent successfully. Redirecting to Message Center in 5 seconds...</p>
+{{/error}}

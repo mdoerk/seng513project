@@ -24,6 +24,7 @@ module.exports = testCase({
 		test.equals(false, wordFilter.isWordOffensive('foo-bar')); 
 		test.equals(false, wordFilter.isWordOffensive('foo bar')); 
 		test.equals(false, wordFilter.isWordOffensive('')); 
+		test.equals(false, wordFilter.isWordOffensive('  ')); 
 		test.done(); 
 	},
 	
@@ -32,11 +33,13 @@ module.exports = testCase({
 		var badText2 = 'foobar foobar loremipsum'; 
 		var goodText = 'All good here!';
 		var emptyText = ''; 
+		var blankText = '  '; 
 		
 		test.equals(2, wordFilter.countOffensiveWords(badText)); 
 		test.equals(3, wordFilter.countOffensiveWords(badText2)); 
 		test.equals(0, wordFilter.countOffensiveWords(goodText)); 
 		test.equals(0, wordFilter.countOffensiveWords(emptyText)); 
+		test.equals(0, wordFilter.isWordOffensive(blankText)); 
 		test.done(); 
 	}
 });

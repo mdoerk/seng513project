@@ -187,15 +187,20 @@ function validateConfirmPassword(e){
  * NOTE: 	'new_issue' is the form name, 'title' and 'description' are the names of their respective fields in the HTML form.
  * 			All of these can are found in the addIssue.js. 
  */
-function checkMandatoryFields()
+function checkMandatoryFields(form)
 {	
-	var message = "Oops, you forgot to include the following mandatory fields:";
-	if (document.new_issue.title.value == "" )
+	var pass = true;
+	var message = "Oops, you forgot the following mandatory fields, they cannot be empty:";
+	if (form.title.value == "" ){
 		message += "\nTitle";
-	if (document.new_issue.description.value == "")
+		pass = false;
+	}
+	if (form.description.value == ""){
 		message += "\nDescription"
+		pass = false;
+	}
 	
-	if (message != "Oops, you forgot to include the following mandatory fields:") {
+	if (!pass) {
 		alert(message);
 		return false;
 	}

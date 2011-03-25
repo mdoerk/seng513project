@@ -8,6 +8,7 @@ CREATE TABLE users (
 		password TEXT NOT NULL,
 		neighborhood TEXT,
 		postal_code TEXT,
+		website TEXT,
 		created DATETIME DEFAULT CURRENT_TIMESTAMP,
 		reputation_score INTEGER,
 		isEditor INTEGER

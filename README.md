@@ -386,14 +386,16 @@ folderids:
 
 ## Application Settings ##
 Application settings can be defined as key-value pairs in config.js. Setting values can be
-accessed from anywhere using 'settings.<setting name>'. 
+accessed from anywhere by requiring settings, then using 'settings.getSetting('<setting name>')'. 
 
 For example, we have a setting in config.js that defines the location of the database file as follows:
 	db_file: 'db/CivicConnect.db'
 	
 dbAccess.js can read this setting like so:
-	db.open(settings.db_file, function(open_error) {...});
+	var settings = require('settings');
+	var DATABASE_NAME = settings.getSetting('db_file');
+	db.open(DATABASE_NAME, function(open_error) {...});
 
 If you would like to have a default value for your setting (in case it isn't defined for
-whatever reason), you may set that in server.js. See the existing default setting definitions
-in there for an example.
+whatever reason), you may set that in settings.js. See the existing default setting definitions
+in there for an example of how to do this.

@@ -3,9 +3,7 @@ var fs = require('fs'),
 	url = require('url'),
 	util = require('util'), 
 	router = require('./lib/routes').router,
-	templating = require('templatingModule'),
-	path = require('path');
-	//ls = require('settings');
+	templating = require('templatingModule');
 
 var port = 8124; 
 
@@ -32,6 +30,5 @@ var server = function(req, res) {
 	router.handle(parsedUrl.pathname, req, res); 
 }
 
-eval(fs.readFileSync('config.js', encoding="ascii"));
 http.createServer(server).listen(port); 
 util.log('Server running on port ' + port);

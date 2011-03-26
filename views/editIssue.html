@@ -2,15 +2,16 @@
 <h1> Edit Issue Details </h1>
 <form id="edit_issue" action="saveIssue" method="post" onsubmit="return checkMandatoryFields(this);">
 	<p><input type="hidden" name="id" value="{{issueId}}"/></p>
-	<p>Title</p> <p><input type="text" name="title" value= "{{title}}"/></p>
-	<p>Description</p><p><textarea rows="10" cols="50" name="description">{{description}}</textarea></p>
-	<p>Location</p> <p><input type="text" name="location" value= "{{location}}"/></p>
-	<p>Link</p> <p><input type="text" name="link" value= "{{link}}"/></p>
-	<p>Tags</p> <p><input type="text" name="tags" value="{{tags}}" /></p>
-	<p>Status</p> <SELECT name="status">
+	<p>Title<font color="#cc0000">* </font><input type="text" name="title" value= "{{title}}"/></p>
+	<p>Description<font color="#cc0000">*</font></br>
+	<textarea rows="10" cols="50" name="description">{{description}}</textarea></p>
+	<p>Location <input type="text" name="location" value= "{{location}}"/></p>
+	<p>Relevant Link (please input only <b><i>one</i></b> link) <input type="text" name="link" value= "{{link}}"/></p>
+	<p><a class="hint" title="For example, entering 'roads tax' will file the issue with 2 tags: 'roads' and 'tax'">Tags (separate each tag with a space)</a> <input type="text" name="tags" value="{{tags}}" /></p>
+	<p>Status <SELECT name="status">
 		<OPTION VALUE="open" {{#openSelected}}SELECTED{{/openSelected}}>Open</OPTION>
 		<OPTION VALUE="resolved" {{#resolvedSelected}}SELECTED{{/resolvedSelected}}>Resolved</OPTION>
-	</SELECT>
+	</SELECT></p>
 	<p><input type="submit" value="Save Issue" /></p>
 </form>
 <br />

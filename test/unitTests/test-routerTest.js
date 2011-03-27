@@ -3,16 +3,14 @@
 * functions.
 *
 * Created By: Eric Kryski Feb. 25, 2011
-* Updated by: Winnie Wu	Feb.25, 2011
+* Updated by: Winnie Wu	Feb. 25, 2011
 **/
-
 
 var Router = require('../../lib/router').Router;
 var nodeunit = require('nodeunit/nodeunit');
 
 exports['router'] = nodeunit.testCase({
-	setUp:function(callback){
-	//setup
+	setUp:function(callback) {
 		//create router object
 		this.r = new Router();
 		
@@ -32,35 +30,31 @@ exports['router'] = nodeunit.testCase({
 		callback();
 	},
 	
-	tearDown:function(callback){
-	//tear down
+	tearDown:function(callback) {
 		this.r = null;
 		this.TestModule = null;
 		//clean up
 		callback();
 	},
 	
-	testAddSimpleRoutes:function(test){
+	testAddSimpleRoutes:function(test) {
 		test.expect(2); //specify number of assertions are expected to run within test class. useful for ensuring callbacks and assertions are run.
-		 
-		//add simple routes
-
+		
 		//test add a simple route to an html page file
 		this.r.add('/', 'index.html');
 		test.equal(this.r.simpleRoutes['/'], 'index.html');
 				
 		//test add a simple route to a function
 		this.r.add('/fooBar', this.TestModule.fooBar);
-		test.equal(this.r.simpleRoutes['/fooBar'], this.TestModule.fooBar);
+		test.equal(this.r.simpleRoutes['/foobar'], this.TestModule.fooBar);
 		
-			
-		test.done();//finish current test function. INCLUDE THIS IN ALL TEST FUNCTIONS
+		test.done(); //finish current test function. INCLUDE THIS IN ALL TEST FUNCTIONS
 	},
 
-	testAddRegularExpressionRoutes: function(test){
+	testAddRegularExpressionRoutes: function(test) {
 		test.expect(2);		
 	
-		//add regexRoute
+		//add regular expression route 
 		var route =/123/;
 		var path = 'static.html'; 
 		

@@ -4,16 +4,19 @@
 <p>
 	<strong>Neighborhood</strong> 
 		{{neighborhood}}
-	<br>
+	<br /> 
 	<strong>Postal Code</strong> 
 		{{postal_code}}
-	<br>
+	<br /> 
+	<strong>Reputation</strong>
+		{{reputation}} 
+	<br /> 
 	<strong>Facebook Account</strong> 
 		{{facebook_account}}
-	<br>
+	<br /> 
 	<strong>Twitter Account</strong> 
 		{{twitter_account}}
-	<br>
+	<br /> 
 	<strong>Website</strong> 
 	{{#has_website}}
 		<a href="http://{{website}}" target="_new">http://{{website}}</a>
@@ -21,7 +24,7 @@
 	{{^has_website}}
 		{{website}}
 	{{/has_website}}
-	<br>
+	<br /> 
 </p>
 <h2>Issues</h2>
 {{#has_issues}}

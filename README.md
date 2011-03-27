@@ -216,8 +216,35 @@ To create a test or a series of tests open a new file called 'test-yourTestName.
 
 You must make sure that you call test.done() at the end of each test as this ensures that your test was actually executed.  Because node is asynchronous, if you don not use the check test.done() then your test may not execute and give a false pass or false fail.
 
+Writing functional tests are similar to writing unit tests, expect you will need to include the server and funcTest modules and start/stop the server on the test setup/teardown: 
+
+	// Include your modules that you will need 
+	var testCase = require('nodeunit/nodeunit').testCase, 
+	Client = require('functionalTesting/funcTest').Client,  
+	server = require('../../server'); 
+	
+	module.exports = testCase({
+		setUp: function (callback) {
+			server.start(); // Make sure to start the server before each test 
+			callback();
+		},
+		tearDown: function (callback) {
+			server.stop(); // Make sure to stop the server after each test 
+			callback();
+		},
+		yourTestName: function (test) {
+			var client = new Client(); // Start a new mock client and send your request 
+			client.sendRequest('POST', '/', { }, function(signInRes) { 
+				test.equals(signInRes.status, 200); 
+				test.ok(signInRes.headers['set-cookie'] != undefined);
+				test.done(); 
+			});
+		}
+	});
+
 **Note**  
 You must make sure that where you place 'test.done()' is within the right call back.
+
 ### Adding Tests to the Project ###
 
 To add your tests to the project all you need to do is place the test file you created in 'test/unitTests' folder or the 'test/funcTests' folder.

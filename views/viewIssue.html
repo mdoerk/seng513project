@@ -1,3 +1,4 @@
+{{^error}}
 {{#found}}
 <h1> {{title}} </h1>
 Created on {{created}}
@@ -61,4 +62,9 @@ Location: {{location}}
 <h1>Issue not found!</h1>
 <p>Issue with id <b>{{issue_id}}</b> does not exist.<br/><br/><a href="/">Back to home</a></p>
 {{/found}}
-
+{{/error}}
+{{#error}}
+<h2>Oops! We seem to be having issues right now :(</h2>
+<p>The dev team has been notified... Please try again later.</p>
+<a href="/">Back to home</a>
+{{/error}}

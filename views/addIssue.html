@@ -1,14 +1,14 @@
 <h1>Add Issue</h1>
 {{#display}}
 	{{#loggedIn}}
-	What do you feel is an important issue that should be addressed by your city? Create a new issue here! (Fields marked with a <font color="#cc0000">*</font> are mandatory)<br>
+	What do you feel is an important issue that should be addressed by your city? Create a new issue here! <BR>(Fields marked with a <font color="#cc0000">*</font> are mandatory. Hover over <font style="border-bottom:1px dotted #000">underlined</font> text for more details.)<br>
 	<form id="new_issue" name="new_issue" action="/addIssue" method="post" onsubmit="return checkMandatoryFields(this);">
 		<p>Title<font color="#cc0000">*</font><input type="text" name="title" /></p>
 		<p>Description<font color="#cc0000">*</font><br>
 		<textarea rows="10" cols="50" name="description"></textarea></p>
 		<p>Location <input type="text" name="location" /></p>
-		<p>Relevant Link <input type="text" name="link" /></p>
-		<p>Tags <input type="text" name="tags" /></p>
+		<p>Relevant Link (please input only <b><i>one</i></b> link) <input type="text" name="link" /></p>
+		<p><a class="hint" title="For example, entering 'roads tax' will file the issue with 2 tags: 'roads' and 'tax'">Tags (separate each tag with a space)</a> <input type="text" name="tags" /></p>
 		<p><input type="submit" value="Create Issue" /></p>
 	</form>
 	{{/loggedIn}}
@@ -25,6 +25,6 @@
 	{{/fail}}
 	{{#success}}
 		Issue successfully added! Redirecting back to home page in 5 seconds.... or click <a href="/index.html">here</a> if you do not wish to wait.
-		<script type="text/javascript">window.setTimeout("window.location.href={{index}}", 5000");</script>
+		<script type="text/javascript">window.setTimeout("window.location.href={{index}}", 5000);</script>
 	{{/success}}
 {{/add}}

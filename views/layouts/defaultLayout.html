@@ -5,6 +5,9 @@
 		<title>{{pageTitle}}</title>
 		<link rel="stylesheet" href="/css/style.css" type="text/css" />
 		<link rel="stylesheet" href="/css/view_votes_style.css" type="text/css" />
+		<link rel="icon" type="image/png" href="/images/favicon.png" />
+		<link rel="shortcut icon" type="image/png" href="/images/favicon.png" />
+		<link rel="apple-touch-icon" href="/images/apple-logo.png" />
 		<script src="/fieldValidations.js"></script>
 	</head>
 
@@ -32,7 +35,7 @@
 			<div id="quick-task-bar">
 				{{>quickTaskButtons}}
 				{{#user}}<a href="/newMessage" id="new-msg-button">New Message</a>{{/user}}
-				<form action="searchIssue" id="search-form">
+				<form action="listIssues" id="search-form">
 					<input type="text" id="search-box" name="search" value="" />
 					<input type="submit" id="search-button" value="Search" /> 
 				</form>

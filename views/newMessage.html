@@ -2,18 +2,16 @@
 	<p><em><a href='/signin'>Sign in</a> to send messages.</em></p>
 {{/user}}
 {{#user}}
-<!--TEST CODE BEGIN-->
 <link rel=StyleSheet href="css/jquery-ui-1.8.11.custom.css">
 <script src='scripts/jquery-1.5.1.min.js'></script>
 <script src='scripts/jquery-ui-1.8.11.custom.min.js'></script>
 <script>
     $(document).ready(function() {
         $("#recipient").autocomplete({
-            source: 'autocomplete'
+            source: 'autocomplete?table=users&column=name',
         });
     });
 </script>
-<!--TEST CODE END-->
 <form action="sendMessage" method="POST">
 <table cellpadding="0" cellspacing="0" border="1" width="100%">
 	<tr><td align="center" colspan=2 bgcolor="#F1F1F1"><b>New Message</b></td></tr>

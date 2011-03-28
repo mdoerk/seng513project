@@ -1,5 +1,6 @@
 {{#found}}
 <h1>{{name}}</h1>
+{{^is_loggedin}}<h2><a href="/newMessage?userid={{userid}}">Send {{name}} a Message</a></h2>{{/is_loggedin}}
 <h2>Personal Information{{#is_loggedin}} <a href="editProfile">Edit</a>{{/is_loggedin}}</h2>
 <p>
 	<strong>Neighborhood</strong> 

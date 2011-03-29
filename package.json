@@ -1,0 +1,23 @@
+{
+  "name": "seng513project",
+  "description": "asdf",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mdoerk/seng513project"
+  },
+  "author": "df <f> (f)",
+  "main": "server.js",
+  "directories": {
+    "lib": "node_modules"
+  },
+  "scripts": {
+    "test": "node runTests.js"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {
+    "sqlite": "1.0.3"
+  }
+}

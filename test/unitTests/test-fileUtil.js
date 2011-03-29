@@ -25,7 +25,7 @@ module.exports = testCase({
 			fileCount = 0; 
 			for (i in results) { fileCount++ }
 			test.equals(fileCount, 1);
-			test.equals(!results[file_1KB], true); 
+			test.ok(results[file_1KB]); 
 			test.done();		
 		}); 
 	},
@@ -36,9 +36,9 @@ module.exports = testCase({
 			fileCount = 0; 
 			for (i in results) { fileCount++ }
 			test.equals(fileCount, 3);
-			test.equals(!results[file_1KB], true); 
-			test.equals(!results[file_100KB], true); 
-			test.equals(!results[file_1000KB], true); 
+			test.ok(results[file_1KB]); 
+			test.ok(results[file_100KB]); 
+			test.ok(results[file_1000KB]); 
 			test.done();		
 		}); 
 	},
@@ -49,7 +49,7 @@ module.exports = testCase({
 			fileCount = 0; 
 			for (i in results) { fileCount++ }
 			test.equals(fileCount, 1);
-			test.equals(!results[file_1KB], true); 
+			test.ok(results[file_1KB]); 
 			test.done();		
 		}); 
 	},

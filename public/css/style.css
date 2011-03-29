@@ -257,6 +257,13 @@ a#new-msg-button
 
 /* Forms */ 
 /* ------------------------------*/ 
+.hint
+{
+	border-bottom: 1px dotted #333;
+	color: #333;
+	cursor: help;
+}
+
 fieldset
 {
     margin: 1em 0px;
@@ -302,6 +309,11 @@ legend
 {
     font-size: 1.1em;
     padding: 2px 4px 8px 4px;
+}
+
+#new_issue textarea{
+	max-width: 400px;
+	max-height: 150px;
 }
 
 #search-form 

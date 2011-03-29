@@ -1,3 +1,4 @@
+{{^error}}
 {{#found}}
 <h1> {{title}} </h1>
 Created on {{created}}
@@ -19,13 +20,13 @@ Location: {{location}}
 			<table style="width: 100%">
 				<tr>
 					<td style="width: 31px">
-						<a href="/voteIssues?issueid={{id}}&vote=0">
+						<a href="/voteIssues?issueid={{issue_id}}&vote=0">
 							<img src="images/thumb_up.png">
 						</a>
 					</td>
 					<td style="width: 49px">Like</td>
 					<td style="width: 31px">
-						<a href="/voteIssues?issueid={{id}}&vote=1">
+						<a href="/voteIssues?issueid={{issue_id}}&vote=1">
 							<img src="images/thumb_down.png">
 						</a>
 					</td>
@@ -61,4 +62,9 @@ Location: {{location}}
 <h1>Issue not found!</h1>
 <p>Issue with id <b>{{issue_id}}</b> does not exist.<br/><br/><a href="/">Back to home</a></p>
 {{/found}}
-
+{{/error}}
+{{#error}}
+<h2>Oops! We seem to be having issues right now :(</h2>
+<p>The dev team has been notified... Please try again later.</p>
+<a href="/">Back to home</a>
+{{/error}}

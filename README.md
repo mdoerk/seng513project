@@ -410,4 +410,34 @@ folderids: 	0 = inbox
 * **messages.getMessages(userId, folderId, function(error, messageList) {})**
 * **messages.getMessage(messageId, folderId, function(error, message) {})**
 
+## Email Utilities ##
+A library that can be used to send emails on behalf of the system. It is specifically set up for use with a gmail account. The application configuration file (config.js) should have the following settings defined in order for this to work:
+email_account: "someone@something.com" // civicconnect@gmail.com is set-up and ready to use
+email_password: "****" // If you don't know the password, email me at sabad66@hotmail.com to find out
+smtp_server_name: "smtp.gmail.com" // That is the smtp server (outgoing mail server) for gmail
 
+
+### Email Utilities API ###
+**Load the email utilities library:**
+	var emailUtil = require('emailUtil');
+* **emailUtil.sendPlainTextEmailToUserId(userId, subject, body, function(error, success) {})** - Sends a plain text email to the given userId. The body parameter should be plain text (i.e. no html tags)
+* **emailUtil.sendHTMLEmailToUserId(userId, subject, body, function(error, success) {})** - Sends an HTML formatted email to the given userId. The body parameter may contain html formatting (i.e body = '<b>hi</b> friend!')
+* **emailUtil.sendPlainTextEmailToAddress(toEmailAddress, subject, body, function(error, success) {})** - Sends a plain text email to the given email address. The body parameter should be plain text (i.e. no html tags)
+* **emailUtil.sendHTMLEmailToAddress(toEmailAddress, subject, body, function(error, success) {})** - Sends an HTML formatted email to the given email address. The body parameter may contain html formatting (i.e body = '<b>hi</b> friend!')
+
+### Notes ###
+Please be careful not to commit your config.js file with the password in there.
+
+Sometimes emails take a few seconds to send, so it's probably better NOT to render any page responses inside the callbacks. Instead, render the page outside the callback like this:
+
+	emailUtil.sendPlainTextEmailToUserId(999, 'Confirm Email', 'Please click the follwoing link to confirm your email.', function(error, success) {
+		if (error)
+			util.log('error sending the confirmation email');
+		else if (!success)
+			util.log('Email was not sent successfully');
+		else
+			util.log('Confirmation email sent successfully!');
+	});
+	response.render('confirmationSent.html');
+
+Other things besides rendering response should probably still be inside the callback function.

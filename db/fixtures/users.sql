@@ -1,7 +1,7 @@
 /**
 * password: 5f4dcc3b5aa765d61d8327deb882cf99 = 'password'. All accounts password is 'password'.
 */
-INSERT INTO users (id,name,email,password,neighborhood,postal_code,reputation_score) VALUES ('1','Virginia Snyder','ipsum@eu.edu','5f4dcc3b5aa765d61d8327deb882cf99','eu','I9S 8N5','1');
+INSERT INTO users (id,name,email,password,neighborhood,postal_code,reputation_score, isEditor) VALUES ('1','System','civicconnect@gmail.com','5f4dcc3b5aa765d61d8327deb882cf99','eu','I9S 8N5','0','1');
 INSERT INTO users (id,name,email,password,neighborhood,postal_code,reputation_score) VALUES ('2','Gloria Blevins','conubia@risus.com','5f4dcc3b5aa765d61d8327deb882cf99','velit','P2T 7L6','5');
 INSERT INTO users (id,name,email,password,neighborhood,postal_code,reputation_score) VALUES ('3','Elliott Clay','Mauris.nulla.Integer@euaccumsan.com','5f4dcc3b5aa765d61d8327deb882cf99','faucibus','A1Z 6Q1','4');
 INSERT INTO users (id,name,email,password,neighborhood,postal_code,reputation_score) VALUES ('4','Holly Massey','Duis.volutpat.nunc@congueaaliquet.ca','5f4dcc3b5aa765d61d8327deb882cf99','metus.','S6H 4R3','3');

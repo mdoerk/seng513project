@@ -7,3 +7,6 @@
 
 # databases
 *.db
+
+# tmp
+tmp/

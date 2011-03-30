@@ -8,5 +8,5 @@
 # databases
 *.db
 
-# tmp
-tmp/
+# uploads
+public/uploads

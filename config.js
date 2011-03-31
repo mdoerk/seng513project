@@ -6,5 +6,6 @@
 settings = {
 	db_file: 'db/CivicConnect.db',
 	email_account: 'civicconnect@gmail.com',
-	email_password: ''
+	email_password: '',
+	email_smtp_server: 'smtp.gmail.com'
 }

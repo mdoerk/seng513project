@@ -1,38 +1,63 @@
 {{#found}}
-<h1>{{name}}</h1>
-<h2>Personal Information{{#is_loggedin}} <a href="editProfile">Edit</a>{{/is_loggedin}}</h2>
-<p>
-	<strong>Neighborhood</strong> 
-		{{neighborhood}}
-	<br /> 
-	<strong>Postal Code</strong> 
-		{{postal_code}}
-	<br /> 
-	<strong>Reputation</strong>
-		{{reputation}} 
-	<br /> 
-	<strong>Facebook Account</strong> 
-		{{facebook_account}}
-	<br /> 
-	<strong>Twitter Account</strong> 
-		{{twitter_account}}
-	<br /> 
-	<strong>Website</strong> 
-	{{#has_website}}
-		<a href="http://{{website}}" target="_new">http://{{website}}</a>
-	{{/has_website}}
-	{{^has_website}}
-		{{website}}
-	{{/has_website}}
-	<br /> 
-</p>
-<h2>Issues</h2>
+<table>
+	<td style="width: 150px">
+		{{#avatar_image}}
+			<img src="{{avatar_image}}" style="width: 120px; height: 120px; border: 1px solid;">
+		{{/avatar_image}}
+		{{^avatar_image}}
+			<div style="width: 120px; height: 120px; border: 1px solid; color: #AAAAAA; font-size: 2em; text-align: center;"><br>No Image</div>
+		{{/avatar_image}}
+	</td>
+	<td>	
+		<h1>{{name}}</h1>
+	</td>
+</table>
+<br>
+<h2>Personal Information{{#is_loggedin}} (<a href="editProfile" style="font-size: 0.9em">Edit</a>){{/is_loggedin}}</h2>
+<table class="profile_view" style="width: 600px; font-size: 1.2em;" border="1.5">
+	<tr>
+		<td>
+			<strong>Neighborhood</strong> 
+				{{neighborhood}}
+		</td>
+		<td>
+			<strong>Postal Code</strong> 
+				{{postal_code}}
+		</td>
+	</tr>
+	<tr>
+		<td>	
+			<strong>Reputation</strong>
+				{{reputation}} 
+		</td>
+		<td>
+			<strong>Facebook Account</strong> 
+				{{facebook_account}}
+		</td>
+	</tr>
+	<tr>
+		<td>	
+			<strong>Twitter Account</strong> 
+				{{twitter_account}}
+		</td>
+		<td>
+			<strong>Website</strong> 
+				{{#has_website}}
+			<a href="http://{{website}}" target="_new">http://{{website}}</a>
+				{{/has_website}}
+				{{^has_website}}
+					{{website}}
+				{{/has_website}}
+		</td>
+	</tr>
+</table>
+<h2 style="margin-bottom: 0px;">Issues</h2>
 {{#has_issues}}
-<table style="width: 100%">
-<tr>
-<td class="text-center-style" style="width: 69px"><h3>Status</h3></td>
-<td class="text-center-style" style="width: 201px"><h3>Title</h3></td>
-<td class="text-center-style"><h3>Last Modified</h3></td>
+<table style="width: 100%; border: solid; margin-top: 0px;">
+<tr style="border: solid;">
+<th class="text-center-style" style="width: 69px;"><h3 style="margin-top: 0px;">Status</h3></th>
+<th class="text-center-style" style="width: 201px;"><h3 style="margin-top: 0px;">Title</h3></th>
+<th class="text-center-style"><h3 style="margin-top: 0px;">Last Modified</h3></th>
 </tr>
 {{#issues_list}}
 <tr>

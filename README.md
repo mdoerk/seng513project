@@ -399,14 +399,13 @@ Calling `response.redirectTo(path)` will generate a redirect HTTP 302. `path` is
 	res.redirectTo('/signin');
 
 ## Messages ##
-folderids: 	0 = inbox
-				1 = sent
+folderids: 	0 = inbox   1 = sent
 
 ### Messages API ###
 **Load the messages library:**
 	var messages = require('messages');
 * **messages.sendMessage(fromId, toId, subject, body, function(error) {})**
-* **messages.deleteMessage(folderId, messageId, function(error) {})**
+* **messages.deleteMessage(messageId, folderId, function(error) {})**
 * **messages.getMessages(userId, folderId, function(error, messageList) {})**
 * **messages.getMessage(messageId, folderId, function(error, message) {})**
 

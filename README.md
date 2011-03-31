@@ -407,7 +407,7 @@ folderids:
 **Load the messages library:**
 	var messages = require('messages');
 * **messages.sendMessage(fromId, toId, subject, body, function(error) {})**
-* **messages.deleteMessage(folderId, messageId, function(error) {})**
+* **messages.deleteMessage(messageId, folderId, function(error) {})**
 * **messages.getMessages(userId, folderId, function(error, messageList) {})**
 * **messages.getMessage(messageId, folderId, function(error, message) {})**
 

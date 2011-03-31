@@ -188,6 +188,13 @@ a#new-msg-button
 	min-height: 600px; 
 }
 
+#issue-stats 
+{
+	padding:5px;
+	background-color: #ECEADB; 
+	font-size:9pt;
+}
+
 #pager
 {
         text-align: center;

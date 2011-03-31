@@ -1,0 +1,7 @@
+<h1>{{iTitile}}</h1>
+
+<form action="/saveComments?cid={{iCommentId}}&iid={{iIssueId}}" method="post">
+<p><textarea name="comments" rows="8" cols="50">{{iContent}}</textarea></p>
+<p><input type="submit" onClick="alert('Your changes have been saved successfully');" value="Save Your Change" />
+<input type="button" onClick="location.href='/viewIssue?id={{iIssueId}}'" value="Cancel" /></p>
+</form>

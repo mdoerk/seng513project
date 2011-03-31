@@ -61,11 +61,12 @@
 	{{/userHasVoted}}
 {{/user}}
 
-
+<h3>Comments</h3>
 {{#comments}}
 	<p>Created by: <a href="/viewProfile?id={{iCommentCreatorId}}" id="user_profile"> {{iCommentCreatorName}} </a> at {{iCommentCreatedTime}}</p>
-	{{iCommentContent}}<br><br><br>
-	
+	<p><input type="{{iButtonType}}" onClick="location.href='/editComments?cid={{iCommentId}}&iid={{iIssueId}}'" value="Edit" />
+	<input type="{{iButtonType}}" onClick="location.href='/deleteComments?cid={{iCommentId}}&iid={{iIssueId}}'" value="Delete" /></p>
+	<textarea name='comments' readonly cols='80' rows='5'>{{iCommentContent}}</textarea><br><br>
 {{/comments}}
 
 <h3>Add Your Comment Here</h3>

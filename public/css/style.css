@@ -392,3 +392,57 @@ legend
 {
 	clear: both; 
 }
+
+/* viewProfile page */
+/* ------------------------------*/
+div.profile-view
+{
+	position: relative;
+	left: 8%;
+	top: 20px;
+}
+
+.show-avatar
+{
+	width: 120px;
+	height: 120px;
+	border: 1px solid;
+	margin-right: 30px;
+}
+
+div.show-avatar
+{
+	color: #AAAAAA;
+	font-size: 2em;
+	text-align: center;
+}
+
+div.profile-view>h2
+{
+	margin-bottom: 0px;
+}
+
+div.profile-view>h2 a
+{
+	font-size: 0.9em;
+}
+
+.profile-info
+{
+	width: 600px;
+	font-size: 1.2em;
+}
+
+.profile-issues
+{
+	width: 75%;
+	border: 1px solid #000000;
+	margin-top: 0px;
+}
+
+.profile-issues th h3
+{
+	margin-top: 0px;
+	font-weight: bold;
+}
+

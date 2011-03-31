@@ -1,11 +1,12 @@
 {{#found}}
+<div class="profile-view">
 <table>
-	<td style="width: 150px">
+	<td>
 		{{#avatar_image}}
-			<img src="{{avatar_image}}" style="width: 120px; height: 120px; border: 1px solid;">
+			<img src="{{avatar_image}}" class="show-avatar">
 		{{/avatar_image}}
 		{{^avatar_image}}
-			<div style="width: 120px; height: 120px; border: 1px solid; color: #AAAAAA; font-size: 2em; text-align: center;"><br>No Image</div>
+			<div class="show-avatar"><br>No Image</div>
 		{{/avatar_image}}
 	</td>
 	<td>	
@@ -13,35 +14,35 @@
 	</td>
 </table>
 <br>
-<h2>Personal Information{{#is_loggedin}} (<a href="editProfile" style="font-size: 0.9em">Edit</a>){{/is_loggedin}}</h2>
-<table class="profile_view" style="width: 600px; font-size: 1.2em;" border="1.5">
+<h2><strong>Personal Information{{#is_loggedin}} (<a href="editProfile">Edit</a>){{/is_loggedin}}</strong></h2>
+<table class="profile-info">
 	<tr>
 		<td>
-			<strong>Neighborhood</strong> 
+			<strong>Neighborhood:</strong> 
 				{{neighborhood}}
 		</td>
 		<td>
-			<strong>Postal Code</strong> 
+			<strong>Postal Code:</strong> 
 				{{postal_code}}
 		</td>
 	</tr>
 	<tr>
-		<td>	
-			<strong>Reputation</strong>
+		<td>
+			<strong>Reputation:</strong>
 				{{reputation}} 
 		</td>
 		<td>
-			<strong>Facebook Account</strong> 
+			<strong>Facebook Account:</strong> 
 				{{facebook_account}}
 		</td>
 	</tr>
 	<tr>
 		<td>	
-			<strong>Twitter Account</strong> 
+			<strong>Twitter Account:</strong> 
 				{{twitter_account}}
 		</td>
 		<td>
-			<strong>Website</strong> 
+			<strong>Website:</strong> 
 				{{#has_website}}
 			<a href="http://{{website}}" target="_new">http://{{website}}</a>
 				{{/has_website}}
@@ -51,13 +52,13 @@
 		</td>
 	</tr>
 </table>
-<h2 style="margin-bottom: 0px;">Issues</h2>
+<h2><strong>Issues</strong></h2>
 {{#has_issues}}
-<table style="width: 100%; border: solid; margin-top: 0px;">
-<tr style="border: solid;">
-<th class="text-center-style" style="width: 69px;"><h3 style="margin-top: 0px;">Status</h3></th>
-<th class="text-center-style" style="width: 201px;"><h3 style="margin-top: 0px;">Title</h3></th>
-<th class="text-center-style"><h3 style="margin-top: 0px;">Last Modified</h3></th>
+<table class="profile-issues">
+<tr>
+<th class="text-center-style" style="width: 69px;"><h3>Status</h3></th>
+<th class="text-center-style" style="width: 301px;"><h3>Title</h3></th>
+<th class="text-center-style"><h3>Last Modified</h3></th>
 </tr>
 {{#issues_list}}
 <tr>
@@ -73,6 +74,7 @@
 </tr>
 {{/issues_list}}
 </table>
+</div>
 {{/has_issues}}
 {{^has_issues}}
 {{#is_loggedin}}

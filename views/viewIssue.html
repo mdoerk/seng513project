@@ -10,6 +10,9 @@ Status: {{status}}<br/>
 Location: {{location}}
 <h3>Description</h3>
 <p>{{description}}</p>
+{{#file_link}}
+<p>Relevant File: <a href="{{file_link}}"> {{file_name}}</a></p>
+{{/file_link}}
 <p>More information: <a href="{{link}}"> here </a></p>
 {{^user}}
 	<p><em><a href='/signin'>Sign in</a> to vote on issues.</em></p>

@@ -26,7 +26,8 @@ CREATE TABLE issues (
 		link TEXT,
 		location TEXT,
 		likes INTEGER,
-		dislikes INTEGER
+		dislikes INTEGER,
+		fileLocation TEXT
 );
 
 DROP TABLE IF EXISTS comments;
@@ -104,7 +105,7 @@ CREATE TABLE cmntvotes (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		user_id INTEGER NOT NULL,
 		comment_id INTEGER NOT NULL
-		);
+);
 
 DROP TABLE IF EXISTS sessions; 
 CREATE TABLE sessions (

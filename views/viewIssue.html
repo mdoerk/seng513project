@@ -46,11 +46,19 @@ Location: {{location}}
 {{/user}}
 
 
+<input id='showcomments' type='button' value='Show/Hide Comments'>
+<div id='comment'>
 {{#comments}}
 	<p>Created by: <a href="/viewProfile?id={{iCommentCreatorId}}" id="user_profile"> {{iCommentCreatorName}} </a> at {{iCommentCreatedTime}}</p>
 	<textarea name='comments' readonly cols='80' rows='5'>{{iCommentContent}}</textarea><br><br><br>
-	
 {{/comments}}
+</div>
+<script type='text/javascript'>
+	$("#showcomments").css({position: 'relative'}).click(function(){
+		$("#comment").toggle();
+		this.hide();
+	});
+</script>
 
 <h3>Add Your Comment Here</h3>
 <form action="addcomments" method="post">

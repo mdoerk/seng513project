@@ -1,0 +1,1 @@
+INSERT INTO followed_users (id, follower_user_id, user_id) VALUES (1, 2, 1); 

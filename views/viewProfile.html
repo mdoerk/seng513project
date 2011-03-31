@@ -25,6 +25,16 @@
 		{{website}}
 	{{/has_website}}
 	<br /> 
+	{{^is_viewing_own_profile}} 
+	{{#is_loggedin}}
+	{{#is_followed}} 
+	<a href="/unfollowUser?id={{user_id}}">Unfollow User</a>
+	{{/is_followed}}
+	{{^is_followed}} 
+	<a href="/followUser?id={{user_id}}">Follow User</a>
+	{{/is_followed}}
+	{{/is_loggedin}}
+	{{/is_viewing_own_profile}} 
 </p>
 <h2>Issues</h2>
 {{#has_issues}}

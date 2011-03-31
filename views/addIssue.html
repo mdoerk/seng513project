@@ -8,9 +8,51 @@
 		<textarea rows="10" cols="50" name="description"></textarea></p>
 		<p>Location <input type="text" name="location" /></p>
 		<p>Relevant Link (please input only <b><i>one</i></b> link) <input type="text" name="link" /></p>
-		<p><a class="hint" title="For example, entering 'roads tax' will file the issue with 2 tags: 'roads' and 'tax'">Tags (separate each tag with a space)</a> <input type="text" name="tags" /></p>
+		<p><a class="hint" title="For example, entering 'roads tax' will file the issue with 2 tags: 'roads' and 'tax'">Tags (separate each tag with a space)</a> <input id="tags" type="text" name="tags" /></p>
 		<p><input type="submit" value="Create Issue" /></p>
 	</form>
+	<script type="text/javascript">
+	$(function() {
+			function split( val ) {
+				return val.split( " " );
+			}
+			function extractLast( term ) {
+				return split( term ).pop();
+			}
+
+			$( "#tags" )
+				// don't navigate away from the field on tab when selecting an item
+				.bind( "keydown", function( event ) {
+					if ( event.keyCode === $.ui.keyCode.TAB &&
+							$( this ).data( "autocomplete" ).menu.active ) {
+						event.preventDefault();
+					}
+				})
+				.autocomplete({
+					minLength: 0,
+						source: function( request, response ) {
+						$.getJSON( "gettags", {
+							term: extractLast( request.term )
+						}, response );
+					},
+					focus: function() {
+						// prevent value inserted on focus
+						return false;
+					},
+					select: function( event, ui ) {
+						var terms = split( this.value );
+						// remove the current input
+						terms.pop();
+						// add the selected item
+						terms.push( ui.item.value );
+						// add placeholder to get the comma-and-space at the end
+						terms.push( "" );
+						this.value = terms.join( " " );
+						return false;
+					}
+				});
+		});
+	</script>
 	{{/loggedIn}}
 	{{^loggedIn}}
 	You must be <a href="signin">logged in</a> to add a new issue.

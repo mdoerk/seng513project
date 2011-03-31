@@ -1,10 +1,12 @@
 {{#canEdit}}
 <h1> Edit Issue Details </h1>
-<form id="edit_issue" action="saveIssue" method="post" onsubmit="return checkMandatoryFields(this);">
+<form id="edit_issue" action="saveIssue" method="post" enctype="multipart/form-data" onsubmit="return checkMandatoryFields(this);">
 	<p><input type="hidden" name="id" value="{{issueId}}"/></p>
 	<p>Title</p> <p><input type="text" name="title" value= "{{title}}"/></p>
 	<p>Description</p><p><textarea rows="10" cols="50" name="description">{{description}}</textarea></p>
 	<p>Location</p> <p><input type="text" name="location" value= "{{location}}"/></p>
+	<p>Relevant File</p> <p><input type="file" name="file"/></p>
+	<p><i>check here <input type="checkbox" name="deleteFile"/> to remove the file above.</i></p>
 	<p>Link</p> <p><input type="text" name="link" value= "{{link}}"/></p>
 	<p>Status</p> <SELECT name="status">
 		<OPTION VALUE="open" {{#openSelected}}SELECTED{{/openSelected}}>Open</OPTION>

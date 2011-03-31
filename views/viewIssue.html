@@ -28,9 +28,22 @@
 	<p>{{description}}</p>
 	<p>More information: <a href="{{link}}"> here </a></p>
 {{^user}}
-	<p><em><a href='/signin'>Sign in</a> to vote on issues.</em></p>
+	<p><em><a href='/signin'>Sign in</a> to follow or vote on this issues.</em></p>
 {{/user}}
 {{#user}}
+	{{#following}}
+		<p>
+			You are following this issue.
+		</p>
+		<p>
+			Click <a href="/unfollowIssue?id={{issue_id}}">here</a> to stop following this issue.
+		</p>
+	{{/following}}
+	{{^following}}
+		<p>
+			<a href="/followIssue?id={{issue_id}}">Follow</a> this issue
+		</p>
+	{{/following}}
 	{{^userHasVoted}}
 		<p>
 			<table style="width: 100%">

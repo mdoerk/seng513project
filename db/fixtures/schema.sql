@@ -26,7 +26,8 @@ CREATE TABLE issues (
 		link TEXT,
 		location TEXT,
 		likes INTEGER,
-		dislikes INTEGER
+		dislikes INTEGER,
+		views INTEGER
 );
 
 DROP TABLE IF EXISTS comments;

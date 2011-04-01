@@ -1,3 +1,4 @@
+
 {{^error}}
 {{#found}}
 
@@ -5,6 +6,9 @@
 <tr>
 	<td>
 	<h1> {{title}} </h1>
+
+
+
 	Created on {{created}}
 	{{#user}}
 		by	<a href="/viewProfile?id={{user_id}}" id="user_profile">{{user_name}}</a>
@@ -19,11 +23,17 @@
 		<br>Comments: {{numComments}} 
 		<br>Followers: {{numFollowers}} 
 		<br>Views: {{numViews}}
+	
+	<br>Tags: {{#tags}}
+		 <a href="/listTagIssues?tag={{name}}">{{name}}</a>
+	{{/tags}}
+	
 	</div>
 	
 	</td>
 </tr>
 </table>
+
 <h3>Description</h3>
 	<p>{{description}}</p>
 	<p>More information: <a href="{{link}}"> here </a></p>
@@ -62,10 +72,23 @@
 							<img src="images/thumb_down.png">
 						</a>
 					</td>
-					<td>Unlike</td>
+					<td>Dislike</td>
 				</tr>
 			</table>
-		</p> 
+		</p>
+		<!-- This view of votes is similar to the one seen in youtube -->
+		<li class="NoBullet">
+			<div class="view_votes_bar" style="width: 200px">
+				<div style="width: {{likepercentage}}%;" class="view_votes_bar_likes"></div>
+				<div style="width: {{dislikepercentage}}%;" class="view_votes_bar_dislikes"></div>
+			</div>
+			<span class="like_dislike_count" style="font-size: 0.85em;">
+				<span class="likes">{{likecount}}</span>
+				likes,
+				<span class="dislikes">{{dislikecount}}</span>
+				dislikes
+			</span>
+		</li>
 	{{/userHasVoted}}
 	{{#userHasVoted}}
 		{{#userLiked}}
@@ -76,6 +99,7 @@
 		{{/userLiked}}
 	{{/userHasVoted}}
 {{/user}}
+
 
 
 <h3>Comments</h3>
@@ -111,3 +135,4 @@
 <p>The dev team has been notified... Please try again later.</p>
 <a href="/">Back to home</a>
 {{/error}}
+

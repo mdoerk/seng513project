@@ -53,6 +53,35 @@
 	</tr>
 </table>
 <h2><strong>Issues</strong></h2>
+<h1>{{name}}</h1>
+{{^is_loggedin}}<h2><a href="/newMessage?userid={{userid}}">Send {{name}} a Message</a></h2>{{/is_loggedin}}
+<h2>Personal Information{{#is_loggedin}} <a href="editProfile">Edit</a>{{/is_loggedin}}</h2>
+<p>
+	<strong>Neighborhood</strong> 
+		{{neighborhood}}
+	<br /> 
+	<strong>Postal Code</strong> 
+		{{postal_code}}
+	<br /> 
+	<strong>Reputation</strong>
+		{{reputation}} 
+	<br /> 
+	<strong>Facebook Account</strong> 
+		{{facebook_account}}
+	<br /> 
+	<strong>Twitter Account</strong> 
+		{{twitter_account}}
+	<br /> 
+	<strong>Website</strong> 
+	{{#has_website}}
+		<a href="http://{{website}}" target="_new">http://{{website}}</a>
+	{{/has_website}}
+	{{^has_website}}
+		{{website}}
+	{{/has_website}}
+	<br /> 
+</p>
+<h2>Issues</h2>
 {{#has_issues}}
 <table class="profile-issues">
 <tr>

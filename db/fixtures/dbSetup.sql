@@ -10,4 +10,5 @@
 .read ./fixtures/follows.sql
 .read ./fixtures/updateIssueVotes.sql
 .read ./fixtures/messages.sql
+.read ./fixtures/followedUsers.sql
 .quit

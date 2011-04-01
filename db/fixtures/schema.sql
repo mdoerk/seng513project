@@ -1,46 +1,46 @@
 DROP TABLE IF EXISTS users; 
 CREATE TABLE users (
-		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		name TEXT NOT NULL,
-		email TEXT NOT NULL,
-		facebook_account TEXT,
-		twitter_account TEXT,
-		password TEXT NOT NULL,
-		neighborhood TEXT,
-		postal_code TEXT,
-		website TEXT,
-		created DATETIME DEFAULT CURRENT_TIMESTAMP,
-		reputation_score INTEGER,
-		isEditor INTEGER
-		);
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	name TEXT NOT NULL,
+	email TEXT NOT NULL,
+	facebook_account TEXT,
+	twitter_account TEXT,
+	password TEXT NOT NULL,
+	neighborhood TEXT,
+	postal_code TEXT,
+	website TEXT,
+	created DATETIME DEFAULT CURRENT_TIMESTAMP,
+	reputation_score INTEGER,
+	isEditor INTEGER
+);
 
 DROP TABLE IF EXISTS issues;
 CREATE TABLE issues (
-		id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
-		user_id INTEGER NOT NULL,
-		created DATETIME DEFAULT CURRENT_TIMESTAMP,
-		lastModified DATETIME DEFAULT CURRENT_TIMESTAMP,
-		status TEXT,
-		title TEXT,
-		description TEXT,
-		link TEXT,
-		location TEXT,
-		likes INTEGER,
-		dislikes INTEGER,
-		views INTEGER
-		fileLocation TEXT
+	id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
+	user_id INTEGER NOT NULL,
+	created DATETIME DEFAULT CURRENT_TIMESTAMP,
+	lastModified DATETIME DEFAULT CURRENT_TIMESTAMP,
+	status TEXT,
+	title TEXT,
+	description TEXT,
+	link TEXT,
+	location TEXT,
+	likes INTEGER,
+	dislikes INTEGER,
+	views INTEGER
+	fileLocation TEXT
 );
 
 DROP TABLE IF EXISTS comments;
 CREATE TABLE comments (
-		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		user_id INTEGER NOT NULL,
-		issue_id INTEGER NOT NULL,
-		created DATETIME DEFAULT CURRENT_TIMESTAMP,
-		content TEXT,
-		likes INTEGER DEFAULT 0,
-		dislikes INTEGER DEFAULT 0
-		);
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	user_id INTEGER NOT NULL,
+	issue_id INTEGER NOT NULL,
+	created DATETIME DEFAULT CURRENT_TIMESTAMP,
+	content TEXT,
+	likes INTEGER DEFAULT 0,
+	dislikes INTEGER DEFAULT 0
+);
 
 DROP TABLE IF EXISTS tags;
 CREATE TABLE tags (
@@ -68,6 +68,13 @@ CREATE TABLE follows (
 	user_id INTEGER NOT NULL,
 	issue_id INTEGER NOT NULL
 );
+
+DROP TABLE IF EXISTS followed_users; 
+CREATE TABLE followed_users (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	follower_user_id INTEGER NOT NULL, 
+	user_id INTEGER NOT NULL
+);  
 		
 DROP TABLE IF EXISTS interests; 
 CREATE TABLE interests (
@@ -103,9 +110,9 @@ CREATE TABLE sent_msgs (
 -- Table used for storing the user votes on comments
 DROP TABLE IF EXISTS cmntvotes;		
 CREATE TABLE cmntvotes (
-		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		user_id INTEGER NOT NULL,
-		comment_id INTEGER NOT NULL
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	user_id INTEGER NOT NULL,
+	comment_id INTEGER NOT NULL
 );
 
 DROP TABLE IF EXISTS sessions; 

@@ -1,4 +1,3 @@
-{{#found}}
 <div class="profile-view">
 <table>
 	<td>
@@ -52,6 +51,16 @@
 		</td>
 	</tr>
 </table>
+{{^is_viewing_own_profile}} 
+{{#is_loggedin}}
+{{#is_followed}} 
+<a href="/unfollowUser?id={{user_id}}">Unfollow User</a>
+{{/is_followed}}
+{{^is_followed}} 
+<a href="/followUser?id={{user_id}}">Follow User</a>
+{{/is_followed}}
+{{/is_loggedin}}
+{{/is_viewing_own_profile}} 
 <h2><strong>Issues</strong></h2>
 <h1>{{name}}</h1>
 {{^is_loggedin}}<h2><a href="/newMessage?userid={{userid}}">Send {{name}} a Message</a></h2>{{/is_loggedin}}
@@ -112,7 +121,6 @@
 	<p>This user is not an author of any issues.</p>
 {{/is_loggedin}}
 {{/has_issues}}
-{{/found}}
 </div>
 {{^found}}
 <h1>User not found!</h1>

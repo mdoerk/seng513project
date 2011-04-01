@@ -1,11 +1,38 @@
 {{#canEdit}}
 <h1> Edit Issue Details </h1>
-<form id="edit_issue" action="saveIssue" method="post" onsubmit="return checkMandatoryFields(this);">
+<form id="edit_issue" action="saveIssue" method="post" enctype="multipart/form-data" onsubmit="return checkMandatoryFields(this);">
 	<p><input type="hidden" name="id" value="{{issueId}}"/></p>
 	<p>Title<font color="#cc0000">* </font><input type="text" name="title" value= "{{title}}"/></p>
 	<p>Description<font color="#cc0000">*</font></br>
 	<textarea rows="10" cols="50" name="description">{{description}}</textarea></p>
 	<p>Location <input type="text" name="location" value= "{{location}}"/></p>
+	<p>Relevant File<br>
+		<div id="edit_fileShow">
+		Current File: {{#file_name}}<a href="{{file_link}}">{{file_name}}</a>
+		<br><i>check here <input type="checkbox" name="deleteFile"/> to remove the file above.</i>
+		<br><a href="javascript:void(0);" id="show_fileupload">[CHANGE FILE]</a>
+		</div>
+		<div id="edit_fileNew" style="display:none;">
+		New File: <input id="file" type="file" name="file"/><br><br>
+		<a href="javascript:void(0);" id="cancel_fileupload">[CANCEL]</a>
+		</div>{{/file_name}}{{^file_name}}<i>no file.</i><br>
+		Upload New File: <input id="file" type="file" name="file"/>
+		</div>{{/file_name}}
+		
+	</p>
+	<script type="text/javascript"> 
+	$(function(){
+		$('#cancel_fileupload').click(function(){
+			$('#edit_fileShow').toggle();
+			$('#edit_fileNew').toggle();
+			$("#file").replaceWith($("#file").clone(true));
+		}); 
+		$('#show_fileupload').click(function(){
+			$('#edit_fileShow').toggle();
+			$('#edit_fileNew').toggle();
+		}); 
+	}); 
+	</script> 
 	<p>Relevant Link (please input only <b><i>one</i></b> link) <input type="text" name="link" value= "{{link}}"/></p>
 	<p><a class="hint" title="For example, entering 'roads tax' will file the issue with 2 tags: 'roads' and 'tax'">Tags (separate each tag with a space)</a> <input type="text" name="tags" value="{{tags}}" /></p>
 	<p>Status <SELECT name="status">

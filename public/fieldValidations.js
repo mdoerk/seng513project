@@ -31,8 +31,9 @@ function signupValidate(form) {
 	var check2 = validateEmail(e);
 	var check3 = validateNewPassword(e);
 	var check4 = validateConfirmPassword(e);
+	var check5 = validateCaptcha(e)
 	
-	if (!check1 || !check2 || !check3 || !check4) {
+	if (!check1 || !check2 || !check3 || !check4 || !check5) {
 		valid = false;
 	}
 		
@@ -177,6 +178,17 @@ function validateConfirmPassword(e){
 	// Checks if the string in the confirm_password matches that of the password.
 	else if(e['new_password'].value != e['confirm_password'].value) {
 		writeError(e['confirm_password'], '  Your passwords do not match. Please type more carefully.');
+		return false;
+	}
+	return true;
+}
+
+/*
+ * validateCaptcha - This function checks to make sure that the user has entered captcha code
+ */
+function validateCaptcha(e){
+	if(!e['user_code'].value) {
+		writeError(e['user_code'], '  This field is required.');
 		return false;
 	}
 	return true;

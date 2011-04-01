@@ -399,15 +399,61 @@ Calling `response.redirectTo(path)` will generate a redirect HTTP 302. `path` is
 	res.redirectTo('/signin');
 
 ## Messages ##
-folderids: 	0 = inbox
-				1 = sent
+folderids:
+		0 = inbox
+		1 = sent
 
 ### Messages API ###
 **Load the messages library:**
 	var messages = require('messages');
 * **messages.sendMessage(fromId, toId, subject, body, function(error) {})**
-* **messages.deleteMessage(folderId, messageId, function(error) {})**
+* **messages.deleteMessage(messageId, folderId, function(error) {})**
 * **messages.getMessages(userId, folderId, function(error, messageList) {})**
 * **messages.getMessage(messageId, folderId, function(error, message) {})**
 
+## Application Settings ##
+Application settings can be defined as key-value pairs in config.js. Setting values can be
+accessed from anywhere by requiring settings, then using 'settings.getSetting('<setting name>')'. 
 
+For example, we have a setting in config.js that defines the location of the database file as follows:
+	db_file: 'db/CivicConnect.db'
+	
+dbAccess.js can read this setting like so:
+	var settings = require('settings');
+	var DATABASE_NAME = settings.getSetting('db_file');
+	db.open(DATABASE_NAME, function(open_error) {...});
+
+If you would like to have a default value for your setting (in case it isn't defined for
+whatever reason), you may set that in settings.js. See the existing default setting definitions
+in there for an example of how to do this.
+
+## Email Utilities ##
+A library that can be used to send emails on behalf of the system. It is specifically set up for use with a gmail account. The application configuration file (config.js) should have the following settings defined in order for this to work:
+email_account: "civicconnect@gmail.com" // This email address is set-up and ready to use
+email_password: "****" // If you don't know the password, email me at sabad66@hotmail.com to find out, and pass it along to anyone else.
+email_smtp_server: "smtp.gmail.com" // The smtp server (outgoing mail server).
+
+### Email Utilities API ###
+**Load the email utilities library:**
+	var emailUtil = require('emailUtil');
+* **emailUtil.sendPlainTextEmailToUserId(userId, subject, body, function(error, success) {})** - Sends a plain text email to the given userId. The body parameter should be plain text (i.e. no html tags)
+* **emailUtil.sendHTMLEmailToUserId(userId, subject, body, function(error, success) {})** - Sends an HTML formatted email to the given userId. The body parameter may contain html formatting (i.e body = '<b>hi</b> friend!')
+* **emailUtil.sendPlainTextEmailToAddress(toEmailAddress, subject, body, function(error, success) {})** - Sends a plain text email to the given email address. The body parameter should be plain text (i.e. no html tags)
+* **emailUtil.sendHTMLEmailToAddress(toEmailAddress, subject, body, function(error, success) {})** - Sends an HTML formatted email to the given email address. The body parameter may contain html formatting (i.e body = '<b>hi</b> friend!')
+
+### Notes ###
+Please be careful not to commit your config.js file with the password in there.
+
+Sometimes emails take a few seconds to send, so it's probably better NOT to render any page responses inside the callbacks. Instead, render the page outside the callback like this:
+
+	emailUtil.sendPlainTextEmailToUserId(999, 'Confirm Email', 'Please click the follwoing link to confirm your email.', function(error, success) {
+		if (error)
+			util.log('error sending the confirmation email');
+		else if (!success)
+			util.log('Email was not sent successfully');
+		else
+			util.log('Confirmation email sent successfully!');
+	});
+	response.render('confirmationSent.html');
+
+Other things besides rendering responses should probably still be done inside the callback function.

@@ -1,12 +1,25 @@
 <h1>Activity Feed</h1>
 
 <table> 
-{{#content}}
+{{#feed}}
 	{{#isIssue}}
 		<p><a href="/viewProfile?id={{userId}}">{{username}}</a> posted an {{type}} {{howLongAgo}} (<a href="/viewIssue?id={{id}}">{{title}}</a>)</p>
 	{{/isIssue}}
 	{{#isComment}}
 		<p><a href="/viewProfile?id={{userId}}">{{username}}</a> posted a {{type}} {{howLongAgo}} (<a href="/viewIssue?id={{issueId}}">{{comment}}</a>)</p>
 	{{/isComment}} 
-{{/content}}
+{{/feed}}
 </table> 
+{{#is_logged_in}}
+<h1>Followed Users</h1>
+<table>
+	{{#follow_feed}}
+		{{#isIssue}}
+			<p><a href="/viewProfile?id={{userId}}">{{username}}</a> posted an {{type}} {{howLongAgo}} (<a href="/viewIssue?id={{id}}">{{title}}</a>)</p>
+		{{/isIssue}}
+		{{#isComment}}
+			<p><a href="/viewProfile?id={{userId}}">{{username}}</a> posted a {{type}} {{howLongAgo}} (<a href="/viewIssue?id={{issueId}}">{{comment}}</a>)</p>
+		{{/isComment}} 
+	{{/follow_feed}}
+</table> 
+{{/is_logged_in}}

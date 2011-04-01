@@ -8,10 +8,31 @@
 		<textarea rows="10" cols="50" name="description"></textarea></p>
 		<p>Location <input type="text" name="location" /></p>
 		<p>Relevant Link (please input only <b><i>one</i></b> link) <input type="text" name="link" /></p>
-		<p><a class="hint" title="For example, entering 'roads tax' will file the issue with 2 tags: 'roads' and 'tax'">Tags (separate each tag with a space)</a> <input id="tags" type="text" name="tags" /></p>
+		<p><a class="hint" title="For example, entering 'roads tax' will file the issue with 2 tags: 'roads' and 'tax'">Tags (separate each tag with a space)</a> <input id="tags" type="text" name="tags" onKeyPress="return noSymbols( event )"/></p>
 		<p>upload <input type="file" name="file"/></p>
 		<p><input type="submit" value="Create Issue" /></p>
 	</form>
+
+      <script type="text/javascript">
+	function noSymbols( evt ) 
+	{
+	    if ( window.event ) { // IE
+		myKey = evt.keyCode;
+	    } else {
+		myKey = evt.which;
+	    }
+	    
+	  //true if myKey is a number (48 to 57) or is between A and Z         or it's between 'a' and 'z'      or it's a Space
+	    if ( (myKey >= 48 && myKey <= 57) || (myKey >= 65 && myKey <= 90) || (myKey >= 97 && myKey <= 122) || myKey == 32) {
+		return true;
+	    } else {
+		return false;
+	    }
+	}
+      </script>
+
+
+
 	<script type="text/javascript">
 	$(function() {
 			function split( val ) {

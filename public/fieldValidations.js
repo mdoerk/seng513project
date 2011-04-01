@@ -14,7 +14,11 @@
  * - email (this field is currently checked to see if the string is in a formate that resembles an email)
  * - password (only limit is that this cannot me null)
  * - confirm_password (this must match the new_password field)
+ 
  */		
+ 
+ var g_MinUserLen = 4;
+ var g_MinPassLen = 4;
 function signupValidate(form) {
 	var e = form.elements;
 	var valid = true;
@@ -109,8 +113,16 @@ function emailFormatValidate(email) {
  * - e - The array of elements from the form. It is used in the form e[#] for a specific index or e[''] for the specific name of an element.
  */
 function validateUsername(e){
+//console.log(e['username'].value.length);
+
+	
 	if (!e['username'].value) {
 		writeError(e['username'], '  This field is required.');
+		return false;
+	}
+	if (e['username'].value.length < g_MinUserLen)
+	{
+		writeError(e['username'], '  The username must be atleast 4 characters long!');
 		return false;
 	}
 	return true;
@@ -145,6 +157,12 @@ function validateEmail(e){
 function validateNewPassword(e){
 	if(!e['new_password'].value) {
 		writeError(e['new_password'], '  This field is required.');
+		return false;
+	}
+	
+	if (e['new_password'].value.length < g_MinPassLen)
+	{
+		writeError(e['new_password'], '  The password must be atleast 4 characters long!');
 		return false;
 	}
 	return true;

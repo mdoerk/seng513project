@@ -30,7 +30,7 @@
 					}
 				})
 				.autocomplete({
-					minLength: 0,
+					minLength: 3,
 						source: function( request, response ) {
 						$.getJSON( "gettags", {
 							term: extractLast( request.term )

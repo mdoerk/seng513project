@@ -8,6 +8,7 @@ CREATE TABLE users (
 		password TEXT NOT NULL,
 		neighborhood TEXT,
 		postal_code TEXT,
+		website TEXT,
 		created DATETIME DEFAULT CURRENT_TIMESTAMP,
 		reputation_score INTEGER,
 		isEditor INTEGER
@@ -15,7 +16,7 @@ CREATE TABLE users (
 
 DROP TABLE IF EXISTS issues;
 CREATE TABLE issues (
-		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
 		user_id INTEGER NOT NULL,
 		created DATETIME DEFAULT CURRENT_TIMESTAMP,
 		lastModified DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -25,7 +26,9 @@ CREATE TABLE issues (
 		link TEXT,
 		location TEXT,
 		likes INTEGER,
-		dislikes INTEGER
+		dislikes INTEGER,
+		views INTEGER
+		fileLocation TEXT
 );
 
 DROP TABLE IF EXISTS comments;
@@ -73,13 +76,37 @@ CREATE TABLE interests (
 	interest_location TEXT
 );
 
+DROP TABLE IF EXISTS inbox_msgs;
+CREATE TABLE inbox_msgs (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	from_id INTEGER NOT NULL,
+	from_user TEXT NOT NULL,
+	to_id INTEGER NOT NULL,
+	to_user TEXT NOT NULL,
+	sent_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+	subject TEXT,
+	body TEXT
+);
+
+DROP TABLE IF EXISTS sent_msgs;
+CREATE TABLE sent_msgs (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	from_id INTEGER NOT NULL,
+	from_user TEXT NOT NULL,
+	to_id INTEGER NOT NULL,
+	to_user TEXT NOT NULL,
+	sent_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+	subject TEXT,
+	body TEXT
+);
+
 -- Table used for storing the user votes on comments
 DROP TABLE IF EXISTS cmntvotes;		
 CREATE TABLE cmntvotes (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		user_id INTEGER NOT NULL,
 		comment_id INTEGER NOT NULL
-		);
+);
 
 DROP TABLE IF EXISTS sessions; 
 CREATE TABLE sessions (

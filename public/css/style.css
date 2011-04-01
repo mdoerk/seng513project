@@ -142,20 +142,39 @@ img.right
 
 a#add-issue-button
 {
-	position: absolute; 
-  	top: 10px; 
+	position: relative; 
+	top: 16px; 
 	text-decoration: none; 
 	text-align: center; 
 	background-color: #b2e136;
 	border: 1px solid #a0c92d; 
 	color: #ffffff;
-   font-size: 1.6em;
+	font-size: 1.6em;
 	padding: 10px 15px 10px 15px; 
 }
 
 a#add-issue-button:hover
 {
 	background-color : #acda33; 
+}
+
+
+a#new-msg-button:hover
+{
+	background-color : #acda33; 
+}
+
+a#new-msg-button
+{
+	position: relative; 
+	top: 16px; 
+	text-decoration: none; 
+	text-align: center; 
+	background-color: #b2e136;
+	border: 1px solid #a0c92d; 
+	color: #ffffff;
+	font-size: 1.6em;
+	padding: 10px 15px 10px 15px; 
 }
 
 #content 
@@ -167,6 +186,13 @@ a#add-issue-button:hover
 	padding: 20px 10px 20px 10px; 
 	width: 960px; 
 	min-height: 600px; 
+}
+
+#issue-stats 
+{
+	padding:5px;
+	background-color: #ECEADB; 
+	font-size:9pt;
 }
 
 #pager
@@ -238,6 +264,13 @@ a#add-issue-button:hover
 
 /* Forms */ 
 /* ------------------------------*/ 
+.hint
+{
+	border-bottom: 1px dotted #333;
+	color: #333;
+	cursor: help;
+}
+
 fieldset
 {
     margin: 1em 0px;
@@ -283,6 +316,11 @@ legend
 {
     font-size: 1.1em;
     padding: 2px 4px 8px 4px;
+}
+
+#new_issue textarea{
+	max-width: 400px;
+	max-height: 150px;
 }
 
 #search-form 
@@ -354,3 +392,57 @@ legend
 {
 	clear: both; 
 }
+
+/* viewProfile page */
+/* ------------------------------*/
+div.profile-view
+{
+	position: relative;
+	left: 8%;
+	top: 20px;
+}
+
+.show-avatar
+{
+	width: 120px;
+	height: 120px;
+	border: 1px solid;
+	margin-right: 30px;
+}
+
+div.show-avatar
+{
+	color: #AAAAAA;
+	font-size: 2em;
+	text-align: center;
+}
+
+div.profile-view>h2
+{
+	margin-bottom: 0px;
+}
+
+div.profile-view>h2 a
+{
+	font-size: 0.9em;
+}
+
+.profile-info
+{
+	width: 600px;
+	font-size: 1.2em;
+}
+
+.profile-issues
+{
+	width: 75%;
+	border: 1px solid #000000;
+	margin-top: 0px;
+}
+
+.profile-issues th h3
+{
+	margin-top: 0px;
+	font-weight: bold;
+}
+

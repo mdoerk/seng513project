@@ -1,0 +1,24 @@
+{
+  "name": "CivicConnect",
+  "description": "A full-featured web application being developed as part of the SENG 513 course at the University of Calgary, Winter 2011.",
+  "version": "0.0.0",
+  "homepage": "http://pages.cpsc.ucalgary.ca/~sillito/seng-513/project.html",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mdoerk/seng513project.git"
+  },
+  "author": "auth names <auth emails> (authurl)",
+  "main": "server.js",
+  "directories": {
+    "lib": "node_modules"
+  },
+  "scripts": {
+    "test": "node runTests.js"
+  },
+  "engines": {
+    "node": "0.4.3"
+  },
+  "dependencies": {
+    "sqlite": "1.0.3"
+  }
+}

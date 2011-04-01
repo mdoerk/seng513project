@@ -6,7 +6,7 @@
 		
 /* 
  * signupValidate - This function call the checks for the fields that are specifically required for the signup form
- * Arguements
+ * Arguments
  * - form - this is the form that is being validated
  *
  * For the signup form to be valid the following fields must be filled out:
@@ -20,8 +20,8 @@ function signupValidate(form) {
 	var valid = true;
 		
 	//Clears previous error messages each time validate is called.
-	for(var i=0; i<e.length; i++) {
-		if(e[i].hasError){
+	for(var i = 0; i < e.length; i++) {
+		if (e[i].hasError) {
 			var old = e[i].parentNode.removeChild(e[i].hasError);
 			e[i].hasError = null;
 		}
@@ -32,7 +32,7 @@ function signupValidate(form) {
 	var check3 = validateNewPassword(e);
 	var check4 = validateConfirmPassword(e);
 	
-	if(!check1 || !check2 || !check3 || !check4){
+	if (!check1 || !check2 || !check3 || !check4) {
 		valid = false;
 	}
 		
@@ -41,7 +41,7 @@ function signupValidate(form) {
 		
 /* 
  * editProfileValidate - This function call the checks for the fields that are specifically required for the editProfile form
- * Arguements
+ * Arguments
  * - form - this is the form that is being validated
  *
  * For the editProfile form to be valid the following fields must be filled out:
@@ -55,8 +55,8 @@ function editProfileValidate(form) {
 	var valid = true;
 	
 	//Clears previous error messages each time validate is called.
-	for(var i=0; i<e.length; i++) {
-		if(e[i].hasError){
+	for (var i = 0; i < e.length; i++) {
+		if (e[i].hasError) {
 			var old = e[i].parentNode.removeChild(e[i].hasError);
 			e[i].hasError = null;
 		}
@@ -66,10 +66,10 @@ function editProfileValidate(form) {
 	var check2 = validateEmail(e);
 	var check3 = validatePassword(e);
 	var check4 = true;
-	if(e['new_password'].value){
+	if (e['new_password'].value) {
 		check4 = validateConfirmPassword(e);
 	}
-	if(!check1 || !check2 || !check3 || !check4){
+	if (!check1 || !check2 || !check3 || !check4) {
 		valid = false;
 	}
 		
@@ -78,7 +78,7 @@ function editProfileValidate(form) {
 
 /*
  * writeError - This function will create a new span element containing the error message and append it to the current field
- * Arguements
+ * Arguments
  * - obj - the field that is being check
  * - msg - the error message that will be appended
  */
@@ -93,36 +93,22 @@ function writeError(obj, msg) {
 	
 /*
  * emailFormatValidate - This function checks to see if the string in the email field resembles the form of an email.
- * Arguements
+ * Arguments
  * - email - the value found in the email field
- *
- * A valid email form is defined as follows:
- * - there must be an @ symbol
- * - there must be an . symbol
- * - there can only be one @ symbol
- * - the @ symbol must come before the last . symbol
- * - there must be some other symbols in between the @ and last . symbols
- * - the first @ symbol cannot be the first in the field
- * - the last . symbol cannot be the last in the field
  */		
-function emailFormatValidate(email){
-	var index_firstat = email.indexOf('@');
-	var index_firstdot = email.indexOf('.');
-	var index_lastat = email.lastIndexOf('@');
-	var index_lastdot = email.lastIndexOf('.');
-	if(index_firstat != -1 && index_firstdot != -1 && (index_firstat+1)<index_lastdot && index_lastdot<(email.length-1) && index_firstat!=0 && index_firstat == index_lastat)
-		return true;
-	return false;
+function emailFormatValidate(email) {
+	var emailPattern = /^[A-Z0-9.]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i; 
+	return emailPattern.test(email); 
 }
 	
 /*
  * validateUsername - This function checks to validity of an input username.
  * **NOTE** Currently this function only checks if the username field is filled, it does not check to see if the user exists.
- * Arguements
+ * Arguments
  * - e - The array of elements from the form. It is used in the form e[#] for a specific index or e[''] for the specific name of an element.
  */
 function validateUsername(e){
-	if(!e['username'].value) {
+	if (!e['username'].value) {
 		writeError(e['username'], '  This field is required.');
 		return false;
 	}
@@ -133,11 +119,11 @@ function validateUsername(e){
  * validateEmail - This function checks to validity of an input email field.
  * **NOTE** Currently this function only checks if the email field is filled, and if the string resembles an email format.
  * 			This does not check if the it is an existing email or if it is in the database.
- * Arguements
+ * Arguments
  * - e - The array of elements from the form. It is used in the form e[#] for a specific index or e[''] for the specific name of an element.
  */
 function validateEmail(e){
-	if(!e['email'].value) {
+	if (!e['email'].value) {
 		writeError(e['email'], '  This field is required.');
 		return false;
 	}
@@ -152,7 +138,7 @@ function validateEmail(e){
 /*
  * validateNewPassword - This function checks to validity of an input new password field.
  * **NOTE** Currently this function only checks if the new_password field is filled, it does not put any other limits on the new password.
- * Arguements
+ * Arguments
  * - e - The array of elements from the form. It is used in the form e[#] for a specific index or e[''] for the specific name of an element.
  */
 function validateNewPassword(e){
@@ -166,7 +152,7 @@ function validateNewPassword(e){
 /*
  * validatePassword - This function checks to validity of an input password field.
  * **NOTE** Currently this function only checks if the password field is filled.
- * Arguements
+ * Arguments
  * - e - The array of elements from the form. It is used in the form e[#] for a specific index or e[''] for the specific name of an element.
  */
 function validatePassword(e){
@@ -180,7 +166,7 @@ function validatePassword(e){
 /*
  * validateNewPassword - This function checks to validity of an input confirm_password field.
  * **NOTE** Currently this function only checks if the confirm_password field is filled, and if it matches the string entered into the new_password field.
- * Arguements
+ * Arguments
  * - e - The array of elements from the form. It is used in the form e[#] for a specific index or e[''] for the specific name of an element.
  */
 function validateConfirmPassword(e){
@@ -201,19 +187,21 @@ function validateConfirmPassword(e){
  * NOTE: 	'new_issue' is the form name, 'title' and 'description' are the names of their respective fields in the HTML form.
  * 			All of these can are found in the addIssue.js. 
  */
-function checkMandatoryFields()
+function checkMandatoryFields(form)
 {	
-		var message = "Oops, you forgot to include the following mandatory fields:";
-		if (document.new_issue.title.value == "" )
-			message += "\nTitle";
-		if (document.new_issue.description.value == "")
-			message += "\nDescription"
-		
-		if (message != "Oops, you forgot to include the following mandatory fields:")
-		{
-			alert(message);
-			return false;
-		}
-					
+	var pass = true;
+	var message = "Oops, you forgot the following mandatory fields, they cannot be empty:";
+	if (form.title.value == "" ){
+		message += "\nTitle";
+		pass = false;
+	}
+	if (form.description.value == ""){
+		message += "\nDescription"
+		pass = false;
+	}
+	
+	if (!pass) {
+		alert(message);
+		return false;
+	}
 }
-

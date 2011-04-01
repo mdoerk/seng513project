@@ -216,8 +216,35 @@ To create a test or a series of tests open a new file called 'test-yourTestName.
 
 You must make sure that you call test.done() at the end of each test as this ensures that your test was actually executed.  Because node is asynchronous, if you don not use the check test.done() then your test may not execute and give a false pass or false fail.
 
+Writing functional tests are similar to writing unit tests, expect you will need to include the server and funcTest modules and start/stop the server on the test setup/teardown: 
+
+	// Include your modules that you will need 
+	var testCase = require('nodeunit/nodeunit').testCase, 
+	Client = require('functionalTesting/funcTest').Client,  
+	server = require('../../server'); 
+	
+	module.exports = testCase({
+		setUp: function (callback) {
+			server.start(); // Make sure to start the server before each test 
+			callback();
+		},
+		tearDown: function (callback) {
+			server.stop(); // Make sure to stop the server after each test 
+			callback();
+		},
+		yourTestName: function (test) {
+			var client = new Client(); // Start a new mock client and send your request 
+			client.sendRequest('POST', '/', { }, function(signInRes) { 
+				test.equals(signInRes.status, 200); 
+				test.ok(signInRes.headers['set-cookie'] != undefined);
+				test.done(); 
+			});
+		}
+	});
+
 **Note**  
 You must make sure that where you place 'test.done()' is within the right call back.
+
 ### Adding Tests to the Project ###
 
 To add your tests to the project all you need to do is place the test file you created in 'test/unitTests' folder or the 'test/funcTests' folder.
@@ -370,3 +397,32 @@ For more information on mustache.js see [https://github.com/janl/mustache.js/](h
 
 Calling `response.redirectTo(path)` will generate a redirect HTTP 302. `path` is the url path, for example:
 	res.redirectTo('/signin');
+
+## Messages ##
+folderids:
+		0 = inbox
+		1 = sent
+
+### Messages API ###
+**Load the messages library:**
+	var messages = require('messages');
+* **messages.sendMessage(fromId, toId, subject, body, function(error) {})**
+* **messages.deleteMessage(messageId, folderId, function(error) {})**
+* **messages.getMessages(userId, folderId, function(error, messageList) {})**
+* **messages.getMessage(messageId, folderId, function(error, message) {})**
+
+## Application Settings ##
+Application settings can be defined as key-value pairs in config.js. Setting values can be
+accessed from anywhere by requiring settings, then using 'settings.getSetting('<setting name>')'. 
+
+For example, we have a setting in config.js that defines the location of the database file as follows:
+	db_file: 'db/CivicConnect.db'
+	
+dbAccess.js can read this setting like so:
+	var settings = require('settings');
+	var DATABASE_NAME = settings.getSetting('db_file');
+	db.open(DATABASE_NAME, function(open_error) {...});
+
+If you would like to have a default value for your setting (in case it isn't defined for
+whatever reason), you may set that in settings.js. See the existing default setting definitions
+in there for an example of how to do this.

@@ -1,12 +1,27 @@
 <h1>Signup</h1>
 <form id="signup_form" action="signup" method="post" enctype="application/x-www-form-urlencoded" onsubmit="return signupValidate(this);">
-	<p>Username<br><input type="text" name="username"></p>
+	<p>Username<br><input type="text" name="username" autofocus ></p>
 	<p>Email<br><input type="text" name="email"></p>
 	<p>Password<br><input type="password" name="new_password" value=""></p>
 	<p>Confirm Password<br><input type="password" name="confirm_password" value=""></p>
 	
 	<p>Postal Code<br><input type="text" name="postalcode"></p>
 	<p>Neighbourhood<br><input type="text" name="neighborhood"></p>
-				
+	
+	<script>
+	var imgdir = "cimg/"; // identify directory where captcha images are located
+	var jfldid = "uword"; // identify word field id name
+	var jfldsz = 20; // identify word field size
+	
+	anum = (Math.floor(Math.random()*10))+1;
+	imgid = parseInt(anum);
+	document.write("<p><img src=\"" + decodeURIComponent(imgdir) + imgid + ".jpg\" width=\"290\" height=\"80\" alt=\"\"><\/p>");
+	document.write("<input type=\"hidden\" name=\"code\" value= \"" + imgid + "\"/>");
+	
+	</script>
+	<p>Enter the characters you see: </p>
+	<p>Code:<br><input type="text" name="user_code"></p>
+	
+	
 	<input type="submit" value="Submit" />
 </form>

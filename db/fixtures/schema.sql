@@ -28,6 +28,7 @@ CREATE TABLE issues (
 		likes INTEGER,
 		dislikes INTEGER,
 		views INTEGER
+		fileLocation TEXT
 );
 
 DROP TABLE IF EXISTS comments;
@@ -105,7 +106,7 @@ CREATE TABLE cmntvotes (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		user_id INTEGER NOT NULL,
 		comment_id INTEGER NOT NULL
-		);
+);
 
 DROP TABLE IF EXISTS sessions; 
 CREATE TABLE sessions (

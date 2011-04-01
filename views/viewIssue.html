@@ -27,7 +27,11 @@
 	<br>Tags: {{#tags}}
 		 <a href="/listTagIssues?tag={{name}}">{{name}}</a>
 	{{/tags}}
-	
+	</div>
+	<div>
+	{{#allowEdit}}
+	<br><br><a href="editIssue?id={{issue_id}}" id="add-issue-button">Edit Issue</a>
+	{{/allowEdit}}
 	</div>
 	
 	</td>

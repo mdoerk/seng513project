@@ -36,10 +36,12 @@
 
 <h3>Description</h3>
 	<p>{{description}}</p>
+	{{#link}}
 	<p>More information: <a href="{{link}}"> here </a></p>
-	{{#file_link}}
+	{{/link}}
+	{{#file_name}}
 	<p>Relevant File: <a href="{{file_link}}"> {{file_name}}</a></p>
-	{{/file_link}}
+	{{/file_name}}
 {{^user}}
 	<p><em><a href='/signin'>Sign in</a> to follow or vote on this issues.</em></p>
 {{/user}}

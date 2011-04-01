@@ -27,11 +27,9 @@
 <h3>Description</h3>
 	<p>{{description}}</p>
 	<p>More information: <a href="{{link}}"> here </a></p>
-	<p>{{description}}</p>
 	{{#file_link}}
 	<p>Relevant File: <a href="{{file_link}}"> {{file_name}}</a></p>
 	{{/file_link}}
-	<p>More information: <a href="{{link}}"> here </a></p>
 {{^user}}
 	<p><em><a href='/signin'>Sign in</a> to follow or vote on this issues.</em></p>
 {{/user}}
@@ -79,13 +77,23 @@
 	{{/userHasVoted}}
 {{/user}}
 
+
 <h3>Comments</h3>
+<input id='showcomments' type='button' value='Show/Hide Comments'>
+<div id='comment'>
 {{#comments}}
 	<p>Created by: <a href="/viewProfile?id={{iCommentCreatorId}}" id="user_profile"> {{iCommentCreatorName}} </a> at {{iCommentCreatedTime}}</p>
 	<p><input type="{{iButtonType}}" onClick="location.href='/editComments?cid={{iCommentId}}&iid={{iIssueId}}'" value="Edit" />
 	<input type="{{iButtonType}}" onClick="location.href='/deleteComments?cid={{iCommentId}}&iid={{iIssueId}}'" value="Delete" /></p>
 	<textarea name='comments' readonly cols='80' rows='5'>{{iCommentContent}}</textarea><br><br>
 {{/comments}}
+</div>
+<script type='text/javascript'>
+	$("#showcomments").css({position: 'relative'}).click(function(){
+		$("#comment").toggle();
+		this.hide();
+	});
+</script>
 
 <h3>Add Your Comment Here</h3>
 <form action="addcomments" method="post">

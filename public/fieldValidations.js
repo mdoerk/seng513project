@@ -109,8 +109,16 @@ function emailFormatValidate(email) {
  * - e - The array of elements from the form. It is used in the form e[#] for a specific index or e[''] for the specific name of an element.
  */
 function validateUsername(e){
+//console.log(e['username'].value.length);
+
+	
 	if (!e['username'].value) {
 		writeError(e['username'], '  This field is required.');
+		return false;
+	}
+	if (e['username'].value.length < 4)
+	{
+		writeError(e['username'], '  The username must be atleast 4 characters long!');
 		return false;
 	}
 	return true;
@@ -145,6 +153,12 @@ function validateEmail(e){
 function validateNewPassword(e){
 	if(!e['new_password'].value) {
 		writeError(e['new_password'], '  This field is required.');
+		return false;
+	}
+	
+	if (e['new_password'].value.length < 4)
+	{
+		writeError(e['new_password'], '  The password must be atleast 4 characters long!');
 		return false;
 	}
 	return true;

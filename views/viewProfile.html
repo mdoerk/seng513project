@@ -1,5 +1,60 @@
 {{#found}}
+<div class="profile-view">
+<table>
+	<td>
+		{{#avatar_image}}
+			<img src="{{avatar_image}}" class="show-avatar">
+		{{/avatar_image}}
+		{{^avatar_image}}
+			<div class="show-avatar"><br>No Image</div>
+		{{/avatar_image}}
+	</td>
+	<td>	
+		<h1>{{name}}</h1>
+	</td>
+</table>
+<br>
+<h2><strong>Personal Information{{#is_loggedin}} (<a href="editProfile">Edit</a>){{/is_loggedin}}</strong></h2>
+<table class="profile-info">
+	<tr>
+		<td>
+			<strong>Neighborhood:</strong> 
+				{{neighborhood}}
+		</td>
+		<td>
+			<strong>Postal Code:</strong> 
+				{{postal_code}}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<strong>Reputation:</strong>
+				{{reputation}} 
+		</td>
+		<td>
+			<strong>Facebook Account:</strong> 
+				{{facebook_account}}
+		</td>
+	</tr>
+	<tr>
+		<td>	
+			<strong>Twitter Account:</strong> 
+				{{twitter_account}}
+		</td>
+		<td>
+			<strong>Website:</strong> 
+				{{#has_website}}
+			<a href="http://{{website}}" target="_new">http://{{website}}</a>
+				{{/has_website}}
+				{{^has_website}}
+					{{website}}
+				{{/has_website}}
+		</td>
+	</tr>
+</table>
+<h2><strong>Issues</strong></h2>
 <h1>{{name}}</h1>
+{{^is_loggedin}}<h2><a href="/newMessage?userid={{userid}}">Send {{name}} a Message</a></h2>{{/is_loggedin}}
 <h2>Personal Information{{#is_loggedin}} <a href="editProfile">Edit</a>{{/is_loggedin}}</h2>
 <p>
 	<strong>Neighborhood</strong> 
@@ -28,11 +83,11 @@
 </p>
 <h2>Issues</h2>
 {{#has_issues}}
-<table style="width: 100%">
+<table class="profile-issues">
 <tr>
-<td class="text-center-style" style="width: 69px"><h3>Status</h3></td>
-<td class="text-center-style" style="width: 201px"><h3>Title</h3></td>
-<td class="text-center-style"><h3>Last Modified</h3></td>
+<th class="text-center-style" style="width: 69px;"><h3>Status</h3></th>
+<th class="text-center-style" style="width: 301px;"><h3>Title</h3></th>
+<th class="text-center-style"><h3>Last Modified</h3></th>
 </tr>
 {{#issues_list}}
 <tr>
@@ -58,6 +113,7 @@
 {{/is_loggedin}}
 {{/has_issues}}
 {{/found}}
+</div>
 {{^found}}
 <h1>User not found!</h1>
 <p>{{#user_id}}User with id <b>{{user_id}}</b> does not exist.{{/user_id}}{{^user_id}}No user was selected.{{/user_id}}<br/><br/><a href="/">Back to home</a></p>

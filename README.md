@@ -399,15 +399,30 @@ Calling `response.redirectTo(path)` will generate a redirect HTTP 302. `path` is
 	res.redirectTo('/signin');
 
 ## Messages ##
-folderids: 	0 = inbox
-				1 = sent
+folderids:
+		0 = inbox
+		1 = sent
 
 ### Messages API ###
 **Load the messages library:**
 	var messages = require('messages');
 * **messages.sendMessage(fromId, toId, subject, body, function(error) {})**
-* **messages.deleteMessage(folderId, messageId, function(error) {})**
+* **messages.deleteMessage(messageId, folderId, function(error) {})**
 * **messages.getMessages(userId, folderId, function(error, messageList) {})**
 * **messages.getMessage(messageId, folderId, function(error, message) {})**
 
+## Application Settings ##
+Application settings can be defined as key-value pairs in config.js. Setting values can be
+accessed from anywhere by requiring settings, then using 'settings.getSetting('<setting name>')'. 
 
+For example, we have a setting in config.js that defines the location of the database file as follows:
+	db_file: 'db/CivicConnect.db'
+	
+dbAccess.js can read this setting like so:
+	var settings = require('settings');
+	var DATABASE_NAME = settings.getSetting('db_file');
+	db.open(DATABASE_NAME, function(open_error) {...});
+
+If you would like to have a default value for your setting (in case it isn't defined for
+whatever reason), you may set that in settings.js. See the existing default setting definitions
+in there for an example of how to do this.

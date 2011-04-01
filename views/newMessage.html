@@ -2,6 +2,16 @@
 	<p><em><a href='/signin'>Sign in</a> to send messages.</em></p>
 {{/user}}
 {{#user}}
+<link rel=StyleSheet href="css/jquery-ui-1.8.11.custom.css">
+<script src='scripts/jquery-1.5.1.min.js'></script>
+<script src='scripts/jquery-ui-1.8.11.custom.min.js'></script>
+<script>
+    $(document).ready(function() {
+        $("#recipient").autocomplete({
+            source: 'autocomplete?table=users&column=name',
+        });
+    });
+</script>
 <form action="sendMessage" method="POST">
 <table cellpadding="0" cellspacing="0" border="1" width="100%">
 	<tr><td align="center" colspan=2 bgcolor="#F1F1F1"><b>New Message</b></td></tr>
@@ -11,11 +21,11 @@
 	</tr>
 	<tr>
 		<td bgcolor="#F1F1F1"><font size="2"><b>Recipient:</b></font></td>
-		<td bgcolor="#F1F1F1"><font size="2"><input type="text" name="tousername" value="{{toUserName}}" size="25" maxlength="25" tabindex="1"></font>
+		<td bgcolor="#F1F1F1"><font size="2"><input type="text" id="recipient" name="tousername" value="{{toUserName}}" size="25" maxlength="25" tabindex="1"></font>
 	</tr>
 	<tr>
 		<td bgcolor="#F1F1F1"><font size="2"><b>Subject:</b></font></td>
-		<td bgcolor="#F1F1F1"><font size="2"><input type="text" name="subject" value="" size="40" maxlength="85" tabindex="2"></font></td>
+		<td bgcolor="#F1F1F1"><font size="2"><input type="text" name="subject" value="{{msgSubject}}" size="40" maxlength="85" tabindex="2"></font></td>
 	</tr>
 	<tr>
 		<td bgcolor="#F1F1F1" valign="top" nowrap=""><p><font size="2"><b>Your Message:</b></font></p>

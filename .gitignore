@@ -10,3 +10,6 @@
 
 # config files (since they have passwords)
 config.js
+
+# uploads
+public/uploads

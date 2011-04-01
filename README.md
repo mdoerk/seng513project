@@ -412,10 +412,9 @@ folderids: 	0 = inbox
 
 ## Email Utilities ##
 A library that can be used to send emails on behalf of the system. It is specifically set up for use with a gmail account. The application configuration file (config.js) should have the following settings defined in order for this to work:
-email_account: "someone@something.com" // civicconnect@gmail.com is set-up and ready to use
-email_password: "****" // If you don't know the password, email me at sabad66@hotmail.com to find out
-smtp_server_name: "smtp.gmail.com" // That is the smtp server (outgoing mail server) for gmail
-
+email_account: "civicconnect@gmail.com" // This email address is set-up and ready to use
+email_password: "****" // If you don't know the password, email me at sabad66@hotmail.com to find out, and pass it along to anyone else.
+email_smtp_server: "smtp.gmail.com" // The smtp server (outgoing mail server).
 
 ### Email Utilities API ###
 **Load the email utilities library:**
@@ -440,4 +439,4 @@ Sometimes emails take a few seconds to send, so it's probably better NOT to rend
 	});
 	response.render('confirmationSent.html');
 
-Other things besides rendering response should probably still be inside the callback function.
+Other things besides rendering responses should probably still be done inside the callback function.

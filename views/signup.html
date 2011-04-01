@@ -7,6 +7,21 @@
 	
 	<p>Postal Code<br><input type="text" name="postalcode"></p>
 	<p>Neighbourhood<br><input type="text" name="neighborhood"></p>
-				
+	
+	<script>
+	var imgdir = "cimg/"; // identify directory where captcha images are located
+	var jfldid = "uword"; // identify word field id name
+	var jfldsz = 20; // identify word field size
+	
+	anum = (Math.floor(Math.random()*10))+1;
+	imgid = parseInt(anum);
+	document.write("<p><img src=\"" + decodeURIComponent(imgdir) + imgid + ".jpg\" width=\"290\" height=\"80\" alt=\"\"><\/p>");
+	document.write("<input type=\"hidden\" name=\"code\" value= \"" + imgid + "\"/>");
+	
+	</script>
+	<p>Enter the characters you see: </p>
+	<p>Code:<br><input type="text" name="user_code"></p>
+	
+	
 	<input type="submit" value="Submit" />
 </form>

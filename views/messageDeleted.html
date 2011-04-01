@@ -1,0 +1,9 @@
+{{#error}}
+<h1>Error</h1>
+<p>Error deleting your message!</p>
+{{/error}}
+{{^error}}
+<META HTTP-EQUIV="refresh" CONTENT="2;URL=/messages">
+<h1>Message deleted!</h1>
+<p>Your message has been deleted successfully. Redirecting to Message Center in 2 seconds...</p>
+{{/error}}

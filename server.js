@@ -3,7 +3,7 @@ var fs = require('fs'),
 	url = require('url'),
 	util = require('util'), 
 	router = require('./lib/routes').router,
-	templating = require('templatingModule'); 
+	templating = require('templatingModule');
 
 var port = 8124; 
 
@@ -18,7 +18,7 @@ for (var i = 0; i < argv.length; i++) {
 			break; 
 	}
 }
- 
+
 var server = function(req, res) {
 	req.getUser = require('user').getUser;
 	res.render = templating.render;

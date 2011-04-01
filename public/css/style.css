@@ -212,6 +212,16 @@ a#new-msg-button
 	width: 100%; 	
 }
 
+.msgReadtrue
+{
+	font-weight: normal;
+}
+
+.msgReadfalse
+{
+	font-weight: bold;
+}
+
 .issue-container
 {
 	display: block;

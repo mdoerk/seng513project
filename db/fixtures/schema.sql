@@ -84,7 +84,8 @@ CREATE TABLE inbox_msgs (
 	to_user TEXT NOT NULL,
 	sent_date DATETIME DEFAULT CURRENT_TIMESTAMP,
 	subject TEXT,
-	body TEXT
+	body TEXT,
+	isRead BOOLEAN DEFAULT false
 );
 
 DROP TABLE IF EXISTS sent_msgs;
@@ -96,7 +97,8 @@ CREATE TABLE sent_msgs (
 	to_user TEXT NOT NULL,
 	sent_date DATETIME DEFAULT CURRENT_TIMESTAMP,
 	subject TEXT,
-	body TEXT
+	body TEXT,	
+	isRead BOOLEAN DEFAULT false
 );
 
 -- Table used for storing the user votes on comments

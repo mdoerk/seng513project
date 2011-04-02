@@ -1,3 +1,4 @@
+{{#found}}
 <div class="profile-view">
 <table>
 	<td>
@@ -93,6 +94,7 @@
 		{{/is_loggedin}}
 	{{/has_issues}}
 </div>
+{{/found}}
 {{^found}}
 	<h1>User not found!</h1>
 	<p>{{#user_id}}User with id <b>{{user_id}}</b> does not exist.{{/user_id}}{{^user_id}}No user was selected.{{/user_id}}<br/><br/><a href="/">Back to home</a></p>

@@ -14,7 +14,7 @@ module.exports = testCase({
 	},
 	
 	testGetIdFromUsername: function(test) {
-		users.getIdFromUsername('Virginia Snyder', function(error, id) { 
+		users.getIdFromUsername('System', function(error, id) { 
 			test.ifError(error); 
 			test.equals(id, 1); 
 			test.done();
@@ -24,7 +24,7 @@ module.exports = testCase({
 	testGetUsernameFromId: function(test) {
 		users.getUsernameFromId(1, function(error, name) { 
 			test.ifError(error); 
-			test.equals(name, 'Virginia Snyder'); 
+			test.equals(name, 'System'); 
 			test.done();
 		}); 
 	},

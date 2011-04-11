@@ -8,22 +8,25 @@
 <tr>
 <td class="text-center-style" style="width: 69px"><h3><a href="listIssues?{{switchDirQueryString}}{{searchQueryString}}sortby=status&page={{pageNumber}}">Status</a></h3></td>
 <td class="text-center-style" style="width: 201px"><h3><a href="listIssues?{{switchDirQueryString}}{{searchQueryString}}sortby=title&page={{pageNumber}}">Title</a></h3></td>
-<td class="text-center-style"><h3><a href="listIssues?{{switchDirQueryString}}{{searchQueryString}}sortby=lastModified&page={{pageNumber}}">Last Modified</a></h3></td>
-<td class="text-center-style"><h3><a href="listIssues?{{switchDirQueryString}}{{searchQueryString}}sortby=likes&page={{pageNumber}}">Votes</a></h3></td>
+<td class="text-center-style" style="width: 30%"><h3><a href="listIssues?{{switchDirQueryString}}{{searchQueryString}}sortby=lastModified&page={{pageNumber}}">Last Modified</a></h3></td>
+<td class="text-center-style" style="width: 20%"><h3><a href="listIssues?{{switchDirQueryString}}{{searchQueryString}}sortby=likes&page={{pageNumber}}">Promoted</a></h3></td>
 </tr>
 {{#content}}
 <tr>
 <td style="width: 69px" class="text-center-style">
 {{iStatus}}
 </td>
-<td style="width: 201px" class="text-center-style">
+<td style="width: 250px" class="text-center-style">
 <a href="./viewIssue?id={{iId}}">{{iTitle}}</a>
 </td>
 <td class="text-center-style">
 {{iLastModified}}
 </td>
-<td style="width: 100px">
+<td class="text-center-style">
+{{promotes}} times
+
 <!-- This view of votes is similar to the one seen in youtube -->
+<!--
 <li class="NoBullet">
 <div class="small_view_votes_bar" style="width: 100px">
 	<div style="width: {{likepercentage}}%;" class="small_view_votes_bar_likes"></div>
@@ -36,6 +39,8 @@
 		dislikes
 	</span>
 </li>
+-->
+
 </tr>
 {{/content}}
 </table>

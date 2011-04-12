@@ -26,7 +26,7 @@
 </tr>
 {{#inboxMsgList}}
 <tr align="center" class=msgRead{{isRead}}><td bgcolor="#F1F1F1" align="left" width="75%"><font size="2"><a href="viewMessage?folderid=0&msgid={{id}}">{{subject}}</a></font></td>
-	<td bgcolor="#DFDFDF" width="25%" align="center"><font size="2">{{user_name}}</font></td>
+	<td bgcolor="#DFDFDF" width="25%" align="center"><font size="2"><a href="viewProfile?id={{userId}}">{{user_name}}</a></font></td>
 	<td bgcolor="#F1F1F1" align="left" nowrap=""><span class="smaller">{{date}}</span></td>
 </tr>
 {{/inboxMsgList}}
@@ -43,7 +43,7 @@
 </tr>
 {{#sentMsgList}}
 <tr align="center" class=msgRead{{isRead}}><td bgcolor="#F1F1F1" align="left" width="75%"><font size="2"><a href="viewMessage?folderid=1&msgid={{id}}">{{subject}}</a></font></td>
-	<td bgcolor="#DFDFDF" width="25%" align="center"><font size="2">{{user_name}}</font></td>
+	<td bgcolor="#DFDFDF" width="25%" align="center"><font size="2"><a href="viewProfile?id={{userId}}">{{user_name}}</a></font></td>
 	<td bgcolor="#F1F1F1" align="left" nowrap=""><span class="smaller">{{date}}</span></td>
 </tr>
 {{/sentMsgList}}

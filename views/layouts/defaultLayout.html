@@ -31,6 +31,7 @@
 				<ul>
 					<li><a href="/">Home</a></li>
 					<li><a href="/about">About</a></li>
+					<li><a href="/popularTags">Tags</a></li>
 					{{#user}}<li><a href="/messages">Messages</a></li>{{/user}}
 				</ul>
 			</div>
@@ -39,7 +40,7 @@
 				{{>quickTaskButtons}}
 				{{#user}}<a href="/newMessage" id="new-msg-button">New Message</a>{{/user}}
 				<form action="listIssues" id="search-form">
-					<input type="text" id="search-box" name="search" value="" />
+					<input type="text" id="search-box" name="search" value="" placeholder=" search Civic Connect..."/>
 					<input type="submit" id="search-button" value="Search" /> 
 				</form>
 			</div>

@@ -456,3 +456,32 @@ div.profile-view>h2 a
 	font-weight: bold;
 }
 
+/* Popular Tags */
+/* ------------------------------*/
+ul#tagList
+{
+	padding:0;
+	margin:0;
+	list-style:none;
+}
+ul#tagList li {
+	float:left;
+	text-align:center;
+	margin:12px 8px 12px 8px;
+}
+ul#tagList li a {
+	padding:6px;
+	font-size:1.2em;
+	color:#fff;
+	background-color: #e05d37;
+	border: 1px solid #ca5130;
+	text-decoration:none;
+}
+ul#tagList li a:hover {
+	background-color: #d85933;
+}
+ul#tagList  li .count {
+	color:#434343;
+	font-size:1.3em;
+	font-weight:bold;
+}

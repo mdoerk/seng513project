@@ -120,11 +120,21 @@
 	});
 </script>
 
+<script type="text/javascript">
+	function checkBlankComment(limitField){
+			//function "trim" cannot be realized in IE8 but, works fine in FireFox
+			if (limitField.value.length == 0 || limitField.value.trim() == "") {
+				alert("Comments must be added before submitting");
+			}
+	}
+</script>
+
 <h3>Add Your Comment Here</h3>
 <form action="addcomments" method="post">
-<p><textarea name="comments" rows="8" cols="50"></textarea></p>
-<p><input type="submit" value="Submit Your Comment" /></p>
+<p><textarea name="comments" rows="8" cols="50" required></textarea></p>
+<p><input type="submit" onClick='checkBlankComment(this.form.comments);' value="Submit Your Comment" /></p>
 </form>
+
 {{/found}}
 {{^found}}
 <h1>Issue not found!</h1>

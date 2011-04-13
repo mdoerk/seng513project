@@ -25,8 +25,7 @@ CREATE TABLE issues (
 	description TEXT,
 	link TEXT,
 	location TEXT,
-	likes INTEGER,
-	dislikes INTEGER,
+	promotes INTEGER,
 	views INTEGER
 	fileLocation TEXT
 );

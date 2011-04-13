@@ -235,3 +235,19 @@ function checkMandatoryFields(form)
 		return false;
 	}
 }
+
+/**
+* checkFieldInputLimits will check the input in the textarea and if it's over maxChars, it will try to prevent the user from
+* adding any more text. Otherwise, it will update the number of characters that can be entered before exceeding the limit.
+* 
+* @param textarea - input textarea to check
+* @param counter - keeps track of the number of chars remaining before limit is exceeding
+* @param maxChars - max number of characters that is allowed by textarea
+*/
+function checkFieldInputLimits(textarea, counter, maxChars) {
+	if (textarea.value.length > maxChars) {
+		textarea.value = textarea.value.substring(0, maxChars);
+	} else {
+		counter.value = maxChars - textarea.value.length;
+	}
+}

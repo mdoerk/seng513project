@@ -280,6 +280,20 @@ a#new-msg-button
 	color: #333;
 	cursor: help;
 }
+.char-limit-text
+{
+	font-size: 0.75em;
+}
+
+input[type="text"].char-limit-box
+{
+	margin:0px;
+	padding:0px; 
+	border:0px solid;
+	width:50px;
+	font-size: 0.8em;
+}
+
 
 fieldset
 {
@@ -329,8 +343,8 @@ legend
 }
 
 #new_issue textarea{
-	max-width: 400px;
-	max-height: 150px;
+	max-width: 600px;
+	max-height: 200px;
 }
 
 #search-form 

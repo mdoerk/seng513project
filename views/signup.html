@@ -1,9 +1,9 @@
 <h1>Signup</h1>
 <form id="signup_form" action="signup" method="post" enctype="application/x-www-form-urlencoded" onsubmit="return signupValidate(this);">
-	<p>Name<br><input type="text" name="name" autofocus ></p>
-	<p>Email<br><input type="text" name="email"></p>
-	<p>Password<br><input type="password" name="new_password" value=""></p>
-	<p>Confirm Password<br><input type="password" name="confirm_password" value=""></p>
+	<p>Name<br><input type="text" name="name" maxlength="{{inputlimit}}" autofocus ></p>
+	<p>Email<br><input type="text" name="email" maxlength="{{inputlimit}}" ></p>
+	<p>Password<br><input type="password" name="new_password" value="" maxlength="{{inputlimit}}" ></p>
+	<p>Confirm Password<br><input type="password" name="confirm_password" value="" maxlength="{{inputlimit}}" ></p>
 	
 	<script>
 	var imgdir = "cimg/"; // identify directory where captcha images are located
@@ -17,7 +17,7 @@
 	
 	</script>
 	<p>Enter the characters you see: </p>
-	<p>Code:<br><input type="text" name="user_code"></p>
+	<p>Code:<br><input type="text" name="user_code" maxlength="{{inputlimit}}" ></p>
 	
 	
 	<input type="submit" value="Submit" />

@@ -1,7 +1,8 @@
 <h1>{{iTitile}}</h1>
 
 <form action="/saveComments?cid={{iCommentId}}&iid={{iIssueId}}" method="post">
-<p><textarea name="comments" rows="8" cols="50">{{iContent}}</textarea></p>
-<p><input type="submit" onClick="alert('Your changes have been saved successfully');" value="Save Your Change" />
+<p><textarea name="comments" rows="8" cols="50" onKeyDown="checkFieldInputLimits(comments, charsleft,{{textarealimit}});" onKeyUp="checkFieldInputLimits( comments, charsleft,{{textarealimit}}">{{iContent}}</textarea>
+<br><font class="char-limit-text">Characters remaining in Comments:</font> <input class="char-limit-box" readonly type="text" maxlength="5" name="charsleft" value="{{textarealimit}}" ></p>
+<p><input type="submit" onClick="alert('Your changes have been saved successfully');" value="Save Your Change" maxlength="{{inputlimit}}" />
 <input type="button" onClick="location.href='/viewIssue?id={{iIssueId}}'" value="Cancel" /></p>
 </form>

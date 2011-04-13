@@ -31,7 +31,7 @@ module.exports = nodeunit.testCase({
 	},
 	
 	testStringWithMultipleTags:function(test) {
-		var testString = "hello <a>world!</a>";
+		var testString = "hello <script>world!</script>";
 		var result = sanitizeInputs.removeTags(testString);
 		var expected = "hello world!";
 		test.deepEqual(result, expected);

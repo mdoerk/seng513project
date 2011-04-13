@@ -40,14 +40,13 @@
 					<td align="top">
 						<form id="editInterest_form" action="saveInterest" method="post" enctype="application/x-www-form-urlencoded" >
 		      				<p>Topics:<br>(list multiple topic interest seperated by comma)<br>
-								<textarea rows="6" cols="40" type="text" name="interest_topic" onKeyDown="checkFieldInputLimits(interest_topic, charsleft,{{textarealimit}});" onKeyUp="checkFieldInputLimits( interest_topic, charsleft,{{textarealimit}} );">{{interest_topic}}</textarea>
-									<br><font class="char-limit-text">Characters remaining in Topic Interests:</font> <input class="char-limit-box" readonly type="text" maxlength="5" name="charsleft" value="{{textarealimit}}" ></p>
-		
-		
-		
+								<textarea rows="6" cols="40" type="text" name="interest_topic" onMouseOver="checkFieldInputLimits(interest_topic, charsleft,{{textarealimit}});"
+									onKeyDown="checkFieldInputLimits(interest_topic, charsleft,{{textarealimit}});" onKeyUp="checkFieldInputLimits( interest_topic, charsleft,{{textarealimit}} );">{{interest_topic}}</textarea>
+								<br><font class="char-limit-text">Characters remaining in Topic Interests:</font> <input class="char-limit-box" readonly type="text" maxlength="5" name="charsleft" value="{{textarealimit}}" ></p>
 							</p>
 		      				<p>Location:<br>(list multiple location interest seperated by comma)<br>
-								<textarea rows="6" cols="40" type="text" name="interest_location"  onKeyDown="checkFieldInputLimits(interest_location, charsleft2,{{textarealimit}});" onKeyUp="checkFieldInputLimits( interest_location, charsleft2,{{textarealimit}} );">{{interest_location}}</textarea>
+								<textarea rows="6" cols="40" type="text" name="interest_location"  onMouseOver="checkFieldInputLimits(interest_location, charsleft2,{{textarealimit}});" 
+									onKeyDown="checkFieldInputLimits(interest_location, charsleft2,{{textarealimit}});" onKeyUp="checkFieldInputLimits( interest_location, charsleft2,{{textarealimit}} );">{{interest_location}}</textarea>
 								<br><font class="char-limit-text">Characters remaining in Location Interests:</font> <input class="char-limit-box" readonly type="text" maxlength="5" name="charsleft2" value="{{textarealimit}}" ></p>
 							</p> 
 		      				<input type=HIDDEN name="user_id" value="{{userid}}">

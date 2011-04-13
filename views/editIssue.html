@@ -4,8 +4,9 @@
 	<p><input type="hidden" name="id" value="{{issueId}}"/></p>
 	<p>Title<font color="#cc0000">* </font><input type="text" name="title" value= "{{title}}" maxlength="{{inputlimit}}" /></p>
 	<p>Description<font color="#cc0000">*</font></br>
-	<p><textarea rows="10" cols="50" name="description" onKeyDown="checkFieldInputLimits(description, charsleft,{{textarealimit}});" onKeyUp="checkFieldInputLimits( description, charsleft,{{textarealimit}} );">{{description}}</textarea>
-		<br><font class="char-limit-text">Characters remaining in Description:</font> <input class="char-limit-box" readonly type="text" maxlength="5" name="charsleft" value="{{textarealimit}}" ></p>
+	<p><textarea rows="10" cols="50" name="description" onMouseOver="checkFieldInputLimits(description, charsleft,{{textarealimit}});"
+		onKeyDown="checkFieldInputLimits(description, charsleft,{{textarealimit}});" onKeyUp="checkFieldInputLimits( description, charsleft,{{textarealimit}} );">{{description}}</textarea>
+	<br><font class="char-limit-text">Characters remaining in Description:</font> <input class="char-limit-box" readonly type="text" maxlength="5" name="charsleft" value="{{textarealimit}}" ></p>
 		
 	<p>Location <input type="text" name="location" value= "{{location}}" maxlength="{{inputlimit}}"  /></p>
 	<p>Relevant File<br>

@@ -1,13 +1,26 @@
 {{^error}}
 {{#found}}
 
+<table id="issue-links-top" border=0 width="100%">
+	<tr>
+		<td align="left">
+		{{#prevIssue}}
+		<a href="/viewIssue?id={{prevIssueId}}"><< Prev Issue: {{prevIssue}}</a>
+		{{/prevIssue}}
+		</td>
+		<td align="right">
+		{{#nextIssue}}
+		<a href="/viewIssue?id={{nextIssueId}}">Next Issue: {{nextIssue}} >></a>
+		{{/nextIssue}}
+		</td>
+	</tr>
+</table>
+
 <table border=0 width="100%">
 <tr>
 	<td>
+	
 	<h1> {{title}} </h1>
-
-
-
 	Created on {{created}}
 	{{#user}}
 		by	<a href="/viewProfile?id={{user_id}}" id="user_profile">{{user_name}}</a>
@@ -110,6 +123,21 @@
 	<p><input type="submit" value="Submit Your Comment" /></p>
 	</form>
 {{/signedIn}}
+<br>
+<table id="issue-links-bottom" border=0 width="100%">
+	<tr>
+		<td align="left">
+		{{#prevIssue}}
+		<a href="/viewIssue?id={{prevIssueId}}"><< Prev Issue: {{prevIssue}}</a>
+		{{/prevIssue}}
+		</td>
+		<td align="right">
+		{{#nextIssue}}
+		<a href="/viewIssue?id={{nextIssueId}}">Next Issue: {{nextIssue}} >></a>
+		{{/nextIssue}}
+		</td>
+	</tr>
+</table>
 
 {{/found}}
 {{^found}}

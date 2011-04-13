@@ -119,7 +119,8 @@
 		}
 	</script>
 	<form action="addcomments" method="post">
-	<p><textarea name="comments" rows="8" cols="50"></textarea></p>
+	<p><textarea name="comments" rows="8" cols="50" onKeyDown="checkFieldInputLimits(comments, charsleft,{{textarealimit}});" onKeyUp="checkFieldInputLimits( comments, charsleft,{{textarealimit}});" ></textarea>
+	<br><font class="char-limit-text">Characters remaining in Comments:</font> <input class="char-limit-box" readonly type="text" maxlength="5" name="charsleft" value="{{textarealimit}}" ></p>
 	<p><input type="submit" value="Submit Your Comment" /></p>
 	</form>
 {{/signedIn}}

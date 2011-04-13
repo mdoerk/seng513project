@@ -34,7 +34,11 @@
 		<td bgcolor="#F1F1F1">
 		<table cellpadding="0" cellspacing="0" border="0">
 		<tbody><tr valign="top">
-			<td><textarea name="body" rows="20" cols="60" wrap="virtual" tabindex="3">{{msgBody}}</textarea><br>
+		
+			<td><textarea name="body" rows="20" cols="60" wrap="virtual" tabindex="3" onKeyDown="checkFieldInputLimits(body, charsleft,{{textarealimit}});" onKeyUp="checkFieldInputLimits( body, charsleft,{{textarealimit}} );">{{msgBody}}</textarea><br>
+			<font class="char-limit-text">Characters remaining in Message:</font> <input class="char-limit-box" readonly type="text" maxlength="5" name="charsleft" style="background-color:#F1F1F1;" value="{{textarealimit}}" ></p>
+		
+			
 		</tr>
 		</tbody></table>
 		</td>

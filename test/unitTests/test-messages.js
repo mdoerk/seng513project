@@ -27,8 +27,8 @@ module.exports = testCase({
 			// Now make sure that it is in user 2's inbox
 			messages.getMessages(2, 0, function(error, msgList) {
 				test.ifError(error);
-				util.log(msgList.length);
-				util.log(msgList[0].id);
+//				util.log(msgList.length);
+//				util.log(msgList[0].id);
 				test.done();
 			});
 		});

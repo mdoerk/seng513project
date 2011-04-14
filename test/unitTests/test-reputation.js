@@ -39,7 +39,7 @@ module.exports = testCase({
 		reputation.getReputation(userId, function(error, rep) { 
 			test.ifError(error);
 			test.equals(rep, 0);
-			test.done(); 			
+			test.done();
 		}); 
 	},
 	
@@ -49,7 +49,7 @@ module.exports = testCase({
 			reputation.getReputation(userId, function(error, rep) { 
 				test.ifError(error);
 				test.equals(rep, 10);
-				test.done(); 			
+				test.done();
 			}); 	
 		}); 
 	},
@@ -60,7 +60,7 @@ module.exports = testCase({
 			reputation.getReputation(userId, function(error, rep) { 
 				test.ifError(error);
 				test.equals(rep, 5);
-				test.done(); 			
+				test.done();
 			}); 			
 		}); 
 	},
@@ -71,7 +71,7 @@ module.exports = testCase({
 			reputation.getReputation(userId, function(error, rep) { 
 				test.ifError(error);
 				test.equals(rep, 2);
-				test.done(); 			
+				test.done();
 			}); 		
 		}); 
 	},
@@ -82,7 +82,7 @@ module.exports = testCase({
 			reputation.getReputation(userId, function(error, rep) { 
 				test.ifError(error);
 				test.equals(rep, 2);
-				test.done(); 			
+				test.done();
 			}); 		
 		}); 
 	},
@@ -96,7 +96,7 @@ module.exports = testCase({
 				reputation.getReputation(userId, function(error, rep) { 
 					test.ifError(error);
 					test.equals(rep, 100000);
-					test.done(); 			
+					test.done();
 				});
 			});
 		});
@@ -108,7 +108,7 @@ module.exports = testCase({
 			reputation.getReputation(userId, function(error, rep) { 
 				test.ifError(error);
 				test.equals(rep, 0);
-				test.done(); 			
+				test.done(); 
 			});
 		}); 
 	},
@@ -122,7 +122,7 @@ module.exports = testCase({
 				reputation.getReputation(userId, function(error, rep) { 
 					test.ifError(error);
 					test.equals(rep, 8);
-					test.done(); 			
+					test.done();
 				});
 			});
 		});

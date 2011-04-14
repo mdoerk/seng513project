@@ -1,4 +1,3 @@
-
 {{^error}}
 {{#found}}
 
@@ -111,7 +110,7 @@
 	<p>Created by: <a href="/viewProfile?id={{iCommentCreatorId}}" id="user_profile"> {{iCommentCreatorName}} </a> at {{iCommentCreatedTime}}</p>
 	<p><input type="{{iButtonType}}" onClick="location.href='/editComments?cid={{iCommentId}}&iid={{iIssueId}}'" value="Edit" />
 	<input type="{{iButtonType}}" onClick="location.href='/deleteComments?cid={{iCommentId}}&iid={{iIssueId}}'" value="Delete" /></p>
-	{{iCommentContent}}</textarea><br><br>
+	{{iCommentContent}}<br><br>
 {{/comments}}
 </div>
 <script type='text/javascript'>

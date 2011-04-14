@@ -14,7 +14,11 @@
  * - email (this field is currently checked to see if the string is in a formate that resembles an email)
  * - password (only limit is that this cannot me null)
  * - confirm_password (this must match the new_password field)
+ 
  */		
+ 
+ var g_MinUserLen = 4;
+ var g_MinPassLen = 4;
 function signupValidate(form) {
 	var e = form.elements;
 	var valid = true;
@@ -31,8 +35,9 @@ function signupValidate(form) {
 	var check2 = validateEmail(e);
 	var check3 = validateNewPassword(e);
 	var check4 = validateConfirmPassword(e);
+	var check5 = validateCaptcha(e)
 	
-	if (!check1 || !check2 || !check3 || !check4) {
+	if (!check1 || !check2 || !check3 || !check4 || !check5) {
 		valid = false;
 	}
 		
@@ -108,8 +113,16 @@ function emailFormatValidate(email) {
  * - e - The array of elements from the form. It is used in the form e[#] for a specific index or e[''] for the specific name of an element.
  */
 function validateUsername(e){
+//console.log(e['username'].value.length);
+
+	
 	if (!e['username'].value) {
 		writeError(e['username'], '  This field is required.');
+		return false;
+	}
+	if (e['username'].value.length < g_MinUserLen)
+	{
+		writeError(e['username'], '  The username must be atleast 4 characters long!');
 		return false;
 	}
 	return true;
@@ -146,6 +159,12 @@ function validateNewPassword(e){
 		writeError(e['new_password'], '  This field is required.');
 		return false;
 	}
+	
+	if (e['new_password'].value.length < g_MinPassLen)
+	{
+		writeError(e['new_password'], '  The password must be atleast 4 characters long!');
+		return false;
+	}
 	return true;
 }
 
@@ -177,6 +196,17 @@ function validateConfirmPassword(e){
 	// Checks if the string in the confirm_password matches that of the password.
 	else if(e['new_password'].value != e['confirm_password'].value) {
 		writeError(e['confirm_password'], '  Your passwords do not match. Please type more carefully.');
+		return false;
+	}
+	return true;
+}
+
+/*
+ * validateCaptcha - This function checks to make sure that the user has entered captcha code
+ */
+function validateCaptcha(e){
+	if(!e['user_code'].value) {
+		writeError(e['user_code'], '  This field is required.');
 		return false;
 	}
 	return true;

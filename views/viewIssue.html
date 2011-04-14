@@ -107,10 +107,12 @@
 <input id='showcomments' type='button' value='Show/Hide Comments'>
 <div id='comment'>
 {{#comments}}
+<div id={{iCommentId}}>
 	<p>Created by: <a href="/viewProfile?id={{iCommentCreatorId}}" id="user_profile"> {{iCommentCreatorName}} </a> at {{iCommentCreatedTime}}</p>
 	<p><input type="{{iButtonType}}" onClick="location.href='/editComments?cid={{iCommentId}}&iid={{iIssueId}}'" value="Edit" />
 	<input type="{{iButtonType}}" onClick="location.href='/deleteComments?cid={{iCommentId}}&iid={{iIssueId}}'" value="Delete" /></p>
 	{{iCommentContent}}<br><br>
+</div>
 {{/comments}}
 </div>
 <script type='text/javascript'>
@@ -121,9 +123,18 @@
 </script>
 
 <h3>Add Your Comment Here</h3>
-<form action="addcomments" method="post">
+<form name="commentform" action="addcomments" method="post" onsubmit="return false;">
 <p><textarea name="comments" rows="8" cols="50"></textarea></p>
-<p><input type="submit" value="Submit Your Comment" /></p>
+<p><input id="add" type="submit" value="Submit Your Comment" /></p>
+<script type='text/javascript'>
+	$("#add").click(function() {
+		$.post('/addcomments', {comments:document.commentform.comments.value}, function(data) {
+			document.commentform.comments.value='';
+			alert(data);
+			//data.appendTo("#comment");
+		});
+	});
+</script>
 </form>
 {{/found}}
 {{^found}}

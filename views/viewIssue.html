@@ -130,8 +130,8 @@
 	$("#add").click(function() {
 		$.post('/addcomments', {comments:document.commentform.comments.value}, function(data) {
 			document.commentform.comments.value='';
-			alert(data);
-			//data.appendTo("#comment");
+			console.log($(data).find('#content'));
+			$("#comment").append($(data).find('#content div'));
 		});
 	});
 </script>

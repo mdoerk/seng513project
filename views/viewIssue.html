@@ -61,16 +61,23 @@
 {{#signedIn}}
 	{{^userHasVoted}}
 		<p>
+			<form name="promotedform" action="/voteIssues?issueid={{issue_id}}&vote=0" method="post">
 			<table style="width: 100%">
 				<tr>
 					<td style="width: 20px">
-						<a href="/voteIssues?issueid={{issue_id}}&vote=0">
-							<img src="images/thumb_up.png">
-						</a>
+						<!-- This is a hidden form input to pass the browser's url (GH-322), see below script -->
+						<input type=hidden name=link value="">
+						<input type="image" src="images/thumb_up.png"><!-- submit button -->	
 					</td>
 					<td style="width: 500px">Promote</td>
 				</tr>
-			</table>
+			</table>			
+			</form>
+
+			<!-- Getting the browser's url to pass into hidden form input 'link', see above -->
+			<script type='text/javascript'>
+				document.addcommentsform.link.value = document.location.href;
+			</script>
 		</p>
 	{{/userHasVoted}}
 	{{#userHasVoted}}

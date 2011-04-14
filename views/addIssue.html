@@ -3,13 +3,19 @@
 	{{#loggedIn}}
 	What do you feel is an important issue that should be addressed by your city? Create a new issue here! <BR>(Fields marked with a <font color="#cc0000">*</font> are mandatory. Hover over <font style="border-bottom:1px dotted #000">underlined</font> text for more details.)<br>
 	<form id="new_issue" name="new_issue" action="/addIssue" method="post" enctype="multipart/form-data" onsubmit="return checkMandatoryFields(this);">
-		<p>Title<font color="#cc0000">*</font><input type="text" name="title" /></p>
-		<p>Description<font color="#cc0000">*</font><br>
-		<textarea rows="10" cols="50" name="description"></textarea></p>
-		<p>Location <input type="text" name="location" /></p>
-		<p>Relevant Link (please input only <b><i>one</i></b> link) <input type="text" name="link" /></p>
-		<p><a class="hint" title="For example, entering 'roads tax' will file the issue with 2 tags: 'roads' and 'tax'">Tags (separate each tag with a space)</a> <input id="tags" type="text" name="tags" /></p>
-		<p>upload <input type="file" name="file"/></p>
+
+		<p>Title<font color="#cc0000">*</font><input type="text" name="title" maxlength="{{inputlimit}}" /></p>
+		
+		<p>Description<font color="#cc0000">*</font> <Br>
+		<textarea rows="25" cols="100" name="description" onKeyDown="checkFieldInputLimits(description, charsleft,{{textarealimit}});" onKeyUp="checkFieldInputLimits( description, charsleft,{{textarealimit}} );"></textarea>
+		<br><font class="char-limit-text">Characters remaining in Description:</font> <input class="char-limit-box" readonly type="text" maxlength="5" name="charsleft" value="{{textarealimit}}" ></p>
+		
+		<p>Location <input type="text" name="location" maxlength="{{inputlimit}}" placeholder=" (optional)"/></p>
+		<p>Relevant Link (please input only <b><i>one</i></b> link) <input type="text" name="link" maxlength="{{inputlimit}}" placeholder=" (optional)"/></p>
+		<p><a class="hint" title="For example, entering 'roads tax' will file the issue with 2 tags: 'roads' and 'tax'">Tags (separate each tag with a space)</a> 
+				<input id="tags" type="text" name="tags" maxlength="{{inputlimit}}" placeholder=" (optional)" /></p>
+		<p>Upload Relevant Image <input type="file" name="file"/></p>
+
 		<p><input type="submit" value="Create Issue" /></p>
 	</form>
 	<script type="text/javascript">

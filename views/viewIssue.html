@@ -127,22 +127,21 @@
 				}
 		}
 	</script>
-	<form name="addcommentsform" action="addcomments" method="post">
+	<form name="addcommentsform" action="addcomments" method="post" onsubmit="return false;">
 
-	<!-- This is a hidden form input to pass the browser's url (GH-321), see below script -->
-	<input type=hidden name=link value="">
-	<p><textarea name="comments" rows="8" cols="50" onKeyDown="checkFieldInputLimits(comments, charsleft,{{textarealimit}});" onKeyUp="checkFieldInputLimits( comments, charsleft,{{textarealimit}});" ></textarea>
-	<br><font class="char-limit-text">Characters remaining in Comments:</font> <input class="char-limit-box" readonly type="text" maxlength="5" name="charsleft" value="{{textarealimit}}" ></p>
-	<p><input id="add" type="submit" value="Submit Your Comment" /></p>
-	<script type='text/javascript'>
-	$("#add").click(function() {
-		$.post('/addcomments', {comments:document.commentform.comments.value}, function(data) {
-			document.commentform.comments.value='';
-			console.log($(data).find('#content'));
-			$("#comment").append($(data).find('#content div'));
-		});
-	});
-	</script>
+		<!-- This is a hidden form input to pass the browser's url (GH-321), see below script -->
+		<input type=hidden name=link value="">
+		<p><textarea name="comments" rows="8" cols="50" onKeyDown="checkFieldInputLimits(comments, charsleft,{{textarealimit}});" onKeyUp="checkFieldInputLimits( comments, charsleft,{{textarealimit}});" ></textarea>
+		<br><font class="char-limit-text">Characters remaining in Comments:</font> <input class="char-limit-box" readonly type="text" maxlength="5" name="charsleft" value="{{textarealimit}}" ></p>
+		<p><input id="add" type="submit" value="Submit Your Comment" /></p>
+		<script type='text/javascript'>
+			$("#add").click(function() {
+				$.post('/addcomments', {comments:document.addcommentsform.comments.value}, function(data) {
+					document.addcommentsform.comments.value='';
+					$("#comment").append($(data).find('#content div'));
+				});
+			});
+		</script>
 	</form>
 
 	<!-- Getting the browser's url to pass into hidden form input 'link', see above -->

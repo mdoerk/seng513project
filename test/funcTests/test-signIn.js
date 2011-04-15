@@ -13,7 +13,7 @@ module.exports = testCase({
 	},
 	testValidSignIn: function (test) {
 		var client = new Client(); 
-		var postBody = client.stringifyQuery({ 'username': 'Wynne Benson', 'password': 'password' });
+		var postBody = client.stringifyQuery({ 'email': 'civicconnect@gmail.com', 'password': 'password' });
 		// Login as user with correct credentials 
 		client.sendRequest('POST', '/signin', { body : postBody }, function(signInRes) { 
 			test.equals(signInRes.status, 302); 
@@ -24,7 +24,7 @@ module.exports = testCase({
 				test.equals(idxRes.status, 200);
 				test.ok(idxRes.body != undefined); 
 				resBody = idxRes.body; 
-				var loginHeaderPatt = /Welcome.*Wynne\sBenson/gi; 
+				var loginHeaderPatt = /Welcome.*System/gi; 
 				var matches = resBody.match(loginHeaderPatt); 				
 				test.equals(matches.length, 1); 
 				test.done();
@@ -33,7 +33,7 @@ module.exports = testCase({
 	},
 	testInvalidSignIn: function (test) {
 		var client = new Client(); 
-		var postBody = client.stringifyQuery({ 'username': 'Wynne Benson', 'password': 'wrongpassword' });
+		var postBody = client.stringifyQuery({ 'email': 'civicconnect@gmail.com', 'password': 'wrongpassword' });
 		// Login as user with incorrect credentials 
 		// Validate header still contains links to login and join 
 		client.sendRequest('POST', '/signin', { body : postBody }, function(signInRes) { 

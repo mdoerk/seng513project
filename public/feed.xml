@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<rss version="2.0">
+<channel>
+<title>CivicConnect</title>
+<description>CivicConnect - Discuss civic issues</description>
+<link>http://csc.cpsc.ucalgary.ca:8124</link>
+<item>
+<title>Issues - CivicConnect</title>
+<description>Watch for new issues to be discussed.</description>
+<link>http://csc.cpsc.ucalgary.ca:8124</link>
+</item>
+</channel>
+</rss>

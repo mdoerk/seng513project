@@ -12,7 +12,11 @@
         });
     });
 </script>
-<form action="sendMessage" method="POST">
+<form name="sendMessageForm" action="sendMessage" method="POST">
+
+<!-- This is a hidden form input to pass the browser's url (GH-324), see below script -->
+<input type=hidden name=link value="">
+
 <table cellpadding="0" cellspacing="0" border="1" width="100%">
 	<tr><td align="center" colspan=2 bgcolor="#F1F1F1"><b>New Message</b></td></tr>
 	<tr>
@@ -21,7 +25,7 @@
 	</tr>
 	<tr>
 		<td bgcolor="#F1F1F1"><font size="2"><b>Recipient:</b></font></td>
-		<td bgcolor="#F1F1F1"><font size="2"><input type="text" id="recipient" name="tousername" value="{{toUserName}}" size="25" maxlength="25" tabindex="1"></font>
+		<td bgcolor="#F1F1F1"><font size="2"><input type="text" id="recipient" name="tousername" value="{{toUserName}}" size="25" maxlength="25" tabindex="1" autofocus ></font>
 	</tr>
 	<tr>
 		<td bgcolor="#F1F1F1"><font size="2"><b>Subject:</b></font></td>
@@ -52,4 +56,10 @@
 </tr>
 </tbody></table>
 </form>
+
+<!-- Getting the browser's url to pass into hidden form input 'link', see above --> 
+<script type='text/javascript'>
+	document.sendMessageForm.link.value = document.location.href;
+</script>
+
 {{/user}}

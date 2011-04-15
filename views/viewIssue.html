@@ -1,13 +1,26 @@
 {{^error}}
 {{#found}}
 
+<table id="issue-links-top" border=0 width="100%">
+	<tr>
+		<td align="left">
+		{{#prevIssue}}
+		<a href="/viewIssue?id={{prevIssueId}}"><< Prev Issue: {{prevIssue}}</a>
+		{{/prevIssue}}
+		</td>
+		<td align="right">
+		{{#nextIssue}}
+		<a href="/viewIssue?id={{nextIssueId}}">Next Issue: {{nextIssue}} >></a>
+		{{/nextIssue}}
+		</td>
+	</tr>
+</table>
+
 <table border=0 width="100%">
 <tr>
 	<td>
+	
 	<h1> {{title}} </h1>
-
-
-
 	Created on {{created}}
 	{{#user}}
 		by	<a href="/viewProfile?id={{user_id}}" id="user_profile">{{user_name}}</a>
@@ -21,6 +34,7 @@
 		Last updated: {{lastModified}}
 		<br>Comments: {{numComments}} 
 		<br>Followers: {{numFollowers}} 
+		<br>Promoted: {{promotes}} 
 		<br>Views: {{numViews}}
 	
 	<br>Tags: {{#tags}}
@@ -41,16 +55,30 @@
 	{{#file_name}}
 	<p>Relevant File: <a href="{{file_link}}"> {{file_name}}</a></p>
 	{{/file_name}}
-{{^user}}
+{{^signedIn}}
 	<p><em><a href='/signin'>Sign in</a> to follow or vote on this issues.</em></p>
-{{/user}}
-{{#user}}
+{{/signedIn}}
+{{#signedIn}}
+	{{^userHasVoted}}
+		<p>
+			<table style="width: 100%">
+				<tr>
+					<td style="width: 20px">
+						<a href="/voteIssues?issueid={{issue_id}}&vote=0">
+							<img src="images/thumb_up.png">
+						</a>
+					</td>
+					<td style="width: 500px">Promote</td>
+				</tr>
+			</table>
+		</p>
+	{{/userHasVoted}}
+	{{#userHasVoted}}
+			<p><i>You have Promoted this Issue!</i></p>
+	{{/userHasVoted}}
 	{{#following}}
 		<p>
-			You are following this issue.
-		</p>
-		<p>
-			Click <a href="/unfollowIssue?id={{issue_id}}">here</a> to stop following this issue.
+			You are following this issue.  (Click <a href="/unfollowIssue?id={{issue_id}}">here</a> to stop following this issue.)
 		</p>
 	{{/following}}
 	{{^following}}
@@ -58,50 +86,7 @@
 			<a href="/followIssue?id={{issue_id}}">Follow</a> this issue
 		</p>
 	{{/following}}
-	{{^userHasVoted}}
-		<p>
-			<table style="width: 100%">
-				<tr>
-					<td style="width: 31px">
-						<a href="/voteIssues?issueid={{issue_id}}&vote=0">
-							<img src="images/thumb_up.png">
-						</a>
-					</td>
-					<td style="width: 49px">Like</td>
-					<td style="width: 31px">
-						<a href="/voteIssues?issueid={{issue_id}}&vote=1">
-							<img src="images/thumb_down.png">
-						</a>
-					</td>
-					<td>Dislike</td>
-				</tr>
-			</table>
-		</p>
-		<!-- This view of votes is similar to the one seen in youtube -->
-		<li class="NoBullet">
-			<div class="view_votes_bar" style="width: 200px">
-				<div style="width: {{likepercentage}}%;" class="view_votes_bar_likes"></div>
-				<div style="width: {{dislikepercentage}}%;" class="view_votes_bar_dislikes"></div>
-			</div>
-			<span class="like_dislike_count" style="font-size: 0.85em;">
-				<span class="likes">{{likecount}}</span>
-				likes,
-				<span class="dislikes">{{dislikecount}}</span>
-				dislikes
-			</span>
-		</li>
-	{{/userHasVoted}}
-	{{#userHasVoted}}
-		{{#userLiked}}
-			<p><i>You Liked this Issue</i></p>
-		{{/userLiked}}
-		{{^userLiked}}
-			<p><i>You Disliked this Issue</i></p>
-		{{/userLiked}}
-	{{/userHasVoted}}
-{{/user}}
-
-
+{{/signedIn}}
 
 <h3>Comments</h3>
 <input id='showcomments' type='button' value='Show/Hide Comments'>
@@ -121,10 +106,40 @@
 </script>
 
 <h3>Add Your Comment Here</h3>
-<form action="addcomments" method="post">
-<p><textarea name="comments" rows="8" cols="50"></textarea></p>
-<p><input type="submit" value="Submit Your Comment" /></p>
-</form>
+{{^signedIn}}
+	<p><em><a href='/signin'>Sign in</a> to comment on this issues.</em></p>
+{{/signedIn}}
+{{#signedIn}}
+	<script type="text/javascript">
+		function checkBlankComment(limitField){
+				//function "trim" cannot be realized in IE8 but, works fine in FireFox
+				if (limitField.value.length == 0 || limitField.value.trim() == "") {
+					alert("Comments must be added before submitting");
+				}
+		}
+	</script>
+	<form action="addcomments" method="post">
+	<p><textarea name="comments" rows="8" cols="50" onKeyDown="checkFieldInputLimits(comments, charsleft,{{textarealimit}});" onKeyUp="checkFieldInputLimits( comments, charsleft,{{textarealimit}});" ></textarea>
+	<br><font class="char-limit-text">Characters remaining in Comments:</font> <input class="char-limit-box" readonly type="text" maxlength="5" name="charsleft" value="{{textarealimit}}" ></p>
+	<p><input type="submit" value="Submit Your Comment" /></p>
+	</form>
+{{/signedIn}}
+<br>
+<table id="issue-links-bottom" border=0 width="100%">
+	<tr>
+		<td align="left">
+		{{#prevIssue}}
+		<a href="/viewIssue?id={{prevIssueId}}"><< Prev Issue: {{prevIssue}}</a>
+		{{/prevIssue}}
+		</td>
+		<td align="right">
+		{{#nextIssue}}
+		<a href="/viewIssue?id={{nextIssueId}}">Next Issue: {{nextIssue}} >></a>
+		{{/nextIssue}}
+		</td>
+	</tr>
+</table>
+
 {{/found}}
 {{^found}}
 <h1>Issue not found!</h1>
@@ -136,4 +151,3 @@
 <p>The dev team has been notified... Please try again later.</p>
 <a href="/">Back to home</a>
 {{/error}}
-

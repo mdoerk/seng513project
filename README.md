@@ -429,9 +429,9 @@ in there for an example of how to do this.
 
 ## Email Utilities ##
 A library that can be used to send emails on behalf of the system. It is specifically set up for use with a gmail account. The application configuration file (config.js) should have the following settings defined in order for this to work:
-email_account: "civicconnect@gmail.com" // This email address is set-up and ready to use
-email_password: "****" // If you don't know the password, email me at sabad66@hotmail.com to find out, and pass it along to anyone else.
-email_smtp_server: "smtp.gmail.com" // The smtp server (outgoing mail server).
+	email_account: "civicconnect@gmail.com" // This email address is set-up and ready to use
+	email_password: "****" // If you don't know the password, email me at sabad66@hotmail.com to find out, and pass it along to anyone else.
+	email_smtp_server: "smtp.gmail.com" // The smtp server (outgoing mail server).
 
 ### Email Utilities API ###
 **Load the email utilities library:**
@@ -442,7 +442,7 @@ email_smtp_server: "smtp.gmail.com" // The smtp server (outgoing mail server).
 * **emailUtil.sendHTMLEmailToAddress(toEmailAddress, subject, body, function(error, success) {})** - Sends an HTML formatted email to the given email address. The body parameter may contain html formatting (i.e body = '<b>hi</b> friend!')
 
 ### Notes ###
-Please be careful not to commit your config.js file with the password in there.
+Please be careful not to commit your config.js file with the password in there. It should be automatically ignored (since it is in the .gitignore file), but just in case.
 
 Sometimes emails take a few seconds to send, so it's probably better NOT to render any page responses inside the callbacks. Instead, render the page outside the callback like this:
 

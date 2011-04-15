@@ -7,23 +7,24 @@
 				</tr>
 				<tr>
 					<td>
+						
 						<form id="editProfile_form" action="handleEditProfile" method="post" enctype="application/x-www-form-urlencoded" onsubmit="return editProfileValidate(this);">
-							<p>Username<br><input type="text" name="username" value="{{username}}"></p>
-							<p>Email<br><input type="text" name="email" value="{{email}}"></p>
-							<p>Neighborhood<br><input type="text" name="neighborhood" value="{{neighborhood}}"></p>
-							<p>Postal Code<br><input type="text" name="postal_code" value="{{postal_code}}"></p>
-							<p>Your Facebook Account<br> <input type="text" name="facebook" value="{{facebook_account}}" /></p>
-							<p>Your Twitter Account<br> <input type="text" name="twitter" value="{{twitter_account}}" /></p>
-							<p>Your Website<br> http://<input type="text" name="website" value="{{website}}" /></p>
+
+							<p><h2>{{message}}</h2></p>
+							<p>Name<br><input type="text" name="name" value="{{name}}" maxlength="{{inputlimit}}" ></p>
+							<p><a href = "editPassword">Change Password</a></p>
+							<p>Email<br><input type="text" name="email" value="{{email}}" maxlength="{{inputlimit}}" ></p>
+							<p>Neighborhood<br><input type="text" name="neighborhood" value="{{neighborhood}}" maxlength="{{inputlimit}}" ></p>
+							<p>Postal Code<br><input type="text" name="postal_code" value="{{postal_code}}" maxlength="7"></p>
+							<p>Your Facebook Account<br> <input type="text" name="facebook" value="{{facebook_account}}" maxlength="{{inputlimit}}"  /></p>
+							<p>Your Twitter Account<br> <input type="text" name="twitter" value="{{twitter_account}}" maxlength="{{inputlimit}}"  /></p>
+							<p>Your Website<br> http://<input type="text" name="website" value="{{website}}" maxlength="{{inputlimit}}"  /></p>
+							<p><input type="text" name="userid" style="visibility: hidden;" value="{{userid}}" maxlength="{{inputlimit}}" ><p>
 							<br>
-							<p>New Password (optional)<br><input type="password" name="new_password"></p>
-							<p>Confirm New Password<br><input type="password" name="confirm_password"></p>
-							<p><input type="text" name="userid" style="visibility: hidden;" value="{{userid}}"><p>
-							<br>
-							<p>Password (required)<br><input type="password" name="password"></p>
-	
+
 							<input type="submit" value="Update" />
 						</form>
+						
 					</td>
 				</tr>
 			</table>
@@ -39,12 +40,16 @@
 					<td align="top">
 						<form id="editInterest_form" action="saveInterest" method="post" enctype="application/x-www-form-urlencoded" >
 		      				<p>Topics:<br>(list multiple topic interest seperated by comma)<br>
-								<textarea rows="6" cols="40" type="text" name="interest_topic" >{{interest_topic}}</textarea>
+								<textarea rows="6" cols="40" type="text" name="interest_topic" onMouseOver="checkFieldInputLimits(interest_topic, charsleft,{{textarealimit}});"
+									onKeyDown="checkFieldInputLimits(interest_topic, charsleft,{{textarealimit}});" onKeyUp="checkFieldInputLimits( interest_topic, charsleft,{{textarealimit}} );">{{interest_topic}}</textarea>
+								<br><font class="char-limit-text">Characters remaining in Topic Interests:</font> <input class="char-limit-box" readonly type="text" maxlength="5" name="charsleft" value="{{textarealimit}}" ></p>
 							</p>
 		      				<p>Location:<br>(list multiple location interest seperated by comma)<br>
-								<textarea rows="6" cols="40" type="text" name="interest_location">{{interest_location}}</textarea>
+								<textarea rows="6" cols="40" type="text" name="interest_location"  onMouseOver="checkFieldInputLimits(interest_location, charsleft2,{{textarealimit}});" 
+									onKeyDown="checkFieldInputLimits(interest_location, charsleft2,{{textarealimit}});" onKeyUp="checkFieldInputLimits( interest_location, charsleft2,{{textarealimit}} );">{{interest_location}}</textarea>
+								<br><font class="char-limit-text">Characters remaining in Location Interests:</font> <input class="char-limit-box" readonly type="text" maxlength="5" name="charsleft2" value="{{textarealimit}}" ></p>
 							</p> 
-		      				<input type=HIDDEN name="user_id" value="{{user_id}}">
+		      				<input type=HIDDEN name="user_id" value="{{userid}}">
 	    					<br> 
 		      				<input type="submit" value="Update Interest" />
 		      			</form>

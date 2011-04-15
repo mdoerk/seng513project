@@ -3,13 +3,13 @@
 <form action="/signin" method="post">
 
 	<p>
-	<label for ="username">Username:</label> <br>
-	<input type="text" id="username" name="username" autofocus >
+	<label for ="email">Email:</label> <br>
+	<input type="text" id="email" name="email" maxlength="{{inputlimit}}" autofocus >
 	</p>
 
 	<p>
 	<label for="password">Password:</label> <br>
-	<input type="password" id="password" name="password">
+	<input type="password" id="password" name="password" maxlength="{{inputlimit}}" >
 	</p>
 	
 	<input type='submit' value='Sign In'>

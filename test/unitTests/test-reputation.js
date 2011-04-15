@@ -192,5 +192,12 @@ module.exports = testCase({
 				});
 			}); 
 		});
+	},
+	
+	testGetRank: function(test){
+		test.equals(reputation.getRank(10), "Level 1");
+		test.equals(reputation.getRank(999), "Level 7");
+		test.equals(reputation.getRank(10000), "Level 10");
+		test.done();
 	}
 });

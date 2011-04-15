@@ -33,22 +33,33 @@
 		</td>
 		<td>
 			<strong>Facebook Account:</strong> 
-				{{facebook_account}}
+				{{#facebook_account}}
+					<a href="http://www.facebook.com/{{facebook_account}}" target="_new" title="External Site">{{facebook_account}}</a>
+				{{/facebook_account}}
+				{{^facebook_account}}
+					None
+				{{/facebook_account}}
+				
 		</td>
 	</tr>
 	<tr>
 		<td>	
 			<strong>Twitter Account:</strong> 
-				{{twitter_account}}
+				{{#twitter_account}}
+					<a href="http://twitter.com/#!/{{twitter_account}}" target="_new" title="External Site">{{twitter_account}}</a>
+				{{/twitter_account}}
+				{{^twitter_account}}
+					None
+				{{/twitter_account}}
 		</td>
 		<td>
 			<strong>Website:</strong> 
-				{{#has_website}}
-			<a href="http://{{website}}" target="_new">http://{{website}}</a>
-				{{/has_website}}
-				{{^has_website}}
-					{{website}}
-				{{/has_website}}
+				{{#website}}
+			<a href="http://{{website}}" target="_new" title="External Site">http://{{website}}</a>
+				{{/website}}
+				{{^website}}
+					None
+				{{/website}}
 		</td>
 	</tr>
 </table>
